@@ -1456,6 +1456,132 @@
                 flex-direction: column;
             }
         }
+
+        /* ============================================================
+           PREMIUM HOVER GLOW — expanding multi-color radial glow behind
+           every clickable button on the site. Colors are pulled entirely
+           from the existing --blue / --teal / --sky / --navy tokens, so
+           the effect adapts automatically if the palette ever changes.
+           Only opacity + transform animate, so it stays GPU-accelerated
+           and smooth at 60fps.
+           ============================================================ */
+        .btn,
+        .icon-btn,
+        .filter-pill,
+        .tab-btn,
+        .auth-tab-btn,
+        .modal-close,
+        .hamburger {
+            position: relative;
+            isolation: isolate;
+            /* keeps the glow layer from bleeding into neighboring elements */
+        }
+
+        .btn::before,
+        .icon-btn::before,
+        .filter-pill::before,
+        .tab-btn::before,
+        .auth-tab-btn::before,
+        .modal-close::before,
+        .hamburger::before {
+            content: '';
+            position: absolute;
+            inset: -14px;
+            z-index: -1;
+            border-radius: inherit;
+            background:
+                radial-gradient(circle at 28% 25%, var(--blue) 0%, transparent 55%),
+                radial-gradient(circle at 72% 75%, var(--teal) 0%, transparent 55%),
+                radial-gradient(circle at 50% 50%, var(--sky) 0%, transparent 65%);
+            filter: blur(16px);
+            opacity: 0;
+            transform: scale(0.82);
+            transition: opacity .45s cubic-bezier(.22, 1, .36, 1),
+                transform .45s cubic-bezier(.22, 1, .36, 1);
+            pointer-events: none;
+            will-change: opacity, transform;
+        }
+
+        .btn:hover::before,
+        .btn:focus-visible::before,
+        .icon-btn:hover::before,
+        .icon-btn:focus-visible::before,
+        .filter-pill:hover::before,
+        .filter-pill:focus-visible::before,
+        .tab-btn:hover::before,
+        .tab-btn:focus-visible::before,
+        .auth-tab-btn:hover::before,
+        .auth-tab-btn:focus-visible::before,
+        .modal-close:hover::before,
+        .modal-close:focus-visible::before,
+        .hamburger:hover::before,
+        .hamburger:focus-visible::before {
+            opacity: 0.75;
+            transform: scale(1.18);
+        }
+
+        /* Primary CTA gets the strongest glow — it's the highest-emphasis button */
+        .btn-primary::before {
+            background:
+                radial-gradient(circle at 25% 25%, var(--blue) 0%, transparent 58%),
+                radial-gradient(circle at 75% 75%, var(--teal) 0%, transparent 58%);
+            filter: blur(20px);
+        }
+
+        .btn-primary:hover::before {
+            opacity: 0.9;
+        }
+
+        /* Outline / ghost / google buttons: quieter glow so they don't visually compete */
+        .btn-outline::before,
+        .btn-ghost::before,
+        .btn-google::before {
+            filter: blur(14px);
+        }
+
+        .btn-outline:hover::before,
+        .btn-ghost:hover::before,
+        .btn-google:hover::before {
+            opacity: 0.5;
+        }
+
+        /* Small utility buttons (pills, tabs, icon buttons) get a tighter, softer glow */
+        .filter-pill::before,
+        .tab-btn::before,
+        .auth-tab-btn::before,
+        .modal-close::before,
+        .hamburger::before {
+            inset: -10px;
+            filter: blur(12px);
+        }
+
+        .filter-pill.active::before {
+            opacity: 0.45;
+            transform: scale(1.05);
+        }
+
+        /* Approve / reject icon buttons: glow hints at the action color, not the generic palette */
+        .icon-btn.approve::before {
+            background: radial-gradient(circle, #1BA37A 0%, transparent 60%);
+        }
+
+        .icon-btn.reject::before {
+            background: radial-gradient(circle, #C0392B 0%, transparent 60%);
+        }
+
+        /* Respect existing reduced-motion rule: glow still appears, just without the animated fade/scale */
+        @media (prefers-reduced-motion: reduce) {
+
+            .btn::before,
+            .icon-btn::before,
+            .filter-pill::before,
+            .tab-btn::before,
+            .auth-tab-btn::before,
+            .modal-close::before,
+            .hamburger::before {
+                transition: none !important;
+            }
+        }
     </style>
 </head>
 
