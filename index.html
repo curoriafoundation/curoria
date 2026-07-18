@@ -224,6 +224,14 @@
             transform: scaleX(1);
         }
 
+        nav.nav-links a.active {
+            color: var(--navy);
+        }
+
+        nav.nav-links a.active::after {
+            transform: scaleX(1);
+        }
+
         .nav-cta {
             display: flex;
             align-items: center;
@@ -320,16 +328,6 @@
             opacity: .55;
             cursor: not-allowed;
             transform: none !important;
-        }
-
-        .btn-google {
-            background: #fff;
-            border-color: var(--line);
-            color: var(--navy);
-        }
-
-        .btn-google:hover {
-            border-color: var(--navy);
         }
 
         .hero {
@@ -640,16 +638,6 @@
             background: var(--paper);
             border-top: 1px solid var(--line);
             border-bottom: 1px solid var(--line);
-        }
-
-        .form-shell {
-            max-width: 760px;
-            margin: 0 auto;
-            background: var(--bg);
-            border: 1px solid var(--line);
-            border-radius: var(--radius-lg);
-            padding: 44px;
-            box-shadow: var(--shadow-sm);
         }
 
         .form-grid {
@@ -1238,12 +1226,18 @@
         .modal-box {
             background: #fff;
             border-radius: var(--radius-lg);
-            max-width: 420px;
+            max-width: 400px;
             width: 100%;
-            padding: 34px;
+            padding: 32px;
             box-shadow: var(--shadow);
             position: relative;
             animation: cardIn .3s ease;
+        }
+
+        .modal-title {
+            font-size: 21px;
+            margin-bottom: 18px;
+            padding-right: 20px;
         }
 
         .modal-close {
@@ -1328,18 +1322,17 @@
             display: block;
         }
 
-        .or-divider {
-            text-align: center;
-            color: var(--ink-soft);
-            font-size: 12px;
-            margin: 2px 0 4px;
-        }
-
-        #authArea,
-        #mobileAuthArea {
+        #authArea {
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+
+        /* mobileAuthArea only appears in the mobile dropdown menu (see the
+           max-width:760px block below) — hidden on desktop so login/logout
+           doesn't show twice in the header. */
+        #mobileAuthArea {
+            display: none;
         }
 
         .avatar-chip {
@@ -1354,6 +1347,20 @@
             font-size: 12.5px;
             font-weight: 700;
             flex-shrink: 0;
+        }
+
+        /* ============================================================
+           TABBED PAGE NAVIGATION — sections are grouped into named
+           "pages" via [data-page]. Only the active page's sections are
+           shown; JS toggles this. Hidden by default in CSS so there is
+           no flash of every section stacked on load.
+           ============================================================ */
+        [data-page] {
+            display: none;
+        }
+
+        [data-page].page-active {
+            display: block;
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1423,6 +1430,11 @@
                 display: none;
             }
 
+            #mobileAuthArea {
+                display: flex;
+                width: 100%;
+            }
+
             section {
                 padding: 64px 0;
             }
@@ -1470,11 +1482,16 @@
         .filter-pill,
         .tab-btn,
         .auth-tab-btn,
-        .modal-close,
         .hamburger {
             position: relative;
             isolation: isolate;
             /* keeps the glow layer from bleeding into neighboring elements */
+        }
+
+        .modal-close {
+            /* stays position: absolute (set above, pinning it to the modal's
+               top-right corner) — only isolated here so its glow doesn't bleed */
+            isolation: isolate;
         }
 
         .btn::before,
@@ -1532,16 +1549,14 @@
             opacity: 0.9;
         }
 
-        /* Outline / ghost / google buttons: quieter glow so they don't visually compete */
+        /* Outline / ghost buttons: quieter glow so they don't visually compete */
         .btn-outline::before,
-        .btn-ghost::before,
-        .btn-google::before {
+        .btn-ghost::before {
             filter: blur(14px);
         }
 
         .btn-outline:hover::before,
-        .btn-ghost:hover::before,
-        .btn-google:hover::before {
+        .btn-ghost:hover::before {
             opacity: 0.5;
         }
 
@@ -1589,16 +1604,16 @@
 
     <header class="site-nav">
         <div class="nav-inner">
-            <a href="#home" class="brand">
-                <img src="CuroriaLOGO.png" class="brand-mark" alt="Curoria Logo">
+            <a href="#home" class="brand" data-page-link="home">
+                <img src="images/CuroriaLOGO.png" class="brand-mark" alt="Curoria Logo">
                 <span>Curoria</span>
             </a>
             <nav class="nav-links" id="navLinks">
-                <a href="#home">Home</a>
-                <a href="#marketplace">Find Research</a>
-                <a href="#submit">Submit Research</a>
-                <a href="#dashboard">Dashboard</a>
-                <a href="#about">About</a>
+                <a href="#home" data-page-link="home">Home</a>
+                <a href="#marketplace" data-page-link="marketplace">Find Research</a>
+                <a href="#submit" data-page-link="submit">Submit Research</a>
+                <a href="#dashboard" data-page-link="dashboard">Dashboard</a>
+                <a href="#about" data-page-link="about">About</a>
                 <span id="mobileAuthArea"></span>
             </nav>
             <div class="nav-cta">
@@ -1610,7 +1625,7 @@
         </div>
     </header>
 
-    <section class="hero" id="home">
+    <section class="hero" id="home" data-page="home">
         <div class="wrap hero-inner">
             <div class="hero-copy">
                 <div class="eyebrow">Curoria Foundation · Student Research Network</div>
@@ -1621,8 +1636,8 @@
                     more accessible, collaborative, and impactful.
                 </p>
                 <div class="hero-ctas">
-                    <a href="#marketplace" class="btn btn-primary">Explore Research</a>
-                    <a href="#submit" class="btn btn-outline">Join The Research Network</a>
+                    <a href="#marketplace" class="btn btn-primary" data-page-link="marketplace">Explore Research</a>
+                    <a href="#submit" class="btn btn-outline" data-page-link="submit">Join The Research Network</a>
                 </div>
                 <div class="stat-row">
                     <div class="stat-card">
@@ -1640,12 +1655,12 @@
                 </div>
             </div>
             <div class="hero-art" aria-hidden="true">
-                <img src="CuroriaLOGO.png" class="hero-logo" alt="Curoria Logo">
+                <img src="images/CuroriaLOGO.png" class="hero-logo" alt="Curoria Logo">
             </div>
         </div>
     </section>
 
-    <section class="how" id="how">
+    <section class="how" id="how" data-page="home">
         <div class="wrap">
             <div class="section-head reveal">
                 <div class="eyebrow">How Curoria Works</div>
@@ -1682,7 +1697,7 @@
         </div>
     </section>
 
-    <section id="marketplace">
+    <section id="marketplace" data-page="marketplace">
         <div class="wrap">
             <div class="section-head reveal">
                 <div class="eyebrow">Research Marketplace</div>
@@ -1704,7 +1719,7 @@
         </div>
     </section>
 
-    <section class="submit-section" id="submit">
+    <section class="submit-section" id="submit" data-page="submit">
         <div class="wrap">
             <div class="section-head reveal">
                 <div class="eyebrow">Submit Research</div>
@@ -1795,7 +1810,7 @@
         </div>
     </section>
 
-    <section id="dashboard">
+    <section id="dashboard" data-page="dashboard">
         <div class="wrap">
             <div class="section-head reveal">
                 <div class="eyebrow">Volunteer Dashboard</div>
@@ -1841,7 +1856,7 @@
                     </div>
                     <div class="tab-panel active" id="tab-available">
                         <p style="color:var(--ink-soft);font-size:14px;">Browse and join studies from the <a
-                                href="#marketplace" style="color:var(--blue-deep);font-weight:700;">marketplace</a>
+                                href="#marketplace" data-page-link="marketplace" style="color:var(--blue-deep);font-weight:700;">marketplace</a>
                             above — anything you join will show up here.</p>
                     </div>
                     <div class="tab-panel" id="tab-completed">
@@ -1855,41 +1870,14 @@
         </div>
     </section>
 
-    <section class="admin-section" id="admin">
-        <div class="wrap">
-            <div class="section-head reveal">
-                <div class="eyebrow">Admin Review Panel</div>
-                <h2>Every study is checked before it goes live</h2>
-                <p>A live queue of submissions pulled from Curoria's database — approve to publish, reject to remove.
-                </p>
-            </div>
-            <div class="admin-grid reveal">
-                <div class="admin-panel">
-                    <h3>Pending Research</h3>
-                    <div id="pendingList">
-                        <div class="loading-note">Loading queue…</div>
-                    </div>
-                </div>
-                <div class="admin-panel">
-                    <h3>User Management</h3>
-                    <div class="info-note">Accounts are now handled by Supabase Auth, so they can't be safely listed
-                        from the browser (that requires a private service key, which should never be exposed
-                        client-side). View and manage real accounts in your <a href="https://supabase.com/dashboard"
-                            target="_blank" rel="noopener">Supabase dashboard</a> → Authentication → Users, once this
-                        site is deployed and connected.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="about">
+    <section id="about" data-page="about">
         <div class="wrap about-grid">
             <div class="about-copy reveal">
                 <div class="eyebrow">About Curoria</div>
                 <h2>Making academic research accessible, on both sides of the study</h2>
                 <p>Curoria is a nonprofit initiative designed to make academic research more accessible — helping
                     researchers find participants, and helping volunteers contribute to discovery.</p>
-                <p>Accounts here are handled by Supabase Auth (including Google sign-in), so logins are real and secure
+                <p>Accounts here are handled by Supabase Auth, so logins are real and secure
                     once this site is deployed with a live Supabase project.</p>
                 <div class="about-vals">
                     <div class="about-val"><b>Reviewed, not open</b><span>Every study is checked before it's
@@ -1942,9 +1930,9 @@
                 <div>
                     <h4>Platform</h4>
                     <ul>
-                        <li><a href="#marketplace">Find Research</a></li>
-                        <li><a href="#submit">Submit Research</a></li>
-                        <li><a href="#about">Our Mission</a></li>
+                        <li><a href="#marketplace" data-page-link="marketplace">Find Research</a></li>
+                        <li><a href="#submit" data-page-link="submit">Submit Research</a></li>
+                        <li><a href="#about" data-page-link="about">Our Mission</a></li>
                     </ul>
                 </div>
             </div>
@@ -1958,13 +1946,12 @@
         <div class="modal-box">
             <button class="modal-close" id="authModalClose" aria-label="Close">✕</button>
 
-            <div class="preview-warning" id="previewWarning">
-                Running in preview mode: this Claude artifact can't reach Google or Supabase (the sandbox blocks it).
-                Sign-in will work once this file is deployed with real Supabase credentials — see the deployment guide.
-            </div>
+            <h3 class="modal-title" id="authModalTitle">Log In</h3>
 
-            <button type="button" class="btn btn-google btn-block" id="googleAuthBtn">Continue with Google</button>
-            <div class="or-divider">or use email</div>
+            <div class="preview-warning" id="previewWarning">
+                Running in preview mode: this Claude artifact can't reach Supabase (the sandbox blocks it). Sign-in
+                will work once this file is deployed with real Supabase credentials — see the deployment guide.
+            </div>
 
             <div class="auth-tabs">
                 <button class="auth-tab-btn active" data-auth="login">Log In</button>
@@ -2027,6 +2014,56 @@
                 return out;
             } catch (e) { return []; }
         }
+
+        /* ============================================================
+           TAB / PAGE ROUTING — turns the anchor menu into real tabs.
+           Each top-level section carries data-page="<name>"; only the
+           active name's sections get shown. Nav links (and any other
+           in-page link) carry data-page-link="<name>" and are
+           intercepted so they switch tabs instead of scrolling.
+           ============================================================ */
+        const PAGE_NAMES = ['home', 'marketplace', 'submit', 'dashboard', 'about'];
+        const pageSections = {};
+        PAGE_NAMES.forEach(name => { pageSections[name] = document.querySelectorAll('[data-page="' + name + '"]'); });
+
+        function showPage(name) {
+            if (!PAGE_NAMES.includes(name)) name = 'home';
+            PAGE_NAMES.forEach(n => {
+                pageSections[n].forEach(el => el.classList.toggle('page-active', n === name));
+            });
+            document.querySelectorAll('[data-page-link]').forEach(a => {
+                a.classList.toggle('active', a.dataset.pageLink === name);
+            });
+            return name;
+        }
+
+        function navigateTo(name, addHistory) {
+            const resolved = showPage(name);
+            window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+            const hash = '#' + resolved;
+            if (addHistory) {
+                history.pushState({ page: resolved }, '', hash);
+            } else {
+                history.replaceState({ page: resolved }, '', hash);
+            }
+        }
+
+        document.addEventListener('click', function (e) {
+            const link = e.target.closest('[data-page-link]');
+            if (!link) return;
+            e.preventDefault();
+            navigateTo(link.dataset.pageLink, true);
+            // close mobile menu if a nav link was tapped
+            navLinksEl.classList.remove('open');
+            hamburgerEl.classList.remove('open');
+            hamburgerEl.setAttribute('aria-expanded', false);
+        });
+
+        window.addEventListener('popstate', function (e) {
+            const name = (e.state && e.state.page) || (location.hash.slice(1) || 'home');
+            showPage(name);
+            window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        });
 
         /* ============================================================
            AUTH STATE
@@ -2094,6 +2131,7 @@
         }
         document.getElementById('authModalClose').addEventListener('click', closeAuthModal);
         authModal.addEventListener('click', (e) => { if (e.target === authModal) closeAuthModal(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && authModal.classList.contains('open')) closeAuthModal(); });
         document.getElementById('submitLoginBtn').addEventListener('click', () => openAuthModal('login'));
         document.getElementById('dashLoginBtn').addEventListener('click', () => openAuthModal('login'));
 
@@ -2101,21 +2139,11 @@
             document.querySelectorAll('.auth-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.auth === tab));
             document.getElementById('loginForm').classList.toggle('active', tab === 'login');
             document.getElementById('signupForm').classList.toggle('active', tab === 'signup');
+            document.getElementById('authModalTitle').textContent = tab === 'login' ? 'Log In' : 'Sign Up';
+            const firstField = tab === 'login' ? document.getElementById('loginEmail') : document.getElementById('signupName');
+            requestAnimationFrame(() => firstField.focus());
         }
         document.querySelectorAll('.auth-tab-btn').forEach(b => b.addEventListener('click', () => switchAuthTab(b.dataset.auth)));
-
-        /* ---- Google sign-in ---- */
-        document.getElementById('googleAuthBtn').addEventListener('click', async () => {
-            if (!supabaseClient) {
-                document.getElementById('previewWarning').classList.add('show');
-                return;
-            }
-            const { error } = await supabaseClient.auth.signInWithOAuth({
-                provider: 'google',
-                options: { redirectTo: window.location.origin }
-            });
-            if (error) document.getElementById('loginError').textContent = error.message;
-        });
 
         /* ---- Email/password sign up ---- */
         document.getElementById('signupForm').addEventListener('submit', async (e) => {
@@ -2388,74 +2416,19 @@
             form.reset();
             document.getElementById('email').value = currentUser.email;
             document.querySelectorAll('.field.invalid').forEach(f => f.classList.remove('invalid'));
-            loadPendingList();
             refreshDashboard();
         });
 
         /* ============================================================
-           ADMIN PANEL — pending submissions queue
-           ============================================================ */
-        async function loadPendingList() {
-            const container = document.getElementById('pendingList');
-            container.innerHTML = '<div class="loading-note">Loading queue…</div>';
-            const submissions = await dbListValues('submissions:', true);
-            const pending = submissions.filter(s => s.status === 'pending');
-            if (!pending.length) {
-                container.innerHTML = '<p style="color:var(--ink-soft);font-size:14px;">No pending submissions right now.</p>';
-                return;
-            }
-            container.innerHTML = '';
-            pending.forEach(s => {
-                const row = document.createElement('div');
-                row.className = 'pending-row';
-                row.dataset.id = s.id;
-                row.innerHTML =
-                    '<div><div class="title">' + s.title + '</div><div class="sub">Submitted by ' + s.researcher + ' · ' + s.category + '</div></div>' +
-                    '<div class="pending-actions"><button class="icon-btn approve" title="Approve" aria-label="Approve">✓</button><button class="icon-btn reject" title="Reject" aria-label="Reject">✕</button></div>';
-                container.appendChild(row);
-            });
-        }
-        document.getElementById('pendingList').addEventListener('click', async (e) => {
-            const btn = e.target.closest('.icon-btn');
-            if (!btn) return;
-            const row = btn.closest('.pending-row');
-            const id = row.dataset.id;
-            const submission = await dbGet('submissions:' + id, true);
-            if (!submission) return;
-            submission.status = btn.classList.contains('approve') ? 'approved' : 'rejected';
-            await dbSet('submissions:' + id, submission, true);
-            row.style.opacity = '0'; row.style.transform = 'translateX(30px)';
-            setTimeout(() => { row.remove(); initStudies(); }, 250);
-        });
-
-        /* ============================================================
-           SEED DEMO DATA (once)
-           ============================================================ */
-        async function seedDemoData() {
-            const seeded = await dbGet('seeded_flag_v2', true);
-            if (seeded) return;
-            const demoSubs = [
-                { id: 'demo1', title: "Gaming Habits and Problem-Solving Skills", description: "Looking at whether regular strategy gaming correlates with faster problem-solving on unrelated tasks.", category: "technology", age: "18–24", slots: "90", time: "9 minutes", link: "https://example.com/survey1", researcher: "D. Alvarez", email: "d.alvarez@example.com", status: "pending", submittedAt: new Date().toLocaleDateString() },
-                { id: 'demo2', title: "Note-Taking Methods and Retention", description: "Comparing handwritten notes, typed notes, and audio notes for information retention a week later.", category: "education", age: "18–24", slots: "110", time: "14 minutes", link: "https://example.com/survey2", researcher: "R. Okafor", email: "r.okafor@example.com", status: "pending", submittedAt: new Date().toLocaleDateString() },
-                { id: 'demo3', title: "Caffeine Intake and Focus in College Students", description: "A short daily log study on caffeine timing and self-reported focus during study sessions.", category: "health", age: "18–24", slots: "75", time: "5 minutes/day", link: "https://example.com/survey3", researcher: "S. Kim", email: "s.kim@example.com", status: "pending", submittedAt: new Date().toLocaleDateString() },
-            ];
-            for (const s of demoSubs) { await dbSet('submissions:' + s.id, s, true); }
-            await dbSet('seeded_flag_v2', { done: true }, true);
-        }
-
-        /* ============================================================
            MOBILE NAV
            ============================================================ */
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('navLinks');
-        hamburger.addEventListener('click', () => {
-            const open = navLinks.classList.toggle('open');
-            hamburger.classList.toggle('open', open);
-            hamburger.setAttribute('aria-expanded', open);
+        const hamburgerEl = document.getElementById('hamburger');
+        const navLinksEl = document.getElementById('navLinks');
+        hamburgerEl.addEventListener('click', () => {
+            const open = navLinksEl.classList.toggle('open');
+            hamburgerEl.classList.toggle('open', open);
+            hamburgerEl.setAttribute('aria-expanded', open);
         });
-        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-            navLinks.classList.remove('open'); hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded', false);
-        }));
 
         /* ============================================================
            ANIMATED STAT COUNTERS + SCROLL REVEAL
@@ -2491,6 +2464,9 @@
            INIT
            ============================================================ */
         (async function init() {
+            const initialPage = location.hash.slice(1) || 'home';
+            navigateTo(initialPage, false);
+
             renderAuthUI();
 
             if (supabaseClient) {
@@ -2502,9 +2478,12 @@
                 });
             }
 
-            await seedDemoData();
             await initStudies();
-            await loadPendingList();
+
+            // Stat counters and reveal animations only fire for elements that
+            // are actually visible (page-active); re-observe whenever a new
+            // page is shown so counters/reveals on that page still animate in.
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
         })();
     </script>
 </body>
