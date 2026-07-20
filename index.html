@@ -1783,57 +1783,468 @@
       .portal-switch { grid-template-columns: 1fr; }
     }
 
+
+
+    /* ============================================================
+       FINAL LOCKED CURORIA UI PASS — CSS ONLY
+       Content and application behavior are intentionally untouched.
+       ============================================================ */
+
+    /* ---------- Unified interactive control system ---------- */
+    :where(
+      .btn,
+      .dash-tab,
+      .auth-tab,
+      .portal-tab,
+      .standards-tab,
+      .admin-action-btn,
+      .search-btn,
+      .menu-btn,
+      .modal-close
+    ) {
+      position: relative;
+      isolation: isolate;
+      overflow: visible;
+      font-family: var(--ff-body, var(--sans));
+      font-weight: 600;
+      letter-spacing: .005em;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Keep all normal action buttons in the same visual family. */
+    :where(.btn, .dash-tab, .auth-tab, .portal-tab, .admin-action-btn) {
+      border-radius: 999px;
+      min-height: 42px;
+      transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        background-color .22s ease,
+        background .22s ease,
+        color .22s ease,
+        border-color .22s ease;
+    }
+
+    .btn {
+      padding: 11px 22px;
+      border-width: 1.5px;
+      font-size: 14px;
+    }
+
+    .btn-sm {
+      min-height: 36px;
+      padding: 8px 16px;
+      font-size: 12.75px;
+    }
+
+    .btn-primary,
+    .btn-blue {
+      border-color: transparent;
+      background: linear-gradient(120deg, var(--blue), var(--teal));
+      color: #fff;
+      box-shadow: 0 8px 20px -14px rgba(11,18,64,.55);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible,
+    .btn-blue:hover,
+    .btn-blue:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 32px -18px rgba(11,18,64,.42);
+    }
+
+    .btn-outline,
+    .btn-ghost,
+    .dash-tab,
+    .auth-tab,
+    .portal-tab,
+    .admin-action-btn {
+      background: rgba(255,255,255,.96);
+      border: 1.5px solid var(--line);
+      color: var(--navy-soft);
+      box-shadow: 0 5px 16px -15px rgba(11,18,64,.35);
+    }
+
+    .btn-outline {
+      border-color: rgba(11,18,64,.72);
+      color: var(--navy);
+    }
+
+    .btn-outline:hover,
+    .btn-outline:focus-visible,
+    .btn-ghost:hover,
+    .btn-ghost:focus-visible,
+    .dash-tab:hover,
+    .dash-tab:focus-visible,
+    .auth-tab:hover,
+    .auth-tab:focus-visible,
+    .portal-tab:hover,
+    .portal-tab:focus-visible,
+    .admin-action-btn:hover,
+    .admin-action-btn:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(18,121,214,.62);
+      color: var(--blue-deep);
+      background: #fff;
+      box-shadow: 0 10px 24px -18px rgba(11,18,64,.30);
+    }
+
+    .btn-outline:hover,
+    .btn-outline:focus-visible {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: #fff;
+    }
+
+    :where(.dash-tab, .auth-tab, .portal-tab).active {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: #fff;
+      box-shadow: 0 8px 18px -15px rgba(11,18,64,.55);
+    }
+
+    /* Standards tabs keep their sidebar shape, but share the same motion/glow. */
+    .policy-nav .standards-tab {
+      border-radius: 12px;
+      border: 1px solid transparent;
+      min-height: 44px;
+      padding: 10px 13px;
+      color: var(--ink-soft);
+      background: transparent;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .policy-nav .standards-tab:hover,
+    .policy-nav .standards-tab:focus-visible {
+      transform: none;
+      background: rgba(238,246,251,.78);
+      border-color: rgba(18,121,214,.14);
+      color: var(--navy);
+    }
+
+    .policy-nav .standards-tab.active {
+      background: linear-gradient(120deg, rgba(18,121,214,.09), rgba(18,182,214,.11));
+      border-color: rgba(18,121,214,.16);
+      color: var(--navy);
+      box-shadow: inset 2px 0 0 var(--blue);
+    }
+
+    /* Admin actions remain semantically clear while still matching the button system. */
+    .admin-action-btn {
+      min-height: 36px;
+      padding: 8px 14px;
+      font-size: 12.5px;
+    }
+
+    .admin-action-btn.approve {
+      color: #0D6B57;
+      border-color: #B7ECDD;
+      background: #F7FEFB;
+    }
+
+    .admin-action-btn.reject,
+    .admin-action-btn.remove {
+      color: var(--danger);
+      border-color: #EFC4BF;
+      background: #FFF9F8;
+    }
+
+    /* ---------- Original Curoria expanding glow ---------- */
+    :where(
+      .btn,
+      .dash-tab,
+      .auth-tab,
+      .portal-tab,
+      .standards-tab,
+      .admin-action-btn,
+      .search-btn,
+      .menu-btn,
+      .modal-close
+    )::before {
+      content: '';
+      position: absolute;
+      inset: -9px;
+      z-index: -1;
+      border-radius: inherit;
+      background:
+        radial-gradient(circle at 28% 25%, var(--blue) 0%, transparent 56%),
+        radial-gradient(circle at 72% 75%, var(--teal) 0%, transparent 56%),
+        radial-gradient(circle at 50% 50%, var(--sky) 0%, transparent 67%);
+      filter: blur(12px);
+      opacity: 0;
+      transform: scale(.86);
+      transition:
+        opacity .42s cubic-bezier(.22,1,.36,1),
+        transform .42s cubic-bezier(.22,1,.36,1);
+      pointer-events: none;
+      will-change: opacity, transform;
+    }
+
+    :where(
+      .btn,
+      .dash-tab,
+      .auth-tab,
+      .portal-tab,
+      .standards-tab,
+      .admin-action-btn,
+      .search-btn,
+      .menu-btn,
+      .modal-close
+    ):hover::before,
+    :where(
+      .btn,
+      .dash-tab,
+      .auth-tab,
+      .portal-tab,
+      .standards-tab,
+      .admin-action-btn,
+      .search-btn,
+      .menu-btn,
+      .modal-close
+    ):focus-visible::before {
+      opacity: .62;
+      transform: scale(1.12);
+    }
+
+    .btn-primary::before,
+    .btn-blue::before {
+      inset: -11px;
+      background:
+        radial-gradient(circle at 25% 25%, var(--blue) 0%, transparent 59%),
+        radial-gradient(circle at 75% 75%, var(--teal) 0%, transparent 59%);
+      filter: blur(16px);
+    }
+
+    .btn-primary:hover::before,
+    .btn-primary:focus-visible::before,
+    .btn-blue:hover::before,
+    .btn-blue:focus-visible::before {
+      opacity: .82;
+      transform: scale(1.14);
+    }
+
+    .admin-action-btn.approve::before {
+      background: radial-gradient(circle, rgba(27,163,122,.88) 0%, transparent 64%);
+      opacity: 0;
+    }
+
+    .admin-action-btn.reject::before,
+    .admin-action-btn.remove::before {
+      background: radial-gradient(circle, rgba(192,57,43,.78) 0%, transparent 64%);
+      opacity: 0;
+    }
+
+    .admin-action-btn.approve:hover::before,
+    .admin-action-btn.approve:focus-visible::before,
+    .admin-action-btn.reject:hover::before,
+    .admin-action-btn.reject:focus-visible::before,
+    .admin-action-btn.remove:hover::before,
+    .admin-action-btn.remove:focus-visible::before {
+      opacity: .42;
+    }
+
+    /* Prevent glow from ever becoming a layer over text. */
+    :where(
+      .btn,
+      .dash-tab,
+      .auth-tab,
+      .portal-tab,
+      .standards-tab,
+      .admin-action-btn,
+      .search-btn,
+      .menu-btn,
+      .modal-close
+    ) > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ---------- Header: clean top-level underline, never dropdown content ---------- */
+    .institutional-nav .nav-dropdown-toggle,
+    .institutional-nav .nav-direct-link {
+      isolation: isolate;
+      font-weight: 500;
+      letter-spacing: .005em;
+      border-bottom: 0 !important;
+    }
+
+    .institutional-nav .nav-dropdown-toggle::after,
+    .institutional-nav .nav-direct-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 10px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--blue), var(--teal));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .24s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .institutional-nav .nav-dropdown-toggle:hover::after,
+    .institutional-nav .nav-dropdown-toggle:focus-visible::after,
+    .institutional-nav .nav-dropdown.open > .nav-dropdown-toggle::after,
+    .institutional-nav .nav-dropdown:focus-within > .nav-dropdown-toggle::after,
+    .institutional-nav .nav-direct-link:hover::after,
+    .institutional-nav .nav-direct-link:focus-visible::after,
+    .institutional-nav .nav-direct-link.active::after {
+      transform: scaleX(1);
+    }
+
+    /* Critical isolation: no inherited underline or pseudo-element inside opened menus. */
+    .nav-dropdown-menu a::before,
+    .nav-dropdown-menu a::after,
+    .institutional-nav .nav-dropdown-menu a::before,
+    .institutional-nav .nav-dropdown-menu a::after,
+    .nav-links .nav-dropdown-menu a::before,
+    .nav-links .nav-dropdown-menu a::after {
+      content: none !important;
+      display: none !important;
+    }
+
+    .nav-dropdown-menu {
+      top: calc(100% + 6px);
+      border-top: 1px solid var(--line);
+      box-shadow: 0 18px 42px -26px rgba(11,18,64,.34);
+    }
+
+    .nav-dropdown-menu a {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      border-radius: 11px;
+      transition: background-color .18s ease, color .18s ease;
+    }
+
+    .nav-dropdown-menu a:hover,
+    .nav-dropdown-menu a:focus-visible,
+    .nav-dropdown-menu a.active {
+      transform: none;
+      background: linear-gradient(120deg, rgba(18,121,214,.055), rgba(18,182,214,.065));
+      color: var(--blue-deep);
+      box-shadow: none;
+    }
+
+    /* Header utility actions stay quiet and formal; no oversized halo. */
+    .header-utility-link,
+    .header-login-btn,
+    .search-btn.header-utility-link {
+      font-weight: 500;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+    }
+
+    /* ---------- General polish without touching content ---------- */
+    .card,
+    .listing,
+    .publication,
+    .surface,
+    .form-card,
+    .prose,
+    .policy-nav,
+    .modal-box {
+      border-color: rgba(225,234,242,.95);
+    }
+
+    .card:hover,
+    .listing:hover,
+    .publication:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 34px -26px rgba(11,18,64,.32);
+      border-color: rgba(18,121,214,.14);
+    }
+
+    /* Mobile header tabs use borders instead of an underline that could cross content. */
+    @media (max-width: 1040px) {
+      .institutional-nav .nav-dropdown-toggle::after,
+      .institutional-nav .nav-direct-link::after {
+        display: none;
+      }
+
+      .institutional-nav .nav-dropdown-toggle,
+      .institutional-nav .nav-direct-link {
+        border-bottom: 1px solid var(--line) !important;
+      }
+
+      .nav-dropdown-menu {
+        margin-top: 0;
+        border-top: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :where(
+        .btn,
+        .dash-tab,
+        .auth-tab,
+        .portal-tab,
+        .standards-tab,
+        .admin-action-btn,
+        .search-btn,
+        .menu-btn,
+        .modal-close
+      )::before,
+      .institutional-nav .nav-dropdown-toggle::after,
+      .institutional-nav .nav-direct-link::after {
+        transition: none !important;
+      }
+    }
+
 </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header institutional-header">
-  <div class="header-primary">
-    <div class="wrap header-primary-inner">
-      <a aria-label="Curoria home" class="brand institutional-brand" data-page-link="home" href="#home">
-        <img alt="Curoria logo" onerror="this.style.display='none'" src="images/CuroriaLOGO.png"/>
-        <span class="brand-copy"><strong>Curoria</strong><span>Student Research Network</span></span>
-      </a>
-      <div class="header-utilities" aria-label="Quick links">
-        <a class="header-utility-link" data-page-link="research" href="#research">Browse Surveys</a>
-        <button aria-label="Search Curoria" class="header-utility-link search-btn" id="globalSearchBtn" type="button"><span class="utility-icon search-icon" aria-hidden="true"></span>Search</button>
-        <div class="nav-actions header-auth" id="authArea"></div>
-        <button aria-expanded="false" aria-label="Open navigation" class="menu-btn" id="menuBtn" type="button">☰</button>
-      </div>
-    </div>
-  </div>
-  <div class="header-secondary">
-    <div class="wrap">
-      <nav aria-label="Primary navigation" class="nav-links institutional-nav" id="navLinks">
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-toggle" type="button" aria-expanded="false">Explore Content <span aria-hidden="true">⌄</span></button>
-          <div class="nav-dropdown-menu">
-            <a data-page-link="research" href="#research"><b>Surveys</b><span>Find surveys and studies recruiting participants.</span></a>
-            <a data-page-link="journal" href="#journal"><b>Results</b><span>Explore outcomes and completed research records.</span></a>
-            <a data-page-link="competitions" href="#competitions"><b>Challenges</b><span>Discover optional research challenges and activities.</span></a>
-          </div>
-        </div>
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-toggle" type="button" aria-expanded="false">About Curoria <span aria-hidden="true">⌄</span></button>
-          <div class="nav-dropdown-menu">
-            <a data-page-link="about" href="#about"><b>About</b><span>Our mission and the idea behind Curoria.</span></a>
-            <a data-page-link="executive-team" href="#executive-team"><b>Executive Team</b><span>How Curoria leadership and responsibilities are structured.</span></a>
-            <a data-page-link="transparency" href="#transparency"><b>Transparency &amp; Trust</b><span>How review, verification, and platform labels work.</span></a>
-            <a data-page-link="collaborations" href="#collaborations"><b>Collaborations</b><span>Ways schools, researchers, and organizations can work with Curoria.</span></a>
-            <a data-page-link="chapters" href="#chapters"><b>Communities</b><span>Local communities supporting research participation.</span></a>
-          </div>
-        </div>
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-toggle" type="button" aria-expanded="false">Submission &amp; Contact <span aria-hidden="true">⌄</span></button>
-          <div class="nav-dropdown-menu nav-dropdown-menu-compact">
-            <a data-page-link="submit" href="#submit"><b>Submit Survey</b><span>Submit a survey or study to recruit participants.</span></a>
-            <a data-page-link="contact" href="#contact"><b>Contact</b><span>Get help or contact the Curoria team.</span></a>
-          </div>
-        </div>
-        <a class="nav-direct-link" data-page-link="donate" href="#donate">Support</a>
-      </nav>
-    </div>
-  </div>
+<div class="header-primary">
+<div class="wrap header-primary-inner">
+<a aria-label="Curoria home" class="brand institutional-brand" data-page-link="home" href="#home">
+<img alt="Curoria logo" onerror="this.style.display='none'" src="images/CuroriaLOGO.png"/>
+<span class="brand-copy"><strong>Curoria</strong><span>Student Research Network</span></span>
+</a>
+<div aria-label="Quick links" class="header-utilities">
+<a class="header-utility-link" data-page-link="research" href="#research">Browse Surveys</a>
+<button aria-label="Search Curoria" class="header-utility-link search-btn" id="globalSearchBtn" type="button"><span aria-hidden="true" class="utility-icon search-icon"></span>Search</button>
+<div class="nav-actions header-auth" id="authArea"></div>
+<button aria-expanded="false" aria-label="Open navigation" class="menu-btn" id="menuBtn" type="button">☰</button>
+</div>
+</div>
+</div>
+<div class="header-secondary">
+<div class="wrap">
+<nav aria-label="Primary navigation" class="nav-links institutional-nav" id="navLinks">
+<div class="nav-dropdown">
+<button aria-expanded="false" class="nav-dropdown-toggle" type="button">Explore Content <span aria-hidden="true">⌄</span></button>
+<div class="nav-dropdown-menu">
+<a data-page-link="research" href="#research"><b>Surveys</b><span>Find surveys and studies recruiting participants.</span></a>
+<a data-page-link="results" href="#results"><b>Results</b><span>Explore outcomes and completed research records.</span></a>
+<a data-page-link="challenges" href="#challenges"><b>Challenges</b><span>Discover optional research challenges and activities.</span></a>
+</div>
+</div>
+<div class="nav-dropdown">
+<button aria-expanded="false" class="nav-dropdown-toggle" type="button">About Curoria <span aria-hidden="true">⌄</span></button>
+<div class="nav-dropdown-menu">
+<a data-page-link="about" href="#about"><b>About</b><span>Our mission and the idea behind Curoria.</span></a>
+<a data-page-link="executive-team" href="#executive-team"><b>Executive Team</b><span>How Curoria leadership and responsibilities are structured.</span></a>
+<a data-page-link="transparency" href="#transparency"><b>Transparency &amp; Trust</b><span>How review, verification, and platform labels work.</span></a>
+<a data-page-link="collaborations" href="#collaborations"><b>Collaborations</b><span>Ways schools, researchers, and organizations can work with Curoria.</span></a>
+<a data-page-link="communities" href="#communities"><b>Communities</b><span>Local communities supporting research participation.</span></a>
+</div>
+</div>
+<div class="nav-dropdown">
+<button aria-expanded="false" class="nav-dropdown-toggle" type="button">Submission &amp; Contact <span aria-hidden="true">⌄</span></button>
+<div class="nav-dropdown-menu nav-dropdown-menu-compact">
+<a data-page-link="submit" href="#submit"><b>Submit Survey</b><span>Submit a survey or study to recruit participants.</span></a>
+<a data-page-link="contact" href="#contact"><b>Contact</b><span>Get help or contact the Curoria team.</span></a>
+</div>
+</div>
+<a class="nav-direct-link" data-page-link="support" href="#support">Support</a>
+</nav>
+</div>
+</div>
 </header>
 <main id="main">
 <section class="page active" data-page="home">
@@ -1869,7 +2280,7 @@
 </section>
 <section class="section split-band">
 <div class="wrap">
-<div class="section-head"><div class="eyebrow">Beyond Participation</div><h2>More ways to support the same research network</h2><p>Groups, research outcomes, challenges, and local communities are optional extensions of Curoria’s original mission—not separate products competing with it.</p></div>
+<div class="section-head"><div class="eyebrow">Beyond Participation</div><h2>More ways to support the same research network</h2><p>Research results, learning challenges, and local communities extend Curoria’s core mission by helping people understand, practice, and support responsible research participation.</p></div>
 <div class="steps">
 <div class="step"><h3>Researchers submit</h3><p>A researcher explains the study, participant requirements, time commitment, privacy approach, and oversight status.</p></div>
 <div class="step"><h3>Curoria reviews</h3><p>The listing is checked for completeness, transparency, obvious safety concerns, and fit with Curoria's platform standards.</p></div>
@@ -1880,12 +2291,12 @@
 </section>
 <section class="section">
 <div class="wrap">
-<div class="section-head"><div class="eyebrow">More ways to grow with Curoria</div><h2>Supporting programs around the core participant network.</h2><p>These programs expand opportunities for emerging researchers, but they remain secondary to Curoria's main mission of connecting studies with participants.</p></div>
+<div class="section-head"><div class="eyebrow">More ways to grow with Curoria</div><h2>Supporting programs around the core participant network.</h2><p>These sections support Curoria’s main purpose: helping researchers reach participants and helping volunteers discover clear, responsible study opportunities.</p></div>
 <div class="grid-4">
-<article class="card"><div class="icon-tile">G</div><h3>Research Groups</h3><p>Collaborate with other students on structured research projects and shared questions.</p><a class="btn btn-outline btn-sm" data-page-link="research" data-research-view="group" href="#research">Explore Groups</a></article>
-<article class="card"><div class="icon-tile">J</div><h3>Research Results</h3><p>See completed research, public study outcomes, and clearly labeled archive records connected to the Curoria community.</p><a class="btn btn-outline btn-sm" data-page-link="journal" href="#journal">Explore Results</a></article>
-<article class="card"><div class="icon-tile">C</div><h3>Challenges</h3><p>Take part in optional research challenges with clear eligibility, deadlines, and evaluation criteria.</p><a class="btn btn-outline btn-sm" data-page-link="competitions" href="#competitions">View Challenges</a></article>
-<article class="card"><div class="icon-tile">H</div><h3>Communities</h3><p>Build local Curoria communities around research participation, education, and responsible recruitment.</p><a class="btn btn-outline btn-sm" data-page-link="chapters" href="#chapters">Explore Communities</a></article>
+
+<article class="card"><div class="icon-tile">J</div><h3>Research Results</h3><p>See completed research, public study outcomes, and clearly labeled result summaries connected to the Curoria community.</p><a class="btn btn-outline btn-sm" data-page-link="results" href="#results">Explore Results</a></article>
+<article class="card"><div class="icon-tile">C</div><h3>Challenges</h3><p>Take part in optional research challenges with clear eligibility, deadlines, and evaluation criteria.</p><a class="btn btn-outline btn-sm" data-page-link="challenges" href="#challenges">View Challenges</a></article>
+<article class="card"><div class="icon-tile">H</div><h3>Communities</h3><p>Build local Curoria communities around research participation, education, and responsible recruitment.</p><a class="btn btn-outline btn-sm" data-page-link="communities" href="#communities">Explore Communities</a></article>
 </div>
 </div>
 </section>
@@ -1894,12 +2305,12 @@
 <div class="card">
 <div class="eyebrow">Transparency</div>
 <h3 style="font-family:var(--serif);font-size:30px">Platform review is not the same thing as IRB or institutional ethics approval.</h3>
-<p>Curoria labels platform review, researcher verification, supervisor involvement, institutional ethics review, and publication status separately.</p>
+<p>Curoria labels platform review, researcher verification, supervisor involvement, institutional ethics review, and recruitment status separately.</p>
 <a class="btn btn-primary btn-sm" data-page-link="transparency" href="#transparency">Read Transparency &amp; Trust</a>
 </div>
 <div class="card">
 <div class="eyebrow">Research integrity</div>
-<h3 style="font-family:var(--serif);font-size:30px">Clear expectations for authorship, originality, consent, privacy, and responsible recruitment.</h3>
+<h3 style="font-family:var(--serif);font-size:30px">Clear expectations for researcher identity, consent, privacy, data integrity, and responsible recruitment.</h3>
 <p>Researchers must disclose what participants will do, what data is collected, who is responsible for the study, and what review pathway applies.</p>
 <a class="btn btn-primary btn-sm" data-page-link="standards" href="#standards">Review Curoria Standards</a>
 </div>
@@ -1936,30 +2347,30 @@
 </div>
 </div></section>
 <section class="page" data-page="executive-team">
-  <div class="section">
-    <div class="wrap">
-      <div class="section-head"><div class="eyebrow">Executive Team</div><h2>The people and responsibilities behind Curoria</h2><p>Curoria publishes leadership information transparently as the team grows. This page describes the roles responsible for the platform without inventing names or credentials that have not been publicly confirmed.</p></div>
-      <div class="grid-3">
-        <article class="card"><div class="icon-tile">L</div><h3>Leadership &amp; Operations</h3><p>Responsible for Curoria's direction, platform operations, organizational decisions, and accountability to the research community.</p></article>
-        <article class="card"><div class="icon-tile">R</div><h3>Research Standards &amp; Review</h3><p>Maintains listing standards and helps ensure public survey and study pages clearly explain participation, privacy, eligibility, and review status.</p></article>
-        <article class="card"><div class="icon-tile">C</div><h3>Community &amp; Partnerships</h3><p>Supports researchers, volunteers, schools, and organizations interested in responsible research participation and collaboration.</p></article>
-      </div>
-      <div class="card" style="margin-top:24px"><h3>Team directory</h3><p>Named leadership profiles should be added here only when Curoria is ready to publish each person's role and information accurately. Curoria does not display fictional team members or unverifiable credentials.</p><a class="btn btn-outline btn-sm" data-page-link="contact" href="#contact">Contact Curoria</a></div>
-    </div>
-  </div>
+<div class="section">
+<div class="wrap">
+<div class="section-head"><div class="eyebrow">Executive Team</div><h2>The people and responsibilities behind Curoria</h2><p>Curoria publishes leadership information transparently as the team grows. This page describes the roles responsible for the platform without inventing names or credentials that have not been publicly confirmed.</p></div>
+<div class="grid-3">
+<article class="card"><div class="icon-tile">L</div><h3>Leadership &amp; Operations</h3><p>Responsible for Curoria's direction, platform operations, organizational decisions, and accountability to the research community.</p></article>
+<article class="card"><div class="icon-tile">R</div><h3>Research Standards &amp; Review</h3><p>Maintains listing standards and helps ensure public survey and study pages clearly explain participation, privacy, eligibility, and review status.</p></article>
+<article class="card"><div class="icon-tile">C</div><h3>Community &amp; Partnerships</h3><p>Supports researchers, volunteers, schools, and organizations interested in responsible research participation and collaboration.</p></article>
+</div>
+<div class="card" style="margin-top:24px"><h3>Team directory</h3><p>Named leadership profiles should be added here only when Curoria is ready to publish each person's role and information accurately. Curoria does not display fictional team members or unverifiable credentials.</p><a class="btn btn-outline btn-sm" data-page-link="contact" href="#contact">Contact Curoria</a></div>
+</div>
+</div>
 </section>
 <section class="page" data-page="collaborations">
-  <div class="section">
-    <div class="wrap">
-      <div class="section-head"><div class="eyebrow">Collaborations</div><h2>Work with Curoria to make responsible research participation more accessible</h2><p>Curoria can collaborate with schools, student organizations, researchers, educators, and community groups when the relationship supports transparent and responsible research participation.</p></div>
-      <div class="grid-3">
-        <article class="card"><div class="icon-tile">S</div><h3>Schools &amp; Student Organizations</h3><p>Share research education opportunities, help students learn responsible recruitment practices, and connect eligible volunteers with clearly described studies.</p></article>
-        <article class="card"><div class="icon-tile">R</div><h3>Researchers &amp; Research Teams</h3><p>Use Curoria to communicate participant opportunities clearly and explore responsible ways to reach communities that may be interested in contributing.</p></article>
-        <article class="card"><div class="icon-tile">O</div><h3>Organizations &amp; Community Groups</h3><p>Support research access, educational programming, or community participation without compromising Curoria's standards or participant choice.</p></article>
-      </div>
-      <div class="card" style="margin-top:24px"><h3>Interested in collaborating?</h3><p>Tell us who you are, what you would like to work on, and how the collaboration would benefit researchers or participants. Curoria should publicly list partnerships only after they are real and confirmed.</p><a class="btn btn-primary btn-sm" data-page-link="contact" href="#contact">Contact Curoria</a></div>
-    </div>
-  </div>
+<div class="section">
+<div class="wrap">
+<div class="section-head"><div class="eyebrow">Collaborations</div><h2>Work with Curoria to make responsible research participation more accessible</h2><p>Curoria can collaborate with schools, student organizations, researchers, educators, and community groups when the relationship supports transparent and responsible research participation.</p></div>
+<div class="grid-3">
+<article class="card"><div class="icon-tile">S</div><h3>Schools &amp; Student Organizations</h3><p>Share research education opportunities, help students learn responsible recruitment practices, and connect eligible volunteers with clearly described studies.</p></article>
+<article class="card"><div class="icon-tile">R</div><h3>Researchers &amp; Research Teams</h3><p>Use Curoria to communicate participant opportunities clearly and explore responsible ways to reach communities that may be interested in contributing.</p></article>
+<article class="card"><div class="icon-tile">O</div><h3>Organizations &amp; Community Groups</h3><p>Support research access, educational programming, or community participation without compromising Curoria's standards or participant choice.</p></article>
+</div>
+<div class="card" style="margin-top:24px"><h3>Interested in collaborating?</h3><p>Tell us who you are, what you would like to work on, and how the collaboration would benefit researchers or participants. Curoria should publicly list partnerships only after they are real and confirmed.</p><a class="btn btn-primary btn-sm" data-page-link="contact" href="#contact">Contact Curoria</a></div>
+</div>
+</div>
 </section>
 <section class="page" data-page="research">
 <div class="section">
@@ -1967,45 +2378,45 @@
 <div class="section-head"><div class="eyebrow">Survey Marketplace</div><h2>Surveys and studies looking for participants</h2><p>Browse participant opportunities by topic, eligibility, and status. Each listing should clearly explain who is conducting the research, who can take part, and what participation involves.</p></div>
 <div class="directory-toolbar">
 <input aria-label="Search surveys and participant studies" class="control" id="researchSearch" placeholder="Search surveys, topics, researchers…" type="search"/>
-<select class="control" id="researchType"><option selected="" value="study">Participant surveys &amp; studies</option><option value="group">Research teams</option><option value="all">All opportunities</option></select>
+<input id="researchType" type="hidden" value="study"/>
 <select class="control" id="researchField"><option value="all">All fields</option><option>Computer Science &amp; AI</option><option>Health &amp; Life Sciences</option><option>Engineering</option><option>Social Sciences</option><option>Education</option><option>Environment</option><option>Business &amp; Economics</option></select>
 <select class="control" id="researchStatus"><option value="all">Any status</option><option value="recruiting">Recruiting</option><option value="in-progress">In progress</option><option value="closed">Closed</option></select>
 <select class="control" id="researchLevel"><option value="all">Any level</option><option value="open">Open level</option><option value="beginner">Beginner friendly</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option></select>
 <button class="btn btn-outline" id="researchReset" type="button">Reset</button>
 </div>
-<div class="directory-status"><span id="researchCount">0 studies</span><span>Participant surveys and studies are the heart of Curoria. Research teams are an optional collaboration pathway.</span></div>
+<div class="directory-status"><span id="researchCount">0 studies</span><span>Every listing here is a participant-facing survey or study submitted for Curoria review.</span></div>
 <div class="listing-grid" id="researchGrid"></div>
 <div class="empty" hidden="" id="researchEmpty"><h3>No surveys match these filters yet.</h3><p>Approved participant surveys and studies will appear here as researchers submit them for review.</p><a class="btn btn-primary btn-sm" data-page-link="submit" href="#submit">Submit a Survey</a></div>
 </div>
 </div>
 </section>
-<section class="page" data-page="journal">
+<section class="page" data-page="results">
 <div class="section">
 <div class="wrap">
-<div class="section-head"><div class="eyebrow">Research Results</div><h2>See what Curoria surveys and studies lead to</h2><p>Explore clearly labeled research outcomes, completed-study records, analyses, and community updates connected to Curoria. Public records are labeled by their actual review or archive status.</p></div>
+<div class="section-head"><div class="eyebrow">Curoria Results</div><h2>See what completed Curoria studies lead to</h2><p>Explore researcher-submitted study outcomes, plain-language findings, and community updates connected to Curoria-listed research. Each result should state clearly what it is and who provided it.</p></div>
 <div class="directory-toolbar" style="grid-template-columns:2fr 1fr auto">
-<input class="control" id="publicationSearch" placeholder="Search titles, authors, keywords…" type="search"/>
-<select class="control" id="publicationType"><option value="all">All result types</option><option value="journal">Reviewed research article</option><option value="archive">Research outcome / archive record</option><option value="review">Student review &amp; analysis</option><option value="news">Curoria community update</option></select>
+<input class="control" id="publicationSearch" placeholder="Search results, researchers, or topics…" type="search"/>
+<select class="control" id="publicationType"><option value="all">All result types</option><option value="outcome">Study outcome</option><option value="summary">Plain-language research summary</option><option value="update">Curoria community update</option></select>
 <button class="btn btn-outline" id="publicationReset" type="button">Reset</button>
 </div>
 <div class="publication-grid" id="publicationGrid"></div>
-<div class="empty" hidden="" id="publicationEmpty"><h3>No research results have been shared yet.</h3><p>Completed work from the Curoria community can appear here with an accurate label explaining how it was reviewed, published, or archived.</p><a class="btn btn-primary btn-sm" data-page-link="submit" href="#submit">Share Research Results</a></div>
-</div>
+<div class="empty" hidden="" id="publicationEmpty"><h3>No Curoria results have been shared yet.</h3><p>When researchers choose to share a completed outcome or plain-language summary from a Curoria-listed study, it can appear here with a clear source label.</p><a class="btn btn-primary btn-sm" data-page-link="contact" href="#contact">Ask about sharing a result</a></div>
+<div class="card results-principles" style="margin-top:24px"><h3>How Curoria presents results</h3><div class="grid-3" style="margin-top:16px"><p><b>Connected to real studies</b><br/><span class="muted small">Results should identify the related study or researcher whenever that information can be verified.</span></p><p><b>Plain-language labels</b><br/><span class="muted small">Curoria distinguishes a study outcome, researcher summary, and community update without implying formal external review or endorsement.</span></p><p><b>No inflated claims</b><br/><span class="muted small">A result shown on Curoria does not automatically mean an institution, external reviewer, or ethics board endorsed the findings.</span></p></div></div></div>
 </div>
 </section>
-<section class="page" data-page="competitions">
+<section class="page" data-page="challenges">
 <div class="section">
 <div class="wrap">
-<div class="section-head"><div class="eyebrow">Curoria Challenges</div><h2>Research challenges for curious students and emerging researchers</h2><p>Curoria challenges are optional activities where members can practice asking questions, designing surveys, analyzing information, and communicating findings. They support the participant network rather than replacing it.</p></div>
+<div class="section-head"><div class="eyebrow">Curoria Challenges</div><h2>Practice the skills behind responsible participant research</h2><p>Curoria challenges are optional learning activities that help students practice survey design, participant communication, research ethics, data interpretation, and clear reporting.</p></div>
 <div class="grid-3" id="competitionGrid"></div>
-<div class="card" style="margin-top:24px"><h3>What every Curoria challenge should make clear</h3><div class="grid-3" style="margin-top:16px"><p><b>Clear purpose</b><br/><span class="muted small">The research question, eligibility, timeline, and expected output are explained before people join.</span></p><p><b>Fair evaluation</b><br/><span class="muted small">Any judging or feedback criteria are shared in advance and applied consistently.</span></p><p><b>No false promises</b><br/><span class="muted small">Taking part never guarantees publication, awards, university admission, or institutional endorsement.</span></p></div></div>
+<div class="card" style="margin-top:24px"><h3>What every Curoria challenge should make clear</h3><div class="grid-3" style="margin-top:16px"><p><b>Clear learning goal</b><br/><span class="muted small">Members know what research skill they are practicing and what they are expected to create or reflect on.</span></p><p><b>Clear participation guidance</b><br/><span class="muted small">Instructions, eligibility, timing, and any feedback process are explained before someone starts.</span></p><p><b>No misleading credentials</b><br/><span class="muted small">Completing a challenge does not imply institutional approval, academic credit, or a professional research credential.</span></p></div></div>
 </div>
 </div>
 </section>
-<section class="page" data-page="chapters">
+<section class="page" data-page="communities">
 <div class="section">
 <div class="wrap">
-<div class="section-head"><div class="eyebrow">Curoria Communities</div><h2>Build a local community around responsible research participation</h2><p>Curoria communities can help researchers learn how to recruit participants responsibly, help volunteers discover legitimate surveys and studies, and host research education activities at schools and in local communities.</p></div>
+<div class="section-head"><div class="eyebrow">Curoria Communities</div><h2>Build a local community around responsible research participation</h2><p>Curoria communities are local groups that help people understand research participation, discover Curoria-listed studies, and learn responsible ways to recruit and communicate with participants.</p></div>
 <div class="grid-3">
 <div class="card"><div class="icon-tile">1</div><h3>Connect</h3><p>Help local students and community members discover Curoria studies and learn how research participation works.</p></div>
 <div class="card"><div class="icon-tile">2</div><h3>Educate</h3><p>Host workshops on research questions, study design, responsible recruitment, consent, privacy, and research communication.</p></div>
@@ -2013,15 +2424,15 @@
 </div>
 <div class="form-card" style="margin-top:28px">
 <h3 style="font-family:var(--serif);font-size:28px;margin-bottom:18px">Start a Curoria community</h3>
-<form data-netlify="true" id="chapterForm" name="chapter-application" netlify-honeypot="bot-field">
-<input name="form-name" type="hidden" value="chapter-application"/><p hidden=""><label>Do not fill this out <input name="bot-field"/></label></p>
+<form data-netlify="true" id="communityForm" name="community-application" netlify-honeypot="bot-field">
+<input name="form-name" type="hidden" value="community-application"/><p hidden=""><label>Do not fill this out <input name="bot-field"/></label></p>
 <div class="form-grid">
-<div class="field"><label for="chapterName">Full name</label><input id="chapterName" name="name" required=""/></div>
-<div class="field"><label for="chapterEmail">Email</label><input id="chapterEmail" name="email" required="" type="email"/></div>
-<div class="field"><label for="chapterSchool">School or organization</label><input id="chapterSchool" name="school" required=""/></div>
-<div class="field"><label for="chapterCity">City</label><input id="chapterCity" name="city" required=""/></div>
-<div class="field"><label for="chapterCountry">Country</label><input id="chapterCountry" name="country" required=""/></div>
-<div class="field full"><label for="chapterPlan">How would your local community support researchers and volunteers?</label><textarea id="chapterPlan" name="plan" required=""></textarea></div>
+<div class="field"><label for="communityName">Full name</label><input id="communityName" name="name" required=""/></div>
+<div class="field"><label for="communityEmail">Email</label><input id="communityEmail" name="email" required="" type="email"/></div>
+<div class="field"><label for="communityOrganization">School or organization</label><input id="communityOrganization" name="school" required=""/></div>
+<div class="field"><label for="communityCity">City</label><input id="communityCity" name="city" required=""/></div>
+<div class="field"><label for="communityCountry">Country</label><input id="communityCountry" name="country" required=""/></div>
+<div class="field full"><label for="communityPlan">How would your local community support researchers and volunteers?</label><textarea id="communityPlan" name="plan" required=""></textarea></div>
 </div>
 <div class="form-actions"><button class="btn btn-primary" type="submit">Submit community application</button><span class="muted small">Applications are reviewed before any public Curoria community listing.</span></div>
 </form>
@@ -2034,17 +2445,17 @@
 <div class="wrap">
 <div class="section-head"><div class="eyebrow">Research Standards</div><h2>Clear standards for every Curoria study listing</h2><p>Choose a section to see the rules that apply to researchers, participant recruitment, privacy, responsible technology use, and Curoria's review process.</p></div>
 <div class="policy-layout standards-tabs-shell">
-<nav aria-label="Research Standards sections" class="policy-nav standards-tab-list" role="tablist" aria-orientation="vertical">
-<button class="standards-tab active" id="standards-tab-overview" type="button" role="tab" aria-selected="true" aria-controls="standards-panel-overview" data-standards-tab="overview">Overview</button>
-<button class="standards-tab" id="standards-tab-recruitment" type="button" role="tab" aria-selected="false" aria-controls="standards-panel-recruitment" data-standards-tab="recruitment">Recruitment</button>
-<button class="standards-tab" id="standards-tab-minors" type="button" role="tab" aria-selected="false" aria-controls="standards-panel-minors" data-standards-tab="minors">Minors</button>
-<button class="standards-tab" id="standards-tab-privacy" type="button" role="tab" aria-selected="false" aria-controls="standards-panel-privacy" data-standards-tab="privacy">Privacy</button>
-<button class="standards-tab" id="standards-tab-authorship" type="button" role="tab" aria-selected="false" aria-controls="standards-panel-authorship" data-standards-tab="authorship">Authorship</button>
-<button class="standards-tab" id="standards-tab-ai" type="button" role="tab" aria-selected="false" aria-controls="standards-panel-ai" data-standards-tab="ai">AI Use</button>
-<button class="standards-tab" id="standards-tab-enforcement" type="button" role="tab" aria-selected="false" aria-controls="standards-panel-enforcement" data-standards-tab="enforcement">Enforcement</button>
+<nav aria-label="Research Standards sections" aria-orientation="vertical" class="policy-nav standards-tab-list" role="tablist">
+<button aria-controls="standards-panel-overview" aria-selected="true" class="standards-tab active" data-standards-tab="overview" id="standards-tab-overview" role="tab" type="button">Overview</button>
+<button aria-controls="standards-panel-recruitment" aria-selected="false" class="standards-tab" data-standards-tab="recruitment" id="standards-tab-recruitment" role="tab" type="button">Recruitment</button>
+<button aria-controls="standards-panel-minors" aria-selected="false" class="standards-tab" data-standards-tab="minors" id="standards-tab-minors" role="tab" type="button">Minors</button>
+<button aria-controls="standards-panel-privacy" aria-selected="false" class="standards-tab" data-standards-tab="privacy" id="standards-tab-privacy" role="tab" type="button">Privacy</button>
+<button aria-controls="standards-panel-authorship" aria-selected="false" class="standards-tab" data-standards-tab="authorship" id="standards-tab-authorship" role="tab" type="button">Researcher Identity</button>
+<button aria-controls="standards-panel-ai" aria-selected="false" class="standards-tab" data-standards-tab="ai" id="standards-tab-ai" role="tab" type="button">AI Use</button>
+<button aria-controls="standards-panel-enforcement" aria-selected="false" class="standards-tab" data-standards-tab="enforcement" id="standards-tab-enforcement" role="tab" type="button">Enforcement</button>
 </nav>
 <div class="standards-panels">
-<article class="prose standard-panel active" id="standards-panel-overview" role="tabpanel" aria-labelledby="standards-tab-overview" data-standards-panel="overview">
+<article aria-labelledby="standards-tab-overview" class="prose standard-panel active" data-standards-panel="overview" id="standards-panel-overview" role="tabpanel">
 <div class="eyebrow">Overview</div>
 <h1>Curoria Research Standards</h1>
 <p>Curoria connects researchers who need participants with people who want to contribute to surveys and studies. These standards explain what a participant-facing listing must communicate before it can appear in the Curoria marketplace.</p>
@@ -2055,8 +2466,7 @@
 <div class="standards-point"><b>Keep listings accurate</b><span>Researchers are responsible for correcting important changes to eligibility, links, procedures, privacy practices, or oversight status.</span></div>
 </div>
 </article>
-
-<article class="prose standard-panel" id="standards-panel-recruitment" role="tabpanel" aria-labelledby="standards-tab-recruitment" data-standards-panel="recruitment" hidden>
+<article aria-labelledby="standards-tab-recruitment" class="prose standard-panel" data-standards-panel="recruitment" hidden="" id="standards-panel-recruitment" role="tabpanel">
 <div class="eyebrow">Recruitment</div>
 <h1>Responsible participant recruitment</h1>
 <p>Every Curoria listing should give a potential participant enough information to understand the opportunity before they choose whether to continue to the researcher's survey or study.</p>
@@ -2070,8 +2480,7 @@
 <div class="standards-point"><b>Voluntary choice</b><span>Participation must be presented as optional. Recruitment language should not pressure people or hide material conditions.</span></div>
 </div>
 </article>
-
-<article class="prose standard-panel" id="standards-panel-minors" role="tabpanel" aria-labelledby="standards-tab-minors" data-standards-panel="minors" hidden>
+<article aria-labelledby="standards-tab-minors" class="prose standard-panel" data-standards-panel="minors" hidden="" id="standards-panel-minors" role="tabpanel">
 <div class="eyebrow">Minors</div>
 <h1>Age and participant protection</h1>
 <p>Research involving minors can require additional consent, permission, safeguarding, and institutional processes. Researchers must accurately state participant ages and follow every requirement that applies to their specific study.</p>
@@ -2084,8 +2493,7 @@
 <div class="standards-point"><b>Curoria access is not approval</b><span>Being able to create an account or submit a listing does not establish that a study involving minors is ethically or legally cleared.</span></div>
 </div>
 </article>
-
-<article class="prose standard-panel" id="standards-panel-privacy" role="tabpanel" aria-labelledby="standards-tab-privacy" data-standards-panel="privacy" hidden>
+<article aria-labelledby="standards-tab-privacy" class="prose standard-panel" data-standards-panel="privacy" hidden="" id="standards-panel-privacy" role="tabpanel">
 <div class="eyebrow">Privacy</div>
 <h1>Privacy and data transparency</h1>
 <p>Participants should know what information a study may collect before they leave Curoria and enter an external survey or research system.</p>
@@ -2098,39 +2506,32 @@
 </div>
 <p>Curoria's platform privacy practices and a researcher's study-specific data practices are separate. Researchers remain responsible for accurately describing their own study's handling of participant information.</p>
 </article>
-
-<article class="prose standard-panel" id="standards-panel-authorship" role="tabpanel" aria-labelledby="standards-tab-authorship" data-standards-panel="authorship" hidden>
-<div class="eyebrow">Authorship</div>
-<h1>Researcher identity, credit, and responsibility</h1>
-<p>Curoria listings and research outcomes should accurately identify the people responsible for the work and should not exaggerate institutional relationships, supervision, or approval.</p>
+<article aria-labelledby="standards-tab-authorship" class="prose standard-panel" data-standards-panel="authorship" hidden="" id="standards-panel-authorship" role="tabpanel"><div class="eyebrow">Researcher Identity</div>
+<h1>Accurate researcher identity and responsibility</h1>
+<p>People deciding whether to participate should be able to understand who is responsible for a Curoria listing and how any school, supervisor, laboratory, or organization is actually connected to the study.</p>
 <div class="standards-point-grid">
-<div class="standards-point"><b>Use accurate identities</b><span>Researchers should submit under their real professional or academic identity and provide current contact information.</span></div>
-<div class="standards-point"><b>Describe affiliations honestly</b><span>A school email, club membership, faculty mentor, and formal institutional sponsorship are different relationships and should be labeled accurately.</span></div>
-<div class="standards-point"><b>Give appropriate credit</b><span>People presented as authors or project leads should have genuinely contributed to the work and accepted responsibility for their role.</span></div>
-<div class="standards-point"><b>Correct the record</b><span>Material errors in researcher names, affiliations, supervision, or contribution claims should be reported and corrected promptly.</span></div>
-</div>
-</article>
-
-<article class="prose standard-panel" id="standards-panel-ai" role="tabpanel" aria-labelledby="standards-tab-ai" data-standards-panel="ai" hidden>
-<div class="eyebrow">AI Use</div>
-<h1>Responsible use of AI and automated tools</h1>
-<p>Researchers may use appropriate tools to support their work, but they remain responsible for the accuracy, originality, privacy, safety, and integrity of everything they submit to Curoria.</p>
+<div class="standards-point"><b>Use accurate identities</b><span>Researchers should provide a real name or an accurately described research team identity together with current contact information.</span></div>
+<div class="standards-point"><b>Describe affiliations honestly</b><span>A school email, student club, faculty mentor, research lab, and formal institutional sponsorship are different relationships and should never be presented as interchangeable.</span></div>
+<div class="standards-point"><b>Name the responsible researcher</b><span>Every participant-facing listing should identify who can answer questions about the study and who is responsible for the information shown on Curoria.</span></div>
+<div class="standards-point"><b>Correct inaccurate claims</b><span>Material errors in researcher names, affiliations, supervision, verification, or oversight status should be corrected promptly.</span></div>
+</div></article>
+<article aria-labelledby="standards-tab-ai" class="prose standard-panel" data-standards-panel="ai" hidden="" id="standards-panel-ai" role="tabpanel"><div class="eyebrow">AI Use</div>
+<h1>Responsible AI use in Curoria-listed research</h1>
+<p>Researchers may use appropriate AI and automated tools when planning or communicating their work, but they remain responsible for accuracy, participant privacy, research integrity, and every claim shown in a Curoria listing.</p>
 <div class="standards-point-grid">
-<div class="standards-point"><b>No fabricated research</b><span>AI must not be used to invent participants, responses, observations, results, approvals, affiliations, or citations and present them as real.</span></div>
-<div class="standards-point"><b>Verify generated material</b><span>Researchers should check AI-assisted summaries, code, analysis, references, and public-facing descriptions before using them.</span></div>
-<div class="standards-point"><b>Protect participant information</b><span>Researchers should not place confidential or personally identifying participant information into tools that are not approved for that data.</span></div>
-<div class="standards-point"><b>Disclose material use when relevant</b><span>When AI meaningfully contributes to a submitted research outcome, researchers should follow the disclosure rules of their institution, venue, or applicable project standard.</span></div>
-</div>
-</article>
-
-<article class="prose standard-panel" id="standards-panel-enforcement" role="tabpanel" aria-labelledby="standards-tab-enforcement" data-standards-panel="enforcement" hidden>
+<div class="standards-point"><b>Never fabricate research activity</b><span>AI must not be used to invent participants, responses, observations, results, approvals, affiliations, or researcher identities and present them as real.</span></div>
+<div class="standards-point"><b>Verify participant-facing information</b><span>Researchers should review AI-assisted study descriptions, eligibility language, consent explanations, code, analysis, and summaries before using them.</span></div>
+<div class="standards-point"><b>Protect participant information</b><span>Confidential or identifying participant information should not be entered into AI tools that are not approved for handling that data.</span></div>
+<div class="standards-point"><b>Follow the study's own rules</b><span>Researchers remain responsible for any institutional, course, sponsor, ethics-review, or platform requirements governing AI use in their study.</span></div>
+</div></article>
+<article aria-labelledby="standards-tab-enforcement" class="prose standard-panel" data-standards-panel="enforcement" hidden="" id="standards-panel-enforcement" role="tabpanel">
 <div class="eyebrow">Enforcement</div>
 <h1>Curoria review and enforcement</h1>
 <p>Curoria may act when a listing is incomplete, misleading, unsafe, inaccurate, or inconsistent with platform standards. The goal is to protect the clarity and trustworthiness of the participant marketplace.</p>
 <h2>Possible review outcomes</h2>
 <div class="standards-point-grid">
-<div class="standards-point"><b>Approve</b><span>The listing may be published when the required participant-facing information is clear and complete.</span></div>
-<div class="standards-point"><b>Request changes</b><span>Curoria may ask the researcher to clarify eligibility, procedures, privacy, oversight, or other material information before publication.</span></div>
+<div class="standards-point"><b>Approve</b><span>The listing may go live when the required participant-facing information is clear and complete.</span></div>
+<div class="standards-point"><b>Request changes</b><span>Curoria may ask the researcher to clarify eligibility, procedures, privacy, oversight, or other material information before the listing goes live.</span></div>
 <div class="standards-point"><b>Pause or remove</b><span>A live listing may be paused or removed when important information changes, a link becomes unsafe or misleading, or a serious standards concern is identified.</span></div>
 <div class="standards-point"><b>Decline</b><span>Curoria may decline listings that do not fit the platform, cannot be presented transparently, or create safety concerns the platform cannot responsibly support.</span></div>
 </div>
@@ -2145,13 +2546,11 @@
 <div class="section">
 <div class="wrap">
 <div class="section-head"><div class="eyebrow">Submit Survey</div><h2>Recruit participants for your survey or study</h2><p>Submit a participant-facing survey or study for Curoria review. Approved listings can appear in the survey marketplace so volunteers can understand the opportunity before choosing whether to participate.</p></div>
-<div class="grid-3">
-<button class="card" data-submission-tab="study" style="text-align:left" type="button"><div class="icon-tile">S</div><h3>Submit a survey or participant study</h3><p>Recruit volunteers for a survey, questionnaire, interview study, or other participant-based project. This is Curoria’s main submission pathway.</p></button>
-<button class="card" data-submission-tab="group" style="text-align:left" type="button"><div class="icon-tile">G</div><h3>Build a research team</h3><p>Use this optional pathway when your project needs collaborators before participant recruitment begins.</p></button>
-<button class="card" data-submission-tab="manuscript" style="text-align:left" type="button"><div class="icon-tile">M</div><h3>Share research results</h3><p>Use this optional pathway to share a completed research outcome with an accurate public label.</p></button>
-</div>
+<div class="grid-3"><article class="card"><div class="icon-tile">S</div><h3>Surveys &amp; questionnaires</h3><p>Recruit eligible volunteers for an online or in-person questionnaire with clear timing, eligibility, privacy, and researcher information.</p></article>
+<article class="card"><div class="icon-tile">I</div><h3>Interviews &amp; focus groups</h3><p>Recruit participants for interviews or group discussions when the commitment, format, recording practices, and contact details are explained clearly.</p></article>
+<article class="card"><div class="icon-tile">R</div><h3>Other participant studies</h3><p>Submit another participant-based research opportunity when volunteers can understand what they will do before choosing to continue.</p></article></div>
 <div class="form-card" id="studySubmissionPanel" style="margin-top:28px">
-<div class="eyebrow">Survey recruitment</div>
+<div class="eyebrow">Participant recruitment submission</div>
 <h3 style="font-family:var(--serif);font-size:30px;margin-bottom:10px">Submit a survey for review</h3>
 <p class="muted">Tell potential participants what your survey or study is about, who can join, what they will do, how long it takes, and how their information will be handled.</p>
 <div class="note warning" style="margin:16px 0">For a safer launch, the public participant pathway should remain 18+ until a dedicated minor-consent and safeguarding process is implemented.</div>
@@ -2175,37 +2574,8 @@
 <div class="form-actions"><button class="btn btn-primary" id="submitFormBtn" type="submit">Submit Survey For Review</button><span class="small muted" id="researchSubmitStatus"></span></div>
 </form>
 </div>
-<div class="form-card" id="groupSubmissionPanel" style="margin-top:28px;display:none">
-<div class="eyebrow">Optional collaboration pathway</div><h3 style="font-family:var(--serif);font-size:30px;margin-bottom:10px">Propose a research group</h3>
-<form data-netlify="true" id="leadForm" name="lead-researcher-application" netlify-honeypot="bot-field">
-<input name="form-name" type="hidden" value="lead-researcher-application"/><p hidden=""><label>Do not fill this out <input name="bot-field"/></label></p>
-<div class="form-grid">
-<div class="field"><label for="leadName">Full name</label><input id="leadName" name="name" required=""/></div>
-<div class="field"><label for="leadEmail">Email</label><input id="leadEmail" name="email" required="" type="email"/></div>
-<div class="field full"><label for="leadInstitution">School, institution, or independent status</label><input id="leadInstitution" name="institution" required=""/></div>
-<div class="field full"><label for="leadProposal">Project proposal</label><textarea id="leadProposal" name="proposal" placeholder="Research question, expected output, roles needed, timeline, and team structure." required=""></textarea></div>
-<div class="field"><label for="leadMethod">Primary method</label><input id="leadMethod" name="method" placeholder="e.g. systematic review, survey, computational analysis" required=""/></div>
-<div class="field"><label for="leadEthics">Ethics considerations</label><input id="leadEthics" name="ethics" placeholder="e.g. no human participants; institutional review pending" required=""/></div>
-</div>
-<div class="form-actions"><button class="btn btn-primary" type="submit">Submit group proposal</button><span class="small muted" id="leadStatus"></span></div>
-</form>
-</div>
-<div class="form-card" id="manuscriptSubmissionPanel" style="margin-top:28px;display:none">
-<div class="eyebrow">Optional research outcome pathway</div><h3 style="font-family:var(--serif);font-size:30px;margin-bottom:10px">Submit completed research</h3>
-<form data-netlify="true" id="manuscriptForm" name="manuscript-submission" netlify-honeypot="bot-field">
-<input name="form-name" type="hidden" value="manuscript-submission"/><p hidden=""><label>Do not fill this out <input name="bot-field"/></label></p>
-<div class="form-grid">
-<div class="field full"><label for="manuscriptTitle">Title</label><input id="manuscriptTitle" name="title" required=""/></div>
-<div class="field full"><label for="manuscriptAbstract">Abstract</label><textarea id="manuscriptAbstract" name="abstract" required=""></textarea></div>
-<div class="field full"><label for="manuscriptAuthors">Authors and affiliations</label><textarea id="manuscriptAuthors" name="authors" required=""></textarea></div>
-<div class="field"><label for="manuscriptEmail">Corresponding author email</label><input id="manuscriptEmail" name="email" required="" type="email"/></div>
-<div class="field"><label for="recordType">Requested pathway</label><select id="recordType" name="record_type" required=""><option value="">Choose</option><option>Editorial review for journal consideration</option><option>Research archive record</option><option>Review &amp; analysis</option></select></div>
-<div class="field full"><label for="manuscriptLink">Manuscript or repository link</label><input id="manuscriptLink" name="link" placeholder="https://" required="" type="url"/></div>
-<div class="field full"><label for="manuscriptEthics">Ethics, consent, data, and conflicts statement</label><textarea id="manuscriptEthics" name="ethics" required=""></textarea></div>
-</div>
-<div class="form-actions"><button class="btn btn-primary" type="submit">Submit completed work</button><span class="small muted" id="manuscriptStatus"></span></div>
-</form>
-</div>
+
+
 </div>
 </div>
 </section>
@@ -2224,7 +2594,7 @@
 <div class="section"><div class="wrap"><article class="prose">
 <h1>Transparency &amp; Trust</h1>
 <p>Curoria works best when participants can understand a study before they click into it and when researchers can describe their work without overstating approval or affiliation.</p>
-<h2>What “Curoria reviewed” means</h2><p>It means Curoria checked the public listing against platform standards. It does not automatically mean a university, IRB, ethics committee, journal, or government agency approved the study.</p>
+<h2>What “Curoria reviewed” means</h2><p>It means Curoria checked the public listing against platform standards. It does not automatically mean a university, IRB, ethics committee, government agency, or other institution approved the study.</p>
 <h2>Researcher information</h2><p>Names, institutional affiliations, school emails, supervisor involvement, and formal ethics-review status should be shown separately and only when Curoria has a reasonable basis to display them.</p>
 <h2>Participant information</h2><p>Study cards and detail pages should make eligibility, expected time, study activities, researcher contact, privacy information, and any compensation easy to find.</p>
 <h2>External study links</h2><p>Many studies may take place on an external survey or research platform. Curoria helps people discover the opportunity, but the researcher's study environment may have its own privacy terms and data practices.</p>
@@ -2242,57 +2612,56 @@
 <h2>After submission</h2><p>Curoria may approve the public listing, request changes, ask for clarification, or decline to publish it. Curoria platform review must never be presented as formal ethics or IRB approval.</p>
 </article></div></div>
 </section>
-<section class="page" data-page="peer-review">
+<section class="page" data-page="review-process">
 <div class="section"><div class="wrap"><article class="prose">
-<h1>Curoria Listing Review Process</h1>
+<h1>Curoria Study Listing Review</h1>
 <p>Curoria's core review process is designed for public study listings in the participant marketplace. It focuses on whether a listing is clear, transparent, and appropriate to publish on the platform.</p>
 <h2>1. Submission check</h2><p>Curoria checks that required study, researcher, participant, contact, privacy, and oversight information is present.</p>
 <h2>2. Clarity review</h2><p>The listing should explain the opportunity in language a potential participant can understand before leaving Curoria.</p>
-<h2>3. Trust and safety review</h2><p>Curoria may flag unclear consent language, misleading approval claims, missing researcher information, unsuitable participant targeting, or other concerns that should be resolved before publication.</p>
-<h2>4. Decision</h2><p>A listing may be approved, returned for changes, paused for clarification, or declined. Curoria review is not academic peer review and is not a substitute for institutional ethics review.</p>
+<h2>3. Trust and safety review</h2><p>Curoria may flag unclear consent language, misleading approval claims, missing researcher information, unsuitable participant targeting, or other concerns that should be resolved before the listing goes live.</p>
+<h2>4. Decision</h2><p>A listing may be approved, returned for changes, paused for clarification, or declined. Curoria listing review is a platform screening process and is not a substitute for formal institutional or ethics review.</p>
 <h2>5. Ongoing corrections</h2><p>Researchers should update listings when recruitment closes or important study details change. Curoria may correct, pause, or remove listings when needed.</p>
 </article></div></div>
 </section>
-<section class="page" data-page="donate">
+<section class="page" data-page="support">
 <div class="section"><div class="wrap"><div class="section-head"><div class="eyebrow">Support Curoria</div><h2>Help expand access to responsible research participation</h2><p>Support for Curoria can strengthen survey discovery, researcher education, participant trust and safety, and access to responsible research opportunities.</p></div><div class="grid-3"><div class="card"><h3>Participant access</h3><p>Help make research opportunities easier to discover and understand.</p></div><div class="card"><h3>Researcher support</h3><p>Help emerging researchers learn how to create clear, responsible participant listings.</p></div><div class="card"><h3>Trust &amp; safety</h3><p>Support review tools, reporting pathways, and platform infrastructure that protect the research community.</p></div></div><div class="note warning" style="margin-top:24px"><b>Launch note:</b> This build intentionally does not claim donations are tax-deductible and does not process payments. Add a payment provider only after Curoria's legal status and donation disclosures are confirmed.</div></div></div>
 </section>
 <section class="page" data-page="contact">
-<div class="section"><div class="wrap grid-2"><div><div class="section-head"><div class="eyebrow">Contact Curoria</div><h2>Questions about a study, submission, or your account?</h2><p>Use the form for participant concerns, researcher questions, corrections, partnerships, or general support. Curoria is here to help both sides of the research network.</p></div><div class="card"><h3>Email</h3><p><a href="mailto:curoriafoundation@gmail.com" style="color:var(--blue);font-weight:800">curoriafoundation@gmail.com</a></p><p class="small muted">For urgent study-related concerns, include the study title and researcher name.</p></div></div><div class="form-card"><form data-netlify="true" id="contactForm" name="contact" netlify-honeypot="bot-field"><input name="form-name" type="hidden" value="contact"/><p hidden=""><label>Do not fill this out <input name="bot-field"/></label></p><div class="form-grid"><div class="field"><label for="contactName">Name</label><input id="contactName" name="name" required=""/></div><div class="field"><label for="contactEmail">Email</label><input id="contactEmail" name="email" required="" type="email"/></div><div class="field full"><label for="contactTopic">Topic</label><select id="contactTopic" name="topic" required=""><option value="">Choose</option><option>Survey or study listing</option><option>Participant question or safety concern</option><option>Survey submission</option><option>Account or dashboard</option><option>Research team or community</option><option>Partnership</option><option>Correction or takedown request</option><option>General</option></select></div><div class="field full"><label for="contactMessage">Message</label><textarea id="contactMessage" name="message" required=""></textarea></div></div><div class="form-actions"><button class="btn btn-primary" type="submit">Send message</button><span class="small muted" id="contactStatus"></span></div></form></div></div></div>
+<div class="section"><div class="wrap grid-2"><div><div class="section-head"><div class="eyebrow">Contact Curoria</div><h2>Questions about a study, submission, or your account?</h2><p>Use the form for participant concerns, researcher questions, corrections, partnerships, or general support. Curoria is here to help both sides of the research network.</p></div><div class="card"><h3>Email</h3><p><a href="mailto:curoriafoundation@gmail.com" style="color:var(--blue);font-weight:800">curoriafoundation@gmail.com</a></p><p class="small muted">For urgent study-related concerns, include the study title and researcher name.</p></div></div><div class="form-card"><form data-netlify="true" id="contactForm" name="contact" netlify-honeypot="bot-field"><input name="form-name" type="hidden" value="contact"/><p hidden=""><label>Do not fill this out <input name="bot-field"/></label></p><div class="form-grid"><div class="field"><label for="contactName">Name</label><input id="contactName" name="name" required=""/></div><div class="field"><label for="contactEmail">Email</label><input id="contactEmail" name="email" required="" type="email"/></div><div class="field full"><label for="contactTopic">Topic</label><select id="contactTopic" name="topic" required=""><option value="">Choose</option><option>Survey or study listing</option><option>Participant question or safety concern</option><option>Survey submission</option><option>Account or dashboard</option><option>Community or collaboration</option><option>Partnership</option><option>Correction or takedown request</option><option>General</option></select></div><div class="field full"><label for="contactMessage">Message</label><textarea id="contactMessage" name="message" required=""></textarea></div></div><div class="form-actions"><button class="btn btn-primary" type="submit">Send message</button><span class="small muted" id="contactStatus"></span></div></form></div></div></div>
 </section>
 <section class="page" data-page="dashboard">
 <div class="section"><div class="wrap"><div class="section-head"><div class="eyebrow">My Curoria</div><h2>Track the surveys and studies you contribute to</h2><p>Sign in to see participant opportunities you joined, surveys you submitted, and your activity across the Curoria network.</p></div><div class="card" id="dashboardLoggedOut" style="text-align:center"><h3>You're not logged in</h3><p>Create a free account or log in to track your research participation and submissions.</p><button class="btn btn-primary" data-open-auth="login" type="button">Log in</button></div><div class="dashboard-layout" hidden="" id="dashboardLoggedIn"><aside class="surface profile"><div class="avatar" id="dashAvatar">C</div><h3 id="dashName">Member</h3><p class="small muted" id="dashEmail"></p><div class="stack" style="margin-top:16px;text-align:left"><div class="note"><b id="dashJoinedCount">0</b> studies and opportunities joined</div><div class="note"><b id="dashSubmissionCount">0</b> research submissions</div></div></aside><div><div class="dash-tabs"><button class="dash-tab active" data-dash-tab="applications">My Participation</button><button class="dash-tab" data-dash-tab="submissions">My Survey Submissions</button><button class="dash-tab" data-dash-tab="profile">Profile</button></div><div class="dash-panel active surface" id="dash-applications"></div><div class="dash-panel surface" id="dash-submissions"></div><div class="dash-panel surface" id="dash-profile"><div style="padding:24px"><h3>Profile</h3><p class="muted">Your account supports your Curoria dashboard. Researcher verification, when offered, is separate from simply creating an account.</p></div></div></div></div></div></div>
 </section>
-
 <section class="page" data-page="admin-dashboard">
 <div class="section"><div class="wrap">
-  <div class="section-head">
-    <div class="eyebrow">Curoria Administration</div>
-    <h2>Review survey submissions before they go live</h2>
-    <p>Approve suitable listings, request changes, reject submissions, or pause and remove listings that should no longer appear publicly.</p>
-  </div>
-  <div id="adminDashboardShell">
-    <div class="admin-dashboard-grid">
-      <div class="admin-stat"><strong id="adminPendingCount">0</strong><span>Pending review</span></div>
-      <div class="admin-stat"><strong id="adminApprovedCount">0</strong><span>Approved</span></div>
-      <div class="admin-stat"><strong id="adminChangesCount">0</strong><span>Changes requested</span></div>
-      <div class="admin-stat"><strong id="adminTotalCount">0</strong><span>Total submissions</span></div>
-    </div>
-    <div class="admin-toolbar">
-      <div><strong style="font-weight:600">Submission queue</strong><div class="small muted">Review the researcher-provided details before changing a listing status.</div></div>
-      <label class="small" for="adminStatusFilter">Show
+<div class="section-head">
+<div class="eyebrow">Curoria Administration</div>
+<h2>Review survey submissions before they go live</h2>
+<p>Approve suitable listings, request changes, reject submissions, or pause and remove listings that should no longer appear publicly.</p>
+</div>
+<div id="adminDashboardShell">
+<div class="admin-dashboard-grid">
+<div class="admin-stat"><strong id="adminPendingCount">0</strong><span>Pending review</span></div>
+<div class="admin-stat"><strong id="adminApprovedCount">0</strong><span>Approved</span></div>
+<div class="admin-stat"><strong id="adminChangesCount">0</strong><span>Changes requested</span></div>
+<div class="admin-stat"><strong id="adminTotalCount">0</strong><span>Total submissions</span></div>
+</div>
+<div class="admin-toolbar">
+<div><strong style="font-weight:600">Submission queue</strong><div class="small muted">Review the researcher-provided details before changing a listing status.</div></div>
+<label class="small" for="adminStatusFilter">Show
         <select class="control" id="adminStatusFilter" style="margin-left:8px;width:auto;display:inline-block">
-          <option value="all">All submissions</option>
-          <option value="pending">Pending</option>
-          <option value="approved">Approved</option>
-          <option value="changes-requested">Changes requested</option>
-          <option value="rejected">Rejected</option>
-          <option value="paused">Paused</option>
-          <option value="removed">Removed</option>
-        </select>
-      </label>
-    </div>
-    <div class="admin-review-list" id="adminSubmissionList"></div>
-  </div>
+<option value="all">All submissions</option>
+<option value="pending">Pending</option>
+<option value="approved">Approved</option>
+<option value="changes-requested">Changes requested</option>
+<option value="rejected">Rejected</option>
+<option value="paused">Paused</option>
+<option value="removed">Removed</option>
+</select>
+</label>
+</div>
+<div class="admin-review-list" id="adminSubmissionList"></div>
+</div>
 </div></div>
 </section>
 <section class="page" data-page="privacy"><div class="section"><div class="wrap"><article class="prose">
@@ -2309,12 +2678,12 @@
 <section class="page" data-page="terms"><div class="section"><div class="wrap"><article class="prose">
 <h1>Terms of Use</h1><p><b>Last updated: July 19, 2026.</b></p>
 <p>These starter terms should be reviewed before public launch and adapted to Curoria's actual legal structure.</p>
-<h2>What Curoria does</h2><p>Curoria connects researchers who need participants with people who want to discover and contribute to research. The platform may also provide supporting research groups, educational activities, research outcomes, challenges, and community programs.</p>
+<h2>What Curoria does</h2><p>Curoria connects researchers who need participants with people who want to discover and contribute to research. It may also provide study results, educational challenges, community programs, and research-participation resources that support that same mission.</p>
 <h2>Researcher responsibilities</h2><p>Researchers are responsible for accurate study information, ethics and consent requirements, privacy and data handling, participant safety, and compliance with applicable institutional or legal requirements.</p>
 <h2>Participant choice</h2><p>Participation in research is voluntary. Users should review the study information and the researcher's own consent materials before taking part.</p>
 <h2>Platform review</h2><p>Curoria may review, request changes to, pause, correct, or remove listings. Platform review does not guarantee research quality and does not substitute for formal institutional or ethics approval.</p>
 <h2>External study services</h2><p>Curoria may link to third-party surveys, repositories, or research tools that Curoria does not control.</p>
-<h2>Supporting programs</h2><p>Research groups, research outcomes, challenges, and local communities are optional extensions of Curoria's central participant-researcher network.</p>
+<h2>Supporting programs</h2><p>Research results, educational challenges, and local Curoria communities are optional extensions of the central researcher-participant network.</p>
 </article></div></div></section>
 <section class="page" data-page="accessibility"><div class="section"><div class="wrap"><article class="prose"><h1>Accessibility Statement</h1><p>Curoria aims to provide a website that is usable by a wide range of people and assistive technologies.</p><h2>Current measures</h2><ul><li>Keyboard-accessible navigation and controls.</li><li>Visible focus states.</li><li>Semantic headings and form labels.</li><li>Reduced-motion support.</li><li>Responsive layouts.</li><li>Color contrast designed for readability.</li></ul><h2>Feedback</h2><p>Report accessibility barriers to curoriafoundation@gmail.com and include the page and issue encountered.</p></article></div></div></section>
 </main>
@@ -2322,38 +2691,36 @@
 <div class="wrap">
 <div class="footer-grid">
 <div><div class="footer-brand"><img alt="" onerror="this.style.display='none'" src="images/CuroriaLOGO.png"/>Curoria</div><p class="small">Connecting researchers with volunteers so that ethical, accessible research can reach the people who want to help.</p><p class="small">curoriafoundation@gmail.com</p></div>
-<div><h4>Explore</h4><a data-page-link="research" href="#research">Browse Surveys</a><a data-page-link="journal" href="#journal">Research Results</a><a data-page-link="competitions" href="#competitions">Challenges</a><a data-page-link="chapters" href="#chapters">Communities</a></div>
-<div><h4>For Researchers</h4><a data-page-link="submit" href="#submit">Submit Survey</a><a data-page-link="guidelines" href="#guidelines">Submission Guidelines</a><a data-page-link="peer-review" href="#peer-review">Listing Review Process</a><a data-page-link="standards" href="#standards">Research Standards</a><a data-page-link="transparency" href="#transparency">Transparency &amp; Trust</a><a data-page-link="contact" href="#contact">Contact</a></div></div>
+<div><h4>Explore</h4><a data-page-link="research" href="#research">Browse Surveys</a><a data-page-link="results" href="#results">Curoria Results</a><a data-page-link="challenges" href="#challenges">Challenges</a><a data-page-link="communities" href="#communities">Communities</a></div>
+<div><h4>For Researchers</h4><a data-page-link="submit" href="#submit">Submit Survey</a><a data-page-link="guidelines" href="#guidelines">Submission Guidelines</a><a data-page-link="review-process" href="#review-process">Study Listing Review</a><a data-page-link="standards" href="#standards">Research Standards</a><a data-page-link="transparency" href="#transparency">Transparency &amp; Trust</a><a data-page-link="contact" href="#contact">Contact</a></div></div>
 <div class="footer-bottom"><span>© 2026 Curoria. Connecting curiosity with discovery through responsible research participation.</span><span><a data-page-link="privacy" href="#privacy" style="display:inline;margin-right:14px">Privacy</a><a data-page-link="terms" href="#terms" style="display:inline;margin-right:14px">Terms</a><a data-page-link="accessibility" href="#accessibility" style="display:inline">Accessibility</a></span></div>
 </div>
 </footer>
 <div aria-labelledby="authTitle" aria-modal="true" class="modal" id="authModal" role="dialog">
 <div class="modal-box" style="max-width:480px">
-  <div class="modal-head"><h3 id="authTitle">Log in to Curoria</h3><button aria-label="Close" class="modal-close" data-close-modal="authModal" type="button">×</button></div>
-  <div class="modal-body">
-    <div class="portal-switch" role="tablist" aria-label="Choose a Curoria login portal">
-      <button class="portal-tab active" data-auth-portal="researcher" type="button" role="tab" aria-selected="true">Researcher Portal</button>
-      <button class="portal-tab" data-auth-portal="admin" type="button" role="tab" aria-selected="false">Admin Portal</button>
-    </div>
-
-    <div class="auth-portal active" id="researcherAuthPortal" data-auth-portal-panel="researcher">
-      <p class="portal-intro">For researchers and Curoria members who submit surveys, participate in studies, and use the personal dashboard.</p>
-      <div class="auth-tabs"><button class="auth-tab active" data-auth-tab="login" type="button">Log in</button><button class="auth-tab" data-auth-tab="signup" type="button">Sign up</button></div>
-      <form class="auth-form active" id="loginForm"><div class="stack"><div class="field"><label for="loginEmail">Email</label><input id="loginEmail" required="" type="email"/></div><div class="field"><label for="loginPassword">Password</label><input id="loginPassword" required="" type="password"/></div><div class="small" id="loginError" style="color:var(--danger)"></div><button class="btn btn-primary btn-block" id="loginSubmit" type="submit">Log in</button></div></form>
-      <form class="auth-form" id="signupForm"><div class="stack"><div class="field"><label for="signupName">Full name</label><input id="signupName" required=""/></div><div class="field"><label for="signupEmail">Email</label><input id="signupEmail" required="" type="email"/></div><div class="field"><label for="signupPassword">Password</label><input id="signupPassword" minlength="6" required="" type="password"/></div><div class="small" id="signupError" style="color:var(--danger)"></div><button class="btn btn-primary btn-block" id="signupSubmit" type="submit">Create account</button></div></form>
-      <div class="note" id="authPreviewNote" style="margin-top:16px;display:none">Supabase is not available. Researcher account actions are disabled until the site is deployed with a working Supabase connection.</div>
-    </div>
-
-    <div class="auth-portal" id="adminAuthPortal" data-auth-portal-panel="admin">
-      <p class="portal-intro">Restricted access for Curoria administrators reviewing survey submissions and marketplace listings.</p>
-      <form id="adminLoginForm"><div class="stack">
-        <div class="field"><label for="adminUsername">Admin username</label><input id="adminUsername" autocomplete="username" required="" type="text"/></div>
-        <div class="field"><label for="adminPassword">Password</label><input id="adminPassword" autocomplete="current-password" required="" type="password"/></div>
-        <div class="small" id="adminLoginError" style="color:var(--danger)"></div>
-        <button class="btn btn-primary btn-block" id="adminLoginSubmit" type="submit">Open Admin Dashboard</button>
-      </div></form>
-    </div>
-  </div>
+<div class="modal-head"><h3 id="authTitle">Log in to Curoria</h3><button aria-label="Close" class="modal-close" data-close-modal="authModal" type="button">×</button></div>
+<div class="modal-body">
+<div aria-label="Choose a Curoria login portal" class="portal-switch" role="tablist">
+<button aria-selected="true" class="portal-tab active" data-auth-portal="researcher" role="tab" type="button">Researcher Portal</button>
+<button aria-selected="false" class="portal-tab" data-auth-portal="admin" role="tab" type="button">Admin Portal</button>
+</div>
+<div class="auth-portal active" data-auth-portal-panel="researcher" id="researcherAuthPortal">
+<p class="portal-intro">For researchers and Curoria members who submit surveys, participate in studies, and use the personal dashboard.</p>
+<div class="auth-tabs"><button class="auth-tab active" data-auth-tab="login" type="button">Log in</button><button class="auth-tab" data-auth-tab="signup" type="button">Sign up</button></div>
+<form class="auth-form active" id="loginForm"><div class="stack"><div class="field"><label for="loginEmail">Email</label><input id="loginEmail" required="" type="email"/></div><div class="field"><label for="loginPassword">Password</label><input id="loginPassword" required="" type="password"/></div><div class="small" id="loginError" style="color:var(--danger)"></div><button class="btn btn-primary btn-block" id="loginSubmit" type="submit">Log in</button></div></form>
+<form class="auth-form" id="signupForm"><div class="stack"><div class="field"><label for="signupName">Full name</label><input id="signupName" required=""/></div><div class="field"><label for="signupEmail">Email</label><input id="signupEmail" required="" type="email"/></div><div class="field"><label for="signupPassword">Password</label><input id="signupPassword" minlength="6" required="" type="password"/></div><div class="small" id="signupError" style="color:var(--danger)"></div><button class="btn btn-primary btn-block" id="signupSubmit" type="submit">Create account</button></div></form>
+<div class="note" id="authPreviewNote" style="margin-top:16px;display:none">Supabase is not available. Researcher account actions are disabled until the site is deployed with a working Supabase connection.</div>
+</div>
+<div class="auth-portal" data-auth-portal-panel="admin" id="adminAuthPortal">
+<p class="portal-intro">Restricted access for Curoria administrators reviewing survey submissions and marketplace listings.</p>
+<form id="adminLoginForm"><div class="stack">
+<div class="field"><label for="adminUsername">Admin username</label><input autocomplete="username" id="adminUsername" required="" type="text"/></div>
+<div class="field"><label for="adminPassword">Password</label><input autocomplete="current-password" id="adminPassword" required="" type="password"/></div>
+<div class="small" id="adminLoginError" style="color:var(--danger)"></div>
+<button class="btn btn-primary btn-block" id="adminLoginSubmit" type="submit">Open Admin Dashboard</button>
+</div></form>
+</div>
+</div>
 </div>
 </div>
 <div aria-labelledby="searchTitle" aria-modal="true" class="modal" id="searchModal" role="dialog">
@@ -2372,11 +2739,11 @@
   const supabaseReady = Boolean(window.supabase && SUPABASE_URL.startsWith('https://') && SUPABASE_ANON_KEY);
   const supabaseClient = supabaseReady ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
-  const PAGE_NAMES = ['home','about','executive-team','collaborations','research','journal','competitions','chapters','standards','submit','how-it-works','transparency','guidelines','peer-review','donate','contact','dashboard','admin-dashboard','privacy','terms','accessibility'];
+  const PAGE_NAMES = ['home','about','executive-team','collaborations','research','results','challenges','communities','standards','submit','how-it-works','transparency','guidelines','review-process','support','contact','dashboard','admin-dashboard','privacy','terms','accessibility'];
   const PAGE_TITLES = {
     home:'Home', about:'About', 'executive-team':'Executive Team', collaborations:'Collaborations', research:'Surveys', journal:'Results', competitions:'Challenges', chapters:'Communities',
     standards:'Research Standards', submit:'Submit Survey', 'how-it-works':'How Curoria Works', transparency:'Transparency & Trust',
-    guidelines:'Submission Guidelines', 'peer-review':'Listing Review Process', donate:'Support Curoria', contact:'Contact',
+    guidelines:'Submission Guidelines', 'review-process':'Study Listing Review', donate:'Support Curoria', contact:'Contact',
     dashboard:'My Curoria', 'admin-dashboard':'Admin Dashboard', privacy:'Privacy', terms:'Terms', accessibility:'Accessibility'
   };
   let currentUser = null;
@@ -2494,7 +2861,7 @@
     } else if (currentUser) {
       area.innerHTML = `<a class="header-utility-link" href="#dashboard" data-page-link="dashboard"><span class="utility-icon account-icon" aria-hidden="true"></span>${esc(currentUser.name)}</a><button class="header-utility-link header-login-btn" id="logoutBtn" type="button"><span class="utility-icon login-icon" aria-hidden="true"></span>Log out</button>`;
       $('#logoutBtn').addEventListener('click', logout);
-      ['email','applyEmail','leadEmail','manuscriptEmail'].forEach(id => { const el = document.getElementById(id); if (el && !el.value) el.value = currentUser.email; });
+      ['email','applyEmail'].forEach(id => { const el = document.getElementById(id); if (el && !el.value) el.value = currentUser.email; });
       ['researcher','applyName','leadName'].forEach(id => { const el = document.getElementById(id); if (el && !el.value) el.value = currentUser.name; });
     } else {
       area.innerHTML = '<button class="header-utility-link header-login-btn" type="button" data-open-auth="login"><span class="utility-icon login-icon" aria-hidden="true"></span>Login</button>';
@@ -2556,11 +2923,11 @@
   ];
 
   const demoPublications = [
-    {id:'demo-record-1',sample:true,type:'archive',title:'Example Research Record',authors:'Demo Authors',year:'2026',abstract:'This is an illustrative archive record included only to preview the publication interface. Replace it with an accepted public record before launch.',keywords:['Example','Archive'],status:'Illustrative preview'}
+    {id:'demo-record-1',sample:true,type:'outcome',title:'Example Research Record',authors:'Demo Authors',year:'2026',abstract:'This is an illustrative archive record included only to preview the publication interface. Replace it with an accepted public record before launch.',keywords:['Example','Archive'],status:'Illustrative preview'}
   ];
 
   const demoCompetitions = [
-    {id:'demo-comp-1',sample:true,title:'Example Research Challenge',status:'Preview only',deadline:'No active deadline',summary:'A demonstration competition card showing the information that should be displayed when a real Curoria competition opens.',eligibility:'Eligibility will be published with any real competition.',criteria:['Originality','Method clarity','Evidence','Communication']}
+    {id:'demo-comp-1',sample:true,title:'Example Research Challenge',status:'Preview only',deadline:'No active deadline',summary:'A demonstration challenge card showing the information that should be displayed when a real Curoria challenge opens.',eligibility:'Eligibility will be published with any real competition.',criteria:['Originality','Method clarity','Evidence','Communication']}
   ];
 
   async function loadData() {
@@ -2616,7 +2983,7 @@
     $('#researchEmpty').hidden = list.length > 0;
     $('#researchGrid').innerHTML = list.map(item => `
       <article class="listing">
-        <div class="listing-head"><div class="chip-row"><span class="chip blue">${esc(item.type === 'study' ? 'Participant study' : 'Research group')}</span>${item.sample ? '<span class="chip gold">Illustrative preview</span>' : ''}<span class="chip ${item.status === 'recruiting' ? 'green' : ''}">${esc(item.status.replace(/-/g,' '))}</span></div><h3>${esc(item.title)}</h3><div class="meta-line"><span>${esc(item.field)}</span><span>${esc(item.level)}</span><span>${esc(item.method)}</span></div></div>
+        <div class="listing-head"><div class="chip-row"><span class="chip blue">${esc('Participant study')}</span>${item.sample ? '<span class="chip gold">Illustrative preview</span>' : ''}<span class="chip ${item.status === 'recruiting' ? 'green' : ''}">${esc(item.status.replace(/-/g,' '))}</span></div><h3>${esc(item.title)}</h3><div class="meta-line"><span>${esc(item.field)}</span><span>${esc(item.level)}</span><span>${esc(item.method)}</span></div></div>
         <div class="listing-body"><p>${esc(item.summary)}</p><div class="chip-row">${(item.skills||[]).slice(0,4).map(skill => `<span class="chip">${esc(skill)}</span>`).join('')}</div></div>
         <div class="listing-foot"><div class="meta-line" style="margin-bottom:12px"><span>${esc(item.researcher || 'Researcher')}</span><span>${esc(item.organization || '')}</span>${item.type === 'group' ? `<span>${esc(item.members || 0)}/${esc(item.roles || 0)} members</span>` : `<span>${esc(item.roles || 0)} participants requested</span>`}</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-outline btn-sm" type="button" data-view-research="${esc(item.id)}">View details</button>${item.sample ? '' : `<button class="btn btn-primary btn-sm" type="button" data-apply-research="${esc(item.id)}">${item.type === 'study' ? 'Participate' : 'Apply to join'}</button>`}</div></div>
       </article>`).join('');
@@ -2627,7 +2994,7 @@
     if (!item) return;
     $('#detailTitle').textContent = item.title;
     $('#detailBody').innerHTML = `
-      <div class="chip-row"><span class="chip blue">${esc(item.type === 'study' ? 'Participant study' : 'Research group')}</span>${item.sample ? '<span class="chip gold">Illustrative preview</span>' : ''}<span class="chip">${esc(item.field)}</span></div>
+      <div class="chip-row"><span class="chip blue">${esc('Participant study')}</span>${item.sample ? '<span class="chip gold">Illustrative preview</span>' : ''}<span class="chip">${esc(item.field)}</span></div>
       <h2 style="font-family:var(--serif);font-size:34px;margin:18px 0 12px;color:var(--navy)">${esc(item.title)}</h2>
       <p class="muted">${esc(item.summary)}</p>
       <div class="grid-2" style="margin:22px 0"><div class="note"><b>Eligibility</b><br>${esc(item.eligibility || 'See application details.')}</div><div class="note"><b>Time commitment</b><br>${esc(item.commitment || 'See application details.')}</div><div class="note"><b>Privacy / data</b><br>${esc(item.privacy || 'Not specified.')}</div><div class="note"><b>Ethics / oversight</b><br>${esc(item.ethics || 'Not specified.')}</div></div>
@@ -2673,7 +3040,7 @@
   function renderPublications() {
     const list = publicationFiltered();
     $('#publicationEmpty').hidden = list.length > 0;
-    $('#publicationGrid').innerHTML = list.map(item => `<article class="publication"><div class="chip-row"><span class="chip blue">${esc(({journal:'Journal article',archive:'Research archive',review:'Review & analysis',news:'News & comment'})[item.type] || item.type)}</span>${item.sample ? '<span class="chip gold">Illustrative preview</span>' : ''}</div><h3>${esc(item.title)}</h3><div class="meta-line" style="margin-bottom:12px"><span>${esc(item.authors || '')}</span><span>${esc(item.year || '')}</span><span>${esc(item.status || '')}</span></div><p>${esc(item.abstract || '')}</p><div class="chip-row">${(item.keywords||[]).map(k => `<span class="chip">${esc(k)}</span>`).join('')}</div></article>`).join('');
+    $('#publicationGrid').innerHTML = list.map(item => `<article class="publication"><div class="chip-row"><span class="chip blue">${esc(({journal:'Study outcome',archive:'Research summary',review:'Research summary',news:'News & comment'})[item.type] || item.type)}</span>${item.sample ? '<span class="chip gold">Illustrative preview</span>' : ''}</div><h3>${esc(item.title)}</h3><div class="meta-line" style="margin-bottom:12px"><span>${esc(item.authors || '')}</span><span>${esc(item.year || '')}</span><span>${esc(item.status || '')}</span></div><p>${esc(item.abstract || '')}</p><div class="chip-row">${(item.keywords||[]).map(k => `<span class="chip">${esc(k)}</span>`).join('')}</div></article>`).join('');
   }
 
   function renderCompetitions() {
@@ -2804,15 +3171,15 @@
     {title:'Executive Team',page:'executive-team',text:'leadership operations team research standards community responsibilities'},
     {title:'Collaborations',page:'collaborations',text:'partners schools researchers organizations community collaboration'},
     {title:'Browse Surveys',page:'research',text:'participant surveys studies volunteers questionnaires research opportunities'},
-    {title:'Research Results',page:'journal',text:'results outcomes completed studies publications archive records'},
-    {title:'Challenges',page:'competitions',text:'research challenges survey design analysis judging'},
-    {title:'Communities',page:'chapters',text:'local communities school research education participation'},
+    {title:'Research Results',page:'results',text:'results outcomes completed studies research summaries findings'},
+    {title:'Challenges',page:'challenges',text:'research challenges survey design analysis judging'},
+    {title:'Communities',page:'communities',text:'local communities school research education participation'},
     {title:'Research Standards',page:'standards',text:'ethics privacy authorship AI minors'},
     {title:'Submit Survey',page:'submit',text:'submit survey study recruit participants questionnaire participant recruitment'},
     {title:'How Curoria Works',page:'how-it-works',text:'review pathways workflow'},
     {title:'Transparency & Trust',page:'transparency',text:'verification review labels affiliations metrics'},
     {title:'Submission Guidelines',page:'guidelines',text:'scope originality methods'},
-    {title:'Listing Review Process',page:'peer-review',text:'survey study listing platform review decision'},
+    {title:'Study Listing Review',page:'review-process',text:'survey study listing platform review decision'},
     {title:'Privacy Policy',page:'privacy',text:'privacy data deletion'},
     {title:'Terms of Use',page:'terms',text:'terms responsibilities'},
     {title:'Accessibility',page:'accessibility',text:'accessibility keyboard focus'}
@@ -2821,7 +3188,7 @@
     const q = normalize($('#globalSearchInput').value);
     const dynamic = [
       ...researchOpportunities.map(item => ({title:item.title,page:'research',text:[item.summary,item.field,(item.skills||[]).join(' ')].join(' ')})),
-      ...publicationRecords.map(item => ({title:item.title,page:'journal',text:[item.abstract,item.authors,(item.keywords||[]).join(' ')].join(' ')}))
+      ...publicationRecords.map(item => ({title:item.title,page:'results',text:[item.abstract,item.authors,(item.keywords||[]).join(' ')].join(' ')}))
     ];
     const results = [...searchIndex,...dynamic].filter(item => !q || normalize(item.title + ' ' + item.text).includes(q)).slice(0,12);
     $('#globalSearchResults').innerHTML = results.length ? results.map(item => `<button class="search-result" type="button" data-search-page="${esc(item.page)}"><b>${esc(item.title)}</b><span>${esc(PAGE_TITLES[item.page] || item.page.replace(/-/g,' '))}</span></button>`).join('') : '<div class="empty">No matches found.</div>';
@@ -3008,7 +3375,7 @@
     try {
       await postNetlifyForm(form);
       await storeSet('submissions:' + id, submission);
-      status.textContent='Submitted successfully. Curoria will review the listing before publication.';
+      status.textContent='Submitted successfully. Curoria will review the listing before the listing goes live.';
       form.reset(); renderAuth(); refreshDashboard(); toast('Research submission received.');
     } catch (error) {
       console.error(error); status.textContent='Submission failed. Confirm Netlify Form Detection is enabled and redeploy the site.'; toast('Submission failed.');
@@ -3023,9 +3390,9 @@
     await saveUserApplication(activity);
     setTimeout(() => closeModal('applyModal'),700);
   });
-  $('#leadForm').addEventListener('submit', event => { event.preventDefault(); handleGenericNetlifyForm(event.currentTarget,$('#leadStatus'),'Research group proposal submitted.'); });
-  $('#manuscriptForm').addEventListener('submit', event => { event.preventDefault(); handleGenericNetlifyForm(event.currentTarget,$('#manuscriptStatus'),'Completed work submitted for screening.'); });
-  $('#chapterForm').addEventListener('submit', event => { event.preventDefault(); handleGenericNetlifyForm(event.currentTarget,null,'Chapter application submitted.'); });
+
+
+  $('#communityForm').addEventListener('submit', event => { event.preventDefault(); handleGenericNetlifyForm(event.currentTarget,null,'Community application submitted.'); });
   $('#contactForm').addEventListener('submit', event => { event.preventDefault(); handleGenericNetlifyForm(event.currentTarget,$('#contactStatus'),'Message sent.'); });
 
   $('#adminStatusFilter').addEventListener('change', refreshAdminDashboard);
