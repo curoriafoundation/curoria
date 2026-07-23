@@ -915,7 +915,7 @@
       align-items: center;
     }
     .about-copy p { color: var(--ink-soft); font-size: 16px; }
-    .about-copy h2 { font-size: clamp(26px, 3.4vw, 36px); }
+    .about-copy-heading { font-family: var(--serif); font-size: clamp(24px, 3vw, 32px); letter-spacing: -.02em; color: var(--navy); margin-bottom: 14px; }
     .original-about-values { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 26px; }
     .about-val { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 16px 18px; }
     .about-val b { display: block; font-size: 14px; margin-bottom: 4px; }
@@ -2194,7 +2194,624 @@
       }
     }
 
-</style>
+
+
+    /* Age verification — uses the existing Curoria form and modal system */
+    .age-verification-copy {
+      color: var(--ink-soft, #4A5578);
+      font-size: 14px;
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+    .age-verification-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 11px;
+      margin-bottom: 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--bg);
+      color: var(--navy-soft, #232A5C);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .age-verification-badge::before {
+      content: '✓';
+      color: var(--teal-deep, #0D93AE);
+      font-weight: 700;
+    }
+
+
+
+    /* ============================================================
+       CURORIA EDITORIAL LAYOUT PASS — CONTENT + VISUAL SYSTEM LOCKED
+       Structure only: page rhythm, hierarchy, alignment and responsive
+       composition. Existing wording, palette, typography and buttons
+       remain untouched.
+       ============================================================ */
+
+    /* Universal page composition */
+    main > .page:not([data-page="home"]) > .section > .wrap {
+      position: relative;
+    }
+
+    main > .page:not([data-page="home"]) .section-head {
+      margin-bottom: 46px;
+    }
+
+    main > .page:not([data-page="home"]) .section-head + .grid-3,
+    main > .page:not([data-page="home"]) .section-head + .grid-4,
+    main > .page:not([data-page="home"]) .section-head + .directory-toolbar,
+    main > .page:not([data-page="home"]) .section-head + .policy-layout {
+      margin-top: 0;
+    }
+
+    /* Home: remove accidental empty fourth column and create stronger rhythm */
+    .page[data-page="home"] .grid-4 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      max-width: 1040px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .page[data-page="home"] > .section:last-child .grid-2 {
+      align-items: stretch;
+      gap: 28px;
+    }
+
+    .page[data-page="home"] > .section:last-child .card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .page[data-page="home"] > .section:last-child .card .btn {
+      margin-top: auto;
+    }
+
+    /* About */
+    .page[data-page="about"] .original-about-grid {
+      grid-template-columns: minmax(0, .95fr) minmax(360px, .78fr);
+      gap: clamp(44px, 7vw, 86px);
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .page[data-page="about"] .about-copy {
+      max-width: 650px;
+    }
+
+    /* Executive team, collaborations and support: institutional landing layouts */
+    .page[data-page="executive-team"] .grid-3,
+    .page[data-page="collaborations"] .grid-3,
+    .page[data-page="support"] .grid-3 {
+      max-width: 1080px;
+      margin-left: auto;
+      margin-right: auto;
+      align-items: stretch;
+    }
+
+    .page[data-page="executive-team"] .grid-3 > *,
+    .page[data-page="collaborations"] .grid-3 > *,
+    .page[data-page="support"] .grid-3 > * {
+      height: 100%;
+    }
+
+    .page[data-page="executive-team"] .wrap > .card:last-child,
+    .page[data-page="collaborations"] .wrap > .card:last-child {
+      max-width: 860px;
+      margin: 34px auto 0;
+    }
+
+    .page[data-page="support"] .wrap > .note:last-child {
+      max-width: 920px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Survey marketplace: deliberate two-tier filter composition */
+    .page[data-page="research"] .directory-toolbar {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      align-items: center;
+    }
+
+    .page[data-page="research"] #researchSearch { grid-column: span 4; }
+    .page[data-page="research"] #researchType { grid-column: span 2; }
+    .page[data-page="research"] #researchField { grid-column: span 2; }
+    .page[data-page="research"] #researchStatus { grid-column: span 1; }
+    .page[data-page="research"] #researchLevel { grid-column: span 1; }
+    .page[data-page="research"] #researchReset { grid-column: span 2; justify-self: stretch; }
+
+    .page[data-page="research"] .directory-status {
+      padding: 0 4px;
+      margin-bottom: 20px;
+    }
+
+    .page[data-page="research"] .listing-grid {
+      gap: 24px;
+    }
+
+    /* Results: search first, then editorial cards */
+    .page[data-page="results"] .directory-toolbar {
+      grid-template-columns: minmax(0, 1.7fr) minmax(190px, .8fr) auto;
+      align-items: center;
+      max-width: 980px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .page[data-page="results"] .publication-grid {
+      gap: 24px;
+      max-width: 1060px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .page[data-page="results"] .results-principles {
+      max-width: 940px;
+      margin: 36px auto 0;
+    }
+
+    /* Challenges */
+    .page[data-page="challenges"] #competitionGrid {
+      max-width: 1080px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .page[data-page="challenges"] .wrap > .card:last-child {
+      max-width: 900px;
+      margin: 36px auto 0;
+    }
+
+    /* Communities: educational summary first, application as a separate stage */
+    .page[data-page="communities"] .grid-3 {
+      max-width: 1040px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .page[data-page="communities"] .form-card {
+      max-width: 980px;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      margin-top: 48px !important;
+    }
+
+    /* Standards: documentation layout with stable reading width */
+    .page[data-page="standards"] .policy-layout {
+      grid-template-columns: 230px minmax(0, 1fr);
+      gap: clamp(30px, 4vw, 52px);
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .page[data-page="standards"] .policy-nav {
+      top: 190px;
+    }
+
+    .page[data-page="standards"] .standards-panels {
+      max-width: 840px;
+      width: 100%;
+    }
+
+    .page[data-page="standards"] .standard-panel {
+      width: 100%;
+    }
+
+    /* Submit: overview choices lead into one focused application surface */
+    .page[data-page="submit"] .grid-3 {
+      max-width: 1040px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .page[data-page="submit"] #studySubmissionPanel {
+      max-width: 980px;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      margin-top: 48px !important;
+    }
+
+    /* Contact: deliberate information / action split */
+    .page[data-page="contact"] > .section > .wrap.grid-2 {
+      grid-template-columns: minmax(300px, .72fr) minmax(0, 1.28fr);
+      gap: clamp(42px, 7vw, 82px);
+      align-items: start;
+      max-width: 1080px;
+    }
+
+    .page[data-page="contact"] .section-head {
+      text-align: left;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .page[data-page="contact"] .section-head .eyebrow {
+      justify-content: flex-start;
+    }
+
+    .page[data-page="contact"] .form-card {
+      margin: 0;
+    }
+
+    /* Dashboard */
+    .page[data-page="dashboard"] .dashboard-layout {
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 34px;
+      align-items: start;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .page[data-page="dashboard"] #dashboardLoggedOut {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .page[data-page="dashboard"] .profile {
+      position: sticky;
+      top: 190px;
+    }
+
+    /* Admin dashboard */
+    .page[data-page="admin-dashboard"] #adminDashboardShell {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .page[data-page="admin-dashboard"] .admin-dashboard-grid {
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .page[data-page="admin-dashboard"] .admin-toolbar {
+      margin-bottom: 24px;
+    }
+
+    /* Formal editorial / policy page structures created at runtime */
+    .prose.prose-structured {
+      max-width: 1120px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .prose-structured .prose-intro {
+      max-width: 820px;
+      margin: 0 auto 42px;
+      text-align: center;
+    }
+
+    .prose-structured .prose-intro > h1:first-child {
+      margin-bottom: 18px;
+    }
+
+    .prose-structured .prose-intro > h1:first-child::after {
+      content: '';
+      display: block;
+      width: 54px;
+      height: 3px;
+      margin: 18px auto 0;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--blue), var(--teal));
+    }
+
+    .prose-grid-layout {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .prose-grid-layout .prose-intro {
+      grid-column: 1 / -1;
+    }
+
+    .prose-grid-layout .prose-block {
+      min-width: 0;
+      padding: 30px 32px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .prose-grid-layout .prose-block h2:first-child,
+    .prose-grid-layout .prose-block h3:first-child {
+      margin-top: 0;
+    }
+
+    .page[data-page="review-process"] .prose-grid-layout {
+      grid-template-columns: 1fr;
+      max-width: 900px;
+    }
+
+    .page[data-page="review-process"] .prose-grid-layout .prose-block {
+      padding-left: 36px;
+      padding-right: 36px;
+    }
+
+    /* Long legal/information documents stay highly readable rather than card-heavy */
+    .prose-legal-layout {
+      max-width: 900px !important;
+      margin: 0 auto;
+    }
+
+    .prose-legal-layout .prose-intro {
+      max-width: 780px;
+      text-align: left;
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: 38px;
+    }
+
+    .prose-legal-layout .prose-intro > h1:first-child::after {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .prose-legal-layout .prose-block {
+      padding: 28px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .prose-legal-layout .prose-block:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .prose-legal-layout .prose-block h2:first-child {
+      margin-top: 0;
+    }
+
+    /* Responsive composition — preserve meaning without overlap */
+    @media (max-width: 1040px) {
+      .page[data-page="research"] .directory-toolbar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .page[data-page="research"] #researchSearch,
+      .page[data-page="research"] #researchType,
+      .page[data-page="research"] #researchField,
+      .page[data-page="research"] #researchStatus,
+      .page[data-page="research"] #researchLevel,
+      .page[data-page="research"] #researchReset {
+        grid-column: span 1;
+      }
+
+      .page[data-page="standards"] .policy-layout,
+      .page[data-page="dashboard"] .dashboard-layout,
+      .page[data-page="contact"] > .section > .wrap.grid-2,
+      .page[data-page="about"] .original-about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .page[data-page="standards"] .policy-nav,
+      .page[data-page="dashboard"] .profile {
+        position: static;
+      }
+
+      .page[data-page="contact"] .section-head {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .page[data-page="contact"] .section-head .eyebrow {
+        justify-content: center;
+      }
+
+      .prose-grid-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page[data-page="home"] .grid-4,
+      .page[data-page="research"] .directory-toolbar,
+      .page[data-page="results"] .directory-toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .page[data-page="research"] #researchSearch,
+      .page[data-page="research"] #researchType,
+      .page[data-page="research"] #researchField,
+      .page[data-page="research"] #researchStatus,
+      .page[data-page="research"] #researchLevel,
+      .page[data-page="research"] #researchReset {
+        grid-column: auto;
+      }
+
+      .prose-grid-layout .prose-block,
+      .page[data-page="review-process"] .prose-grid-layout .prose-block {
+        padding: 24px;
+      }
+
+      .prose-structured .prose-intro {
+        text-align: left;
+        margin-bottom: 30px;
+      }
+
+      .prose-structured .prose-intro > h1:first-child::after {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+
+
+    /* Consistent spacing/typography utilities — added for formatting consistency */
+    .section-followup { margin-top: 32px; }
+    .card-heading-lg {
+      font-family: var(--serif);
+      font-size: 28px;
+      margin-bottom: 12px;
+      color: var(--navy);
+    }
+  
+    /* ============================================================
+       FORMATTING REFINEMENT PASS -- inspired by NSRI/Synthica structure
+       CSS-only: unifies spacing, replaces the letter icon-tiles with an
+       intentional monogram-badge treatment, simplifies the button hover
+       glow to a restrained lift, and adds a cleaner stat/step rhythm.
+       No HTML content, JS, or class names removed -- pure overrides.
+       ============================================================ */
+
+    /* Unified spacing scale across every grid on every page */
+    .grid-2, .grid-3, .grid-4 { gap: 24px; }
+    .card { padding: 28px; }
+
+    /* Icon tiles read as an intentional monogram badge instead of a
+       placeholder letter -- same markup, refined treatment */
+    .icon-tile {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-family: var(--ff-display, Georgia, serif);
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--navy);
+      background: linear-gradient(155deg, #ffffff, var(--soft));
+      border: 1.5px solid var(--line);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.7), 0 10px 22px -16px rgba(11,18,64,.35);
+      margin-bottom: 18px;
+    }
+
+    /* Simplify the multicolor hover glow to a restrained, professional lift */
+    :where(
+      .btn, .dash-tab, .auth-tab, .portal-tab, .standards-tab,
+      .admin-action-btn, .search-btn, .menu-btn, .modal-close
+    )::before { display: none; }
+
+    .btn { transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, border-color .18s ease, color .18s ease; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary:hover, .btn-blue:hover { box-shadow: 0 14px 28px -16px rgba(11,18,64,.45); }
+    .btn-outline:hover, .btn-ghost:hover { box-shadow: 0 8px 18px -14px rgba(11,18,64,.22); }
+    .dash-tab:hover, .auth-tab:hover, .portal-tab:hover, .admin-action-btn:hover {
+      border-color: var(--blue);
+      color: var(--blue-deep);
+      box-shadow: 0 8px 18px -14px rgba(11,18,64,.20);
+    }
+
+    /* Cleaner stat strip: thin accent bar + larger figure, same markup */
+    .metric {
+      position: relative;
+      padding: 28px 20px 24px;
+      overflow: hidden;
+    }
+    .metric::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--teal));
+    }
+    .metric strong { font-size: 34px; }
+
+    /* Subtle connecting line between step numbers on wide screens */
+    .steps { position: relative; }
+    .step { position: relative; }
+    .step::after {
+      content: '';
+      position: absolute;
+      top: 46px;
+      left: calc(100% + 8px);
+      width: 16px;
+      height: 2px;
+      background: rgba(255,255,255,.22);
+    }
+    .step:last-child::after { display: none; }
+    @media (max-width: 1040px) { .step::after { display: none; } }
+
+    /* Slightly more generous reading rhythm on long-form pages */
+    .prose p, .prose li { line-height: 1.75; }
+  
+    /* ============================================================
+       PAGE-BY-PAGE VISIBILITY PASS -- every page gets a visible hit.
+       Signature: cards/tiles get a left accent bar, toolbars/sidebars
+       get a top accent bar. Pure CSS overrides -- no HTML/JS touched.
+       ============================================================ */
+
+    /* Left accent bar on every card-type component, site-wide:
+       .card = Home, Executive Team, Collaborations, Support, Contact, Challenges (JS-rendered)
+       .about-val = About
+       .standards-point = Standards
+       .admin-stat / .admin-review-card = Admin Dashboard
+       .listing = Research (Surveys)
+       .publication = Results
+       .form-card = Communities, Submit, Contact */
+    .card, .about-val, .standards-point, .admin-stat, .admin-review-card,
+    .listing, .publication, .form-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before, .about-val::before, .standards-point::before, .admin-stat::before, .admin-review-card::before,
+    .listing::before, .publication::before, .form-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--blue), var(--teal));
+    }
+
+    /* Top accent bar on toolbar/sidebar containers:
+       .directory-toolbar = Research, Results
+       .policy-nav = Standards
+       .admin-toolbar = Admin Dashboard */
+    .directory-toolbar, .policy-nav, .admin-toolbar {
+      position: relative;
+      overflow: hidden;
+    }
+    .directory-toolbar::before, .policy-nav::before, .admin-toolbar::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--teal));
+    }
+
+    /* Prose pages: How Curoria Works, Transparency, Guidelines, Review Process
+       get the same left-accent card treatment on their content blocks */
+    .prose-grid-layout .prose-block {
+      position: relative;
+      overflow: hidden;
+    }
+    .prose-grid-layout .prose-block::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--blue), var(--teal));
+    }
+
+    /* Legal pages: Privacy, Terms, Accessibility -- accent mark on each heading instead */
+    .prose-legal-layout .prose-block h2:first-child {
+      position: relative;
+      padding-left: 18px;
+    }
+    .prose-legal-layout .prose-block h2:first-child::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 4px; bottom: 4px;
+      width: 3px;
+      border-radius: 2px;
+      background: linear-gradient(180deg, var(--blue), var(--teal));
+    }
+
+    /* About page: give the decorative SVG diagram real depth */
+    .about-art svg { filter: drop-shadow(0 18px 34px rgba(11,18,64,.18)); }
+
+    /* Dashboard: avatar gets a soft ring instead of a flat circle */
+    .avatar { box-shadow: 0 0 0 4px rgba(18,121,214,.14), 0 12px 26px -14px rgba(11,18,64,.4); }
+
+    /* Chips a touch bolder for legibility (Research/Results/Challenges/Communities) */
+    .chip { border-width: 1.5px; font-weight: 700; letter-spacing: .01em; }
+  </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -2202,7 +2819,7 @@
 <div class="header-primary">
 <div class="wrap header-primary-inner">
 <a aria-label="Curoria home" class="brand institutional-brand" data-page-link="home" href="#home">
-<img alt="Curoria logo" onerror="this.style.display='none'" src="CuroriaLOGO.png"/>
+<img alt="Curoria logo" onerror="this.style.display='none'" src="images/CuroriaLOGO2.png"/>
 <span class="brand-copy"><strong>Curoria</strong><span>Student Research Network</span></span>
 </a>
 <div aria-label="Quick links" class="header-utilities">
@@ -2222,6 +2839,7 @@
 <a data-page-link="research" href="#research"><b>Surveys</b><span>Find surveys and studies recruiting participants.</span></a>
 <a data-page-link="results" href="#results"><b>Results</b><span>Explore outcomes and completed research records.</span></a>
 <a data-page-link="challenges" href="#challenges"><b>Challenges</b><span>Discover optional research challenges and activities.</span></a>
+<a data-page-link="communities" href="#communities"><b>Communities</b><span>Local communities supporting research participation.</span></a>
 </div>
 </div>
 <div class="nav-dropdown">
@@ -2231,7 +2849,6 @@
 <a data-page-link="executive-team" href="#executive-team"><b>Executive Team</b><span>How Curoria leadership and responsibilities are structured.</span></a>
 <a data-page-link="transparency" href="#transparency"><b>Transparency &amp; Trust</b><span>How review, verification, and platform labels work.</span></a>
 <a data-page-link="collaborations" href="#collaborations"><b>Collaborations</b><span>Ways schools, researchers, and organizations can work with Curoria.</span></a>
-<a data-page-link="communities" href="#communities"><b>Communities</b><span>Local communities supporting research participation.</span></a>
 </div>
 </div>
 <div class="nav-dropdown">
@@ -2262,7 +2879,7 @@
 <span>Reviewed study listings</span><span>Clear participation details</span><span>Contribution tracking</span>
 </div>
 </div>
-<div aria-hidden="true" class="hero-art"><img alt="Curoria Logo" class="hero-logo" src="CuroriaLOGO.png"/></div>
+<div aria-hidden="true" class="hero-art"><img alt="Curoria Logo" class="hero-logo" src="images/CuroriaLOGO.png"/></div>
 </div>
 </div>
 <div class="section-sm">
@@ -2272,8 +2889,8 @@
 <div class="wrap">
 <div class="section-head"><div class="eyebrow">How Curoria Works</div><h2>One network, three roles, one shared loop</h2><p>Every study on Curoria moves through the same simple circle — submit, participate, support.</p></div>
 <div class="grid-3">
-<article class="card"><div class="icon-tile">V</div><h3>For Volunteers</h3><p>Sign in, join studies that interest you, and track your contributions on your dashboard.</p><a class="btn btn-primary btn-sm" data-page-link="research" href="#research">Browse Surveys</a></article>
 <article class="card"><div class="icon-tile">R</div><h3>For Researchers</h3><p>Create a free account, submit your study, and reach real participants once it is reviewed.</p><a class="btn btn-primary btn-sm" data-page-link="submit" href="#submit">Submit a Survey</a></article>
+<article class="card"><div class="icon-tile">V</div><h3>For Volunteers</h3><p>Sign in, join studies that interest you, and track your contributions on your dashboard.</p><a class="btn btn-primary btn-sm" data-page-link="research" href="#research">Browse Surveys</a></article>
 <article class="card"><div class="icon-tile">O</div><h3>For Organizations</h3><p>Support education and scientific discovery by backing the researchers and volunteers who power it.</p><a class="btn btn-outline btn-sm" data-page-link="about" href="#about">Learn About Curoria</a></article>
 </div>
 </div>
@@ -2292,7 +2909,7 @@
 <section class="section">
 <div class="wrap">
 <div class="section-head"><div class="eyebrow">More ways to grow with Curoria</div><h2>Supporting programs around the core participant network.</h2><p>These sections support Curoria’s main purpose: helping researchers reach participants and helping volunteers discover clear, responsible study opportunities.</p></div>
-<div class="grid-4">
+<div class="grid-3">
 
 <article class="card"><div class="icon-tile">J</div><h3>Research Results</h3><p>See completed research, public study outcomes, and clearly labeled result summaries connected to the Curoria community.</p><a class="btn btn-outline btn-sm" data-page-link="results" href="#results">Explore Results</a></article>
 <article class="card"><div class="icon-tile">C</div><h3>Challenges</h3><p>Take part in optional research challenges with clear eligibility, deadlines, and evaluation criteria.</p><a class="btn btn-outline btn-sm" data-page-link="challenges" href="#challenges">View Challenges</a></article>
@@ -2304,13 +2921,13 @@
 <div class="wrap grid-2">
 <div class="card">
 <div class="eyebrow">Transparency</div>
-<h3 style="font-family:var(--serif);font-size:30px">Platform review is not the same thing as IRB or institutional ethics approval.</h3>
+<h3 class="card-heading-lg">Platform review is not the same thing as IRB or institutional ethics approval.</h3>
 <p>Curoria labels platform review, researcher verification, supervisor involvement, institutional ethics review, and recruitment status separately.</p>
 <a class="btn btn-primary btn-sm" data-page-link="transparency" href="#transparency">Read Transparency &amp; Trust</a>
 </div>
 <div class="card">
 <div class="eyebrow">Research integrity</div>
-<h3 style="font-family:var(--serif);font-size:30px">Clear expectations for researcher identity, consent, privacy, data integrity, and responsible recruitment.</h3>
+<h3 class="card-heading-lg">Clear expectations for researcher identity, consent, privacy, data integrity, and responsible recruitment.</h3>
 <p>Researchers must disclose what participants will do, what data is collected, who is responsible for the study, and what review pathway applies.</p>
 <a class="btn btn-primary btn-sm" data-page-link="standards" href="#standards">Review Curoria Standards</a>
 </div>
@@ -2319,10 +2936,12 @@
 </section>
 <section class="page" data-page="about">
 <div class="section">
+<div class="wrap">
+<div class="section-head"><div class="eyebrow">About Curoria</div><h2>A research participation network built around access and trust</h2><p>Curoria connects researchers seeking participants with people who want to contribute to research, then supports that core network with education, community programs, and transparent research outcomes.</p></div>
+</div>
 <div class="wrap about-grid original-about-grid">
 <div class="about-copy">
-<div class="eyebrow">About Curoria</div>
-<h2>Making academic research accessible, on both sides of the study</h2>
+<h3 class="about-copy-heading">Making academic research accessible, on both sides of the study</h3>
 <p>Curoria is a student research network designed to make academic research more accessible — helping researchers find participants, and helping volunteers contribute to discovery.</p>
 <p>The core idea is simple: researchers should have a trusted place to share participant opportunities, and volunteers should have one organized place to understand and discover studies they may want to support.</p>
 <div class="about-vals original-about-values">
@@ -2342,9 +2961,6 @@
 </svg>
 </div>
 </div>
-<div class="wrap" style="margin-top:64px">
-<div class="section-head"><div class="eyebrow">About Curoria</div><h2>A research participation network built around access and trust</h2><p>Curoria connects researchers seeking participants with people who want to contribute to research, then supports that core network with education, community programs, and transparent research outcomes.</p></div>
-</div>
 </div></section>
 <section class="page" data-page="executive-team">
 <div class="section">
@@ -2355,7 +2971,7 @@
 <article class="card"><div class="icon-tile">R</div><h3>Research Standards &amp; Review</h3><p>Maintains listing standards and helps ensure public survey and study pages clearly explain participation, privacy, eligibility, and review status.</p></article>
 <article class="card"><div class="icon-tile">C</div><h3>Community &amp; Partnerships</h3><p>Supports researchers, volunteers, schools, and organizations interested in responsible research participation and collaboration.</p></article>
 </div>
-<div class="card" style="margin-top:24px"><h3>Team directory</h3><p>Named leadership profiles should be added here only when Curoria is ready to publish each person's role and information accurately. Curoria does not display fictional team members or unverifiable credentials.</p><a class="btn btn-outline btn-sm" data-page-link="contact" href="#contact">Contact Curoria</a></div>
+<div class="card section-followup"><h3>Team directory</h3><p>Named leadership profiles should be added here only when Curoria is ready to publish each person's role and information accurately. Curoria does not display fictional team members or unverifiable credentials.</p><a class="btn btn-outline btn-sm" data-page-link="contact" href="#contact">Contact Curoria</a></div>
 </div>
 </div>
 </section>
@@ -2368,7 +2984,7 @@
 <article class="card"><div class="icon-tile">R</div><h3>Researchers &amp; Research Teams</h3><p>Use Curoria to communicate participant opportunities clearly and explore responsible ways to reach communities that may be interested in contributing.</p></article>
 <article class="card"><div class="icon-tile">O</div><h3>Organizations &amp; Community Groups</h3><p>Support research access, educational programming, or community participation without compromising Curoria's standards or participant choice.</p></article>
 </div>
-<div class="card" style="margin-top:24px"><h3>Interested in collaborating?</h3><p>Tell us who you are, what you would like to work on, and how the collaboration would benefit researchers or participants. Curoria should publicly list partnerships only after they are real and confirmed.</p><a class="btn btn-primary btn-sm" data-page-link="contact" href="#contact">Contact Curoria</a></div>
+<div class="card section-followup"><h3>Interested in collaborating?</h3><p>Tell us who you are, what you would like to work on, and how the collaboration would benefit researchers or participants. Curoria should publicly list partnerships only after they are real and confirmed.</p><a class="btn btn-primary btn-sm" data-page-link="contact" href="#contact">Contact Curoria</a></div>
 </div>
 </div>
 </section>
@@ -2401,7 +3017,7 @@
 </div>
 <div class="publication-grid" id="publicationGrid"></div>
 <div class="empty" hidden="" id="publicationEmpty"><h3>No Curoria results have been shared yet.</h3><p>When researchers choose to share a completed outcome or plain-language summary from a Curoria-listed study, it can appear here with a clear source label.</p><a class="btn btn-primary btn-sm" data-page-link="contact" href="#contact">Ask about sharing a result</a></div>
-<div class="card results-principles" style="margin-top:24px"><h3>How Curoria presents results</h3><div class="grid-3" style="margin-top:16px"><p><b>Connected to real studies</b><br/><span class="muted small">Results should identify the related study or researcher whenever that information can be verified.</span></p><p><b>Plain-language labels</b><br/><span class="muted small">Curoria distinguishes a study outcome, researcher summary, and community update without implying formal external review or endorsement.</span></p><p><b>No inflated claims</b><br/><span class="muted small">A result shown on Curoria does not automatically mean an institution, external reviewer, or ethics board endorsed the findings.</span></p></div></div></div>
+<div class="card results-principles section-followup"><h3>How Curoria presents results</h3><div class="grid-3" style="margin-top:16px"><p><b>Connected to real studies</b><br/><span class="muted small">Results should identify the related study or researcher whenever that information can be verified.</span></p><p><b>Plain-language labels</b><br/><span class="muted small">Curoria distinguishes a study outcome, researcher summary, and community update without implying formal external review or endorsement.</span></p><p><b>No inflated claims</b><br/><span class="muted small">A result shown on Curoria does not automatically mean an institution, external reviewer, or ethics board endorsed the findings.</span></p></div></div></div>
 </div>
 </section>
 <section class="page" data-page="challenges">
@@ -2409,7 +3025,7 @@
 <div class="wrap">
 <div class="section-head"><div class="eyebrow">Curoria Challenges</div><h2>Practice the skills behind responsible participant research</h2><p>Curoria challenges are optional learning activities that help students practice survey design, participant communication, research ethics, data interpretation, and clear reporting.</p></div>
 <div class="grid-3" id="competitionGrid"></div>
-<div class="card" style="margin-top:24px"><h3>What every Curoria challenge should make clear</h3><div class="grid-3" style="margin-top:16px"><p><b>Clear learning goal</b><br/><span class="muted small">Members know what research skill they are practicing and what they are expected to create or reflect on.</span></p><p><b>Clear participation guidance</b><br/><span class="muted small">Instructions, eligibility, timing, and any feedback process are explained before someone starts.</span></p><p><b>No misleading credentials</b><br/><span class="muted small">Completing a challenge does not imply institutional approval, academic credit, or a professional research credential.</span></p></div></div>
+<div class="card section-followup"><h3>What every Curoria challenge should make clear</h3><div class="grid-3" style="margin-top:16px"><p><b>Clear learning goal</b><br/><span class="muted small">Members know what research skill they are practicing and what they are expected to create or reflect on.</span></p><p><b>Clear participation guidance</b><br/><span class="muted small">Instructions, eligibility, timing, and any feedback process are explained before someone starts.</span></p><p><b>No misleading credentials</b><br/><span class="muted small">Completing a challenge does not imply institutional approval, academic credit, or a professional research credential.</span></p></div></div>
 </div>
 </div>
 </section>
@@ -2422,8 +3038,8 @@
 <div class="card"><div class="icon-tile">2</div><h3>Educate</h3><p>Host workshops on research questions, study design, responsible recruitment, consent, privacy, and research communication.</p></div>
 <div class="card"><div class="icon-tile">3</div><h3>Support</h3><p>Create a local community that encourages responsible research without claiming to provide institutional ethics approval.</p></div>
 </div>
-<div class="form-card" style="margin-top:28px">
-<h3 style="font-family:var(--serif);font-size:28px;margin-bottom:18px">Start a Curoria community</h3>
+<div class="form-card section-followup">
+<h3 class="card-heading-lg">Start a Curoria community</h3>
 <form data-netlify="true" id="communityForm" name="community-application" netlify-honeypot="bot-field">
 <input name="form-name" type="hidden" value="community-application"/><p hidden=""><label>Do not fill this out <input name="bot-field"/></label></p>
 <div class="form-grid">
@@ -2549,9 +3165,9 @@
 <div class="grid-3"><article class="card"><div class="icon-tile">S</div><h3>Surveys &amp; questionnaires</h3><p>Recruit eligible volunteers for an online or in-person questionnaire with clear timing, eligibility, privacy, and researcher information.</p></article>
 <article class="card"><div class="icon-tile">I</div><h3>Interviews &amp; focus groups</h3><p>Recruit participants for interviews or group discussions when the commitment, format, recording practices, and contact details are explained clearly.</p></article>
 <article class="card"><div class="icon-tile">R</div><h3>Other participant studies</h3><p>Submit another participant-based research opportunity when volunteers can understand what they will do before choosing to continue.</p></article></div>
-<div class="form-card" id="studySubmissionPanel" style="margin-top:28px">
+<div class="form-card section-followup" id="studySubmissionPanel">
 <div class="eyebrow">Participant recruitment submission</div>
-<h3 style="font-family:var(--serif);font-size:30px;margin-bottom:10px">Submit a survey for review</h3>
+<h3 class="card-heading-lg">Submit a survey for review</h3>
 <p class="muted">Tell potential participants what your survey or study is about, who can join, what they will do, how long it takes, and how their information will be handled.</p>
 <div class="note warning" style="margin:16px 0">For a safer launch, the public participant pathway should remain 18+ until a dedicated minor-consent and safeguarding process is implemented.</div>
 <form data-netlify="true" id="researchForm" name="research-submission" netlify-honeypot="bot-field" novalidate="">
@@ -2624,7 +3240,7 @@
 </article></div></div>
 </section>
 <section class="page" data-page="support">
-<div class="section"><div class="wrap"><div class="section-head"><div class="eyebrow">Support Curoria</div><h2>Help expand access to responsible research participation</h2><p>Support for Curoria can strengthen survey discovery, researcher education, participant trust and safety, and access to responsible research opportunities.</p></div><div class="grid-3"><div class="card"><h3>Participant access</h3><p>Help make research opportunities easier to discover and understand.</p></div><div class="card"><h3>Researcher support</h3><p>Help emerging researchers learn how to create clear, responsible participant listings.</p></div><div class="card"><h3>Trust &amp; safety</h3><p>Support review tools, reporting pathways, and platform infrastructure that protect the research community.</p></div></div><div class="note warning" style="margin-top:24px"><b>Launch note:</b> This build intentionally does not claim donations are tax-deductible and does not process payments. Add a payment provider only after Curoria's legal status and donation disclosures are confirmed.</div></div></div>
+<div class="section"><div class="wrap"><div class="section-head"><div class="eyebrow">Support Curoria</div><h2>Help expand access to responsible research participation</h2><p>Support for Curoria can strengthen survey discovery, researcher education, participant trust and safety, and access to responsible research opportunities.</p></div><div class="grid-3"><div class="card"><h3>Participant access</h3><p>Help make research opportunities easier to discover and understand.</p></div><div class="card"><h3>Researcher support</h3><p>Help emerging researchers learn how to create clear, responsible participant listings.</p></div><div class="card"><h3>Trust &amp; safety</h3><p>Support review tools, reporting pathways, and platform infrastructure that protect the research community.</p></div></div><div class="note warning section-followup"><b>Launch note:</b> This build intentionally does not claim donations are tax-deductible and does not process payments. Add a payment provider only after Curoria's legal status and donation disclosures are confirmed.</div></div></div>
 </section>
 <section class="page" data-page="contact">
 <div class="section"><div class="wrap grid-2"><div><div class="section-head"><div class="eyebrow">Contact Curoria</div><h2>Questions about a study, submission, or your account?</h2><p>Use the form for participant concerns, researcher questions, corrections, partnerships, or general support. Curoria is here to help both sides of the research network.</p></div><div class="card"><h3>Email</h3><p><a href="mailto:curoriafoundation@gmail.com" style="color:var(--blue);font-weight:800">curoriafoundation@gmail.com</a></p><p class="small muted">For urgent study-related concerns, include the study title and researcher name.</p></div></div><div class="form-card"><form data-netlify="true" id="contactForm" name="contact" netlify-honeypot="bot-field"><input name="form-name" type="hidden" value="contact"/><p hidden=""><label>Do not fill this out <input name="bot-field"/></label></p><div class="form-grid"><div class="field"><label for="contactName">Name</label><input id="contactName" name="name" required=""/></div><div class="field"><label for="contactEmail">Email</label><input id="contactEmail" name="email" required="" type="email"/></div><div class="field full"><label for="contactTopic">Topic</label><select id="contactTopic" name="topic" required=""><option value="">Choose</option><option>Survey or study listing</option><option>Participant question or safety concern</option><option>Survey submission</option><option>Account or dashboard</option><option>Community or collaboration</option><option>Partnership</option><option>Correction or takedown request</option><option>General</option></select></div><div class="field full"><label for="contactMessage">Message</label><textarea id="contactMessage" name="message" required=""></textarea></div></div><div class="form-actions"><button class="btn btn-primary" type="submit">Send message</button><span class="small muted" id="contactStatus"></span></div></form></div></div></div>
@@ -2679,9 +3295,9 @@
 <h1>Terms of Use</h1><p><b>Last updated: July 19, 2026.</b></p>
 <p>These starter terms should be reviewed before public launch and adapted to Curoria's actual legal structure.</p>
 <h2>What Curoria does</h2><p>Curoria connects researchers who need participants with people who want to discover and contribute to research. It may also provide study results, educational challenges, community programs, and research-participation resources that support that same mission.</p>
+<h2>Platform review</h2><p>Curoria may review, request changes to, pause, correct, or remove listings. Platform review does not guarantee research quality and does not substitute for formal institutional or ethics approval.</p>
 <h2>Researcher responsibilities</h2><p>Researchers are responsible for accurate study information, ethics and consent requirements, privacy and data handling, participant safety, and compliance with applicable institutional or legal requirements.</p>
 <h2>Participant choice</h2><p>Participation in research is voluntary. Users should review the study information and the researcher's own consent materials before taking part.</p>
-<h2>Platform review</h2><p>Curoria may review, request changes to, pause, correct, or remove listings. Platform review does not guarantee research quality and does not substitute for formal institutional or ethics approval.</p>
 <h2>External study services</h2><p>Curoria may link to third-party surveys, repositories, or research tools that Curoria does not control.</p>
 <h2>Supporting programs</h2><p>Research results, educational challenges, and local Curoria communities are optional extensions of the central researcher-participant network.</p>
 </article></div></div></section>
@@ -2690,7 +3306,7 @@
 <footer class="footer">
 <div class="wrap">
 <div class="footer-grid">
-<div><div class="footer-brand"><img alt="" onerror="this.style.display='none'" src="CuroriaLOGO.png"/>Curoria</div><p class="small">Connecting researchers with volunteers so that ethical, accessible research can reach the people who want to help.</p><p class="small">curoriafoundation@gmail.com</p></div>
+<div><div class="footer-brand"><img alt="" onerror="this.style.display='none'" src="images/CuroriaLOGO2.png"/>Curoria</div><p class="small">Connecting researchers with volunteers so that ethical, accessible research can reach the people who want to help.</p><p class="small">curoriafoundation@gmail.com</p></div>
 <div><h4>Explore</h4><a data-page-link="research" href="#research">Browse Surveys</a><a data-page-link="results" href="#results">Curoria Results</a><a data-page-link="challenges" href="#challenges">Challenges</a><a data-page-link="communities" href="#communities">Communities</a></div>
 <div><h4>For Researchers</h4><a data-page-link="submit" href="#submit">Submit Survey</a><a data-page-link="guidelines" href="#guidelines">Submission Guidelines</a><a data-page-link="review-process" href="#review-process">Study Listing Review</a><a data-page-link="standards" href="#standards">Research Standards</a><a data-page-link="transparency" href="#transparency">Transparency &amp; Trust</a><a data-page-link="contact" href="#contact">Contact</a></div></div>
 <div class="footer-bottom"><span>© 2026 Curoria. Connecting curiosity with discovery through responsible research participation.</span><span><a data-page-link="privacy" href="#privacy" style="display:inline;margin-right:14px">Privacy</a><a data-page-link="terms" href="#terms" style="display:inline;margin-right:14px">Terms</a><a data-page-link="accessibility" href="#accessibility" style="display:inline">Accessibility</a></span></div>
@@ -2708,7 +3324,7 @@
 <p class="portal-intro">For researchers and Curoria members who submit surveys, participate in studies, and use the personal dashboard.</p>
 <div class="auth-tabs"><button class="auth-tab active" data-auth-tab="login" type="button">Log in</button><button class="auth-tab" data-auth-tab="signup" type="button">Sign up</button></div>
 <form class="auth-form active" id="loginForm"><div class="stack"><div class="field"><label for="loginEmail">Email</label><input id="loginEmail" required="" type="email"/></div><div class="field"><label for="loginPassword">Password</label><input id="loginPassword" required="" type="password"/></div><div class="small" id="loginError" style="color:var(--danger)"></div><button class="btn btn-primary btn-block" id="loginSubmit" type="submit">Log in</button></div></form>
-<form class="auth-form" id="signupForm"><div class="stack"><div class="field"><label for="signupName">Full name</label><input id="signupName" required=""/></div><div class="field"><label for="signupEmail">Email</label><input id="signupEmail" required="" type="email"/></div><div class="field"><label for="signupPassword">Password</label><input id="signupPassword" minlength="6" required="" type="password"/></div><div class="small" id="signupError" style="color:var(--danger)"></div><button class="btn btn-primary btn-block" id="signupSubmit" type="submit">Create account</button></div></form>
+<form class="auth-form" id="signupForm"><div class="stack"><div class="field"><label for="signupName">Full name</label><input id="signupName" required=""/></div><div class="field"><label for="signupEmail">Email</label><input id="signupEmail" required="" type="email"/></div><div class="field"><label for="signupDob">Date of birth</label><input autocomplete="bday" id="signupDob" required="" type="date"/><div class="help">Used to verify your age. Curoria stores the verification result and age band, not your birth date.</div></div><div class="field"><label for="signupPassword">Password</label><input id="signupPassword" minlength="6" required="" type="password"/></div><div class="small" id="signupError" style="color:var(--danger)"></div><button class="btn btn-primary btn-block" id="signupSubmit" type="submit">Create account</button></div></form>
 <div class="note" id="authPreviewNote" style="margin-top:16px;display:none">Supabase is not available. Researcher account actions are disabled until the site is deployed with a working Supabase connection.</div>
 </div>
 <div class="auth-portal" data-auth-portal-panel="admin" id="adminAuthPortal">
@@ -2720,6 +3336,23 @@
 <button class="btn btn-primary btn-block" id="adminLoginSubmit" type="submit">Open Admin Dashboard</button>
 </div></form>
 </div>
+</div>
+</div>
+</div>
+<div aria-labelledby="ageVerificationTitle" aria-modal="true" class="modal" id="ageVerificationModal" role="dialog">
+<div class="modal-box" style="max-width:500px">
+<div class="modal-head"><h3 id="ageVerificationTitle">Verify your age</h3><button aria-label="Close" class="modal-close" data-close-modal="ageVerificationModal" type="button">×</button></div>
+<div class="modal-body">
+<div class="age-verification-badge">Age verification required before participation</div>
+<p class="age-verification-copy">Curoria currently opens external participation links only for age-verified adults who are 18 or older. Your date of birth is used for this check and is not stored by Curoria in this browser flow.</p>
+<form id="ageVerificationForm">
+<div class="stack">
+<div class="field"><label for="ageVerificationDob">Date of birth</label><input autocomplete="bday" id="ageVerificationDob" required type="date"/><div class="help">Your account will store only an age band and verification status.</div></div>
+<label class="check"><input id="ageVerificationConfirm" required type="checkbox"/> <span>I confirm that the date of birth I entered is accurate.</span></label>
+<div class="small" id="ageVerificationError" style="color:var(--danger)"></div>
+<button class="btn btn-primary btn-block" id="ageVerificationSubmit" type="submit">Verify age</button>
+</div>
+</form>
 </div>
 </div>
 </div>
@@ -2741,12 +3374,15 @@
 
   const PAGE_NAMES = ['home','about','executive-team','collaborations','research','results','challenges','communities','standards','submit','how-it-works','transparency','guidelines','review-process','support','contact','dashboard','admin-dashboard','privacy','terms','accessibility'];
   const PAGE_TITLES = {
-    home:'Home', about:'About', 'executive-team':'Executive Team', collaborations:'Collaborations', research:'Surveys', journal:'Results', competitions:'Challenges', chapters:'Communities',
+    home:'Home', about:'About', 'executive-team':'Executive Team', collaborations:'Collaborations', research:'Surveys', results:'Results', challenges:'Challenges', communities:'Communities',
     standards:'Research Standards', submit:'Submit Survey', 'how-it-works':'How Curoria Works', transparency:'Transparency & Trust',
-    guidelines:'Submission Guidelines', 'review-process':'Study Listing Review', donate:'Support Curoria', contact:'Contact',
+    guidelines:'Submission Guidelines', 'review-process':'Study Listing Review', support:'Support Curoria', contact:'Contact',
     dashboard:'My Curoria', 'admin-dashboard':'Admin Dashboard', privacy:'Privacy', terms:'Terms', accessibility:'Accessibility'
   };
   let currentUser = null;
+  const MIN_ACCOUNT_AGE = 13;
+  const MIN_PARTICIPATION_AGE = 18;
+  let pendingParticipationId = null;
   let adminAuthenticated = sessionStorage.getItem('curoria:admin-session') === '1';
   const ADMIN_USERNAME = 'admin';
   const ADMIN_PASSWORD_HASH = '9fb6b28a4ea92229d62e78f6289f8b7e59abb1de49ce888bf4a68a18458039c1';
@@ -2824,10 +3460,49 @@
     } catch { return []; }
   }
 
+  function calculateAge(dateString) {
+    if (!dateString) return NaN;
+    const birthDate = new Date(dateString + 'T00:00:00');
+    if (Number.isNaN(birthDate.getTime()) || birthDate > new Date()) return NaN;
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDelta = today.getMonth() - birthDate.getMonth();
+    if (monthDelta < 0 || (monthDelta === 0 && today.getDate() < birthDate.getDate())) age -= 1;
+    return age;
+  }
+  function ageBandFor(age) {
+    if (age >= 18) return '18+';
+    if (age >= 13) return '13-17';
+    return 'under-13';
+  }
   function deriveUser(user) {
     if (!user) return null;
-    const name = user.user_metadata?.name || user.email?.split('@')[0] || 'Member';
-    return { name, email: user.email || '', id: user.id || '' };
+    const metadata = user.user_metadata || {};
+    const name = metadata.name || user.email?.split('@')[0] || 'Member';
+    return {
+      name,
+      email: user.email || '',
+      id: user.id || '',
+      ageVerified: Boolean(metadata.age_verified_at),
+      adultVerified: metadata.adult_verified === true,
+      ageBand: metadata.age_band || ''
+    };
+  }
+  async function persistAgeVerification(age) {
+    if (!currentUser || !supabaseClient) return false;
+    const ageBand = ageBandFor(age);
+    const verifiedAt = new Date().toISOString();
+    const { data, error } = await supabaseClient.auth.updateUser({
+      data: {
+        age_band: ageBand,
+        age_verified_at: verifiedAt,
+        adult_verified: age >= MIN_PARTICIPATION_AGE
+      }
+    });
+    if (error) throw error;
+    currentUser = deriveUser(data.user);
+    renderAuth();
+    return true;
   }
   function initials(name) {
     return String(name || 'C').trim().split(/\s+/).slice(0,2).map(part => part[0]?.toUpperCase() || '').join('') || 'C';
@@ -3003,13 +3678,36 @@
     openModal('detailModal');
   }
 
+  function continueToExternalStudy(item) {
+    window.open(item.link, '_blank', 'noopener,noreferrer');
+    const activity = {title:item.title,type:'Participant study',date:new Date().toISOString()};
+    saveUserApplication(activity);
+  }
+
   function openResearchApplication(id) {
     const item = researchOpportunities.find(record => record.id === id);
     if (!item || item.sample) return;
     if (item.type === 'study' && item.link && item.link !== '#') {
-      window.open(item.link, '_blank', 'noopener,noreferrer');
-      const activity = {title:item.title,type:'Participant study',date:new Date().toISOString()};
-      saveUserApplication(activity);
+      if (!currentUser) {
+        pendingParticipationId = id;
+        openAuth('login');
+        toast('Log in or create an account to verify your age before participating.');
+        return;
+      }
+      if (!currentUser.ageVerified) {
+        pendingParticipationId = id;
+        $('#ageVerificationForm').reset();
+        $('#ageVerificationError').textContent = '';
+        openModal('ageVerificationModal');
+        return;
+      }
+      if (!currentUser.adultVerified) {
+        pendingParticipationId = null;
+        toast('Participation links are currently available only to age-verified adults 18 or older.');
+        return;
+      }
+      pendingParticipationId = null;
+      continueToExternalStudy(item);
       return;
     }
     $('#applyTitle').textContent = `Apply: ${item.title}`;
@@ -3303,6 +4001,9 @@
   $('#publicationReset').addEventListener('click', () => { $('#publicationSearch').value=''; $('#publicationType').value='all'; renderPublications(); });
 
   // Auth
+  const todayForAgeInputs = new Date().toISOString().split('T')[0];
+  $('#signupDob').max = todayForAgeInputs;
+  $('#ageVerificationDob').max = todayForAgeInputs;
   $$('.portal-tab').forEach(button => button.addEventListener('click', () => switchAuthPortal(button.dataset.authPortal)));
   $$('.auth-tab').forEach(button => button.addEventListener('click', () => switchAuthTab(button.dataset.authTab)));
   $('#loginForm').addEventListener('submit', async event => {
@@ -3315,6 +4016,20 @@
       if (error) throw error;
       currentUser = deriveUser(data.user);
       closeModal('authModal'); renderAuth(); toast('Welcome back.');
+      if (pendingParticipationId) {
+        const participationId = pendingParticipationId;
+        if (!currentUser.ageVerified) {
+          $('#ageVerificationForm').reset();
+          $('#ageVerificationError').textContent = '';
+          setTimeout(() => openModal('ageVerificationModal'), 50);
+        } else if (!currentUser.adultVerified) {
+          pendingParticipationId = null;
+          toast('Participation links are currently available only to age-verified adults 18 or older.');
+        } else {
+          pendingParticipationId = null;
+          setTimeout(() => openResearchApplication(participationId), 50);
+        }
+      }
     } catch (error) { $('#loginError').textContent=error.message || 'Login failed.'; }
     finally { button.disabled=false; button.textContent='Log in'; }
   });
@@ -3347,16 +4062,83 @@
   });
   $('#signupForm').addEventListener('submit', async event => {
     event.preventDefault();
+    $('#signupError').style.color='var(--danger)';
     $('#signupError').textContent='';
     if (!supabaseClient) { $('#signupError').textContent='Supabase is not available on this deployment.'; return; }
+    const age = calculateAge($('#signupDob').value);
+    if (!Number.isFinite(age)) { $('#signupError').textContent='Please enter a valid date of birth.'; return; }
+    if (age < MIN_ACCOUNT_AGE) { $('#signupError').textContent='Curoria accounts are currently available only to users age 13 or older.'; return; }
     const button = $('#signupSubmit'); button.disabled=true; button.textContent='Creating account…';
     try {
-      const {data,error} = await supabaseClient.auth.signUp({email:$('#signupEmail').value.trim(),password:$('#signupPassword').value,options:{data:{name:$('#signupName').value.trim()}}});
+      const {data,error} = await supabaseClient.auth.signUp({
+        email:$('#signupEmail').value.trim(),
+        password:$('#signupPassword').value,
+        options:{data:{
+          name:$('#signupName').value.trim(),
+          age_band:ageBandFor(age),
+          age_verified_at:new Date().toISOString(),
+          adult_verified:age >= MIN_PARTICIPATION_AGE
+        }}
+      });
       if (error) throw error;
-      if (data.session) { currentUser=deriveUser(data.user); closeModal('authModal'); renderAuth(); toast('Account created.'); }
-      else { $('#signupError').style.color='var(--success)'; $('#signupError').textContent='Account created. Check your email if confirmation is enabled.'; }
+      if (data.session) {
+        currentUser=deriveUser(data.user);
+        closeModal('authModal'); renderAuth(); toast('Account created and age verified.');
+        if (pendingParticipationId) {
+          const participationId = pendingParticipationId;
+          if (currentUser.adultVerified) {
+            pendingParticipationId = null;
+            setTimeout(() => openResearchApplication(participationId), 50);
+          } else {
+            pendingParticipationId = null;
+            toast('Your account is active, but participation links are currently limited to adults 18 or older.');
+          }
+        }
+      }
+      else { $('#signupError').style.color='var(--success)'; $('#signupError').textContent='Account created and age verified. Check your email if confirmation is enabled.'; }
     } catch (error) { $('#signupError').textContent=error.message || 'Sign-up failed.'; }
     finally { button.disabled=false; button.textContent='Create account'; }
+  });
+
+  $('#ageVerificationForm').addEventListener('submit', async event => {
+    event.preventDefault();
+    const errorEl = $('#ageVerificationError');
+    errorEl.style.color = 'var(--danger)';
+    errorEl.textContent = '';
+    if (!currentUser || !supabaseClient) {
+      errorEl.textContent = 'Please log in before verifying your age.';
+      return;
+    }
+    const age = calculateAge($('#ageVerificationDob').value);
+    if (!Number.isFinite(age)) {
+      errorEl.textContent = 'Please enter a valid date of birth.';
+      return;
+    }
+    if (age < MIN_ACCOUNT_AGE) {
+      errorEl.textContent = 'Curoria accounts are currently available only to users age 13 or older.';
+      return;
+    }
+    const button = $('#ageVerificationSubmit');
+    button.disabled = true;
+    button.textContent = 'Verifying…';
+    try {
+      await persistAgeVerification(age);
+      if (age < MIN_PARTICIPATION_AGE) {
+        pendingParticipationId = null;
+        errorEl.textContent = 'Your age is verified. Participation links are currently available only to adults 18 or older, but you may continue using researcher and account features.';
+        return;
+      }
+      const participationId = pendingParticipationId;
+      pendingParticipationId = null;
+      closeModal('ageVerificationModal');
+      toast('Age verified. You can now continue to the study.');
+      if (participationId) setTimeout(() => openResearchApplication(participationId), 50);
+    } catch (error) {
+      errorEl.textContent = error.message || 'Age verification could not be saved.';
+    } finally {
+      button.disabled = false;
+      button.textContent = 'Verify age';
+    }
   });
 
   // Submission forms
@@ -3403,7 +4185,49 @@
     $$('.dash-panel').forEach(panel => panel.classList.toggle('active',panel.id==='dash-'+button.dataset.dashTab));
   }));
 
+
+
+  /* Layout-only editorial structure: wraps existing text blocks without
+     changing any wording, links, controls, colors, typography or buttons. */
+  function structureEditorialPages() {
+    const gridPages = ['how-it-works', 'transparency', 'guidelines', 'review-process'];
+    const legalPages = ['privacy', 'terms', 'accessibility'];
+
+    [...gridPages, ...legalPages].forEach(pageName => {
+      const article = document.querySelector(`.page[data-page="${pageName}"] article.prose`);
+      if (!article || article.dataset.layoutStructured === 'true') return;
+
+      const originalChildren = Array.from(article.children);
+      if (!originalChildren.length) return;
+
+      const intro = document.createElement('header');
+      intro.className = 'prose-intro';
+      const blocks = [];
+      let currentBlock = null;
+
+      originalChildren.forEach(node => {
+        if (node.tagName === 'H2') {
+          currentBlock = document.createElement('section');
+          currentBlock.className = 'prose-block';
+          blocks.push(currentBlock);
+          currentBlock.appendChild(node);
+        } else if (currentBlock) {
+          currentBlock.appendChild(node);
+        } else {
+          intro.appendChild(node);
+        }
+      });
+
+      article.replaceChildren(intro, ...blocks);
+      article.classList.add('prose-structured');
+      article.classList.add(gridPages.includes(pageName) ? 'prose-grid-layout' : 'prose-legal-layout');
+      article.dataset.layoutStructured = 'true';
+    });
+  }
+
+
   async function init() {
+    structureEditorialPages();
     showPage(location.hash.slice(1) || 'home', false);
     renderAuth();
     if (supabaseClient) {
