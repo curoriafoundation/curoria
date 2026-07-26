@@ -10,8 +10,8 @@
 <meta content="Find reviewed participant studies, contribute to research, or submit a study to recruit volunteers through Curoria." property="og:description"/>
 <meta content="website" property="og:type"/>
 <title>Curoria — Connecting Researchers With Participants</title>
-<link href="CuroriaLOGO.png" rel="icon" type="image/png"/>
-<link href="CuroriaLOGO.png" rel="apple-touch-icon"/>
+<link href="images/CuroriaLOGO.png" rel="icon" type="image/png"/>
+<link href="images/CuroriaLOGO.png" rel="apple-touch-icon"/>
 <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -524,7 +524,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <div class="header-primary">
 <div class="wrap header-primary-inner">
 <a aria-label="Curoria home" class="brand institutional-brand" data-page-link="home" href="#home">
-<img alt="Curoria logo" onerror="this.style.display='none'" src="CuroriaLOGO.png"/>
+<img alt="Curoria logo" onerror="this.style.display='none'" src="images/CuroriaLOGO.png"/>
 <span class="brand-copy"><strong>Curoria</strong><span>Student Research Network</span></span>
 </a>
 <div aria-label="Quick links" class="header-utilities">
@@ -585,7 +585,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <span>Reviewed study listings</span><span>Clear participation details</span><span>Contribution tracking</span>
 </div>
 </div>
-<div aria-hidden="true" class="hero-art"><img alt="Curoria Logo" class="hero-logo" src="CuroriaLOGO.png"/></div>
+<div aria-hidden="true" class="hero-art"><img alt="Curoria Logo" class="hero-logo" src="images/CuroriaLOGO.png"/></div>
 </div>
 </div>
 <div class="section-sm">
@@ -731,6 +731,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <div class="wrap">
 <div class="section-head"><div class="eyebrow">Curoria Challenges</div><h2>Practice the skills behind responsible participant research</h2><p>Curoria challenges are optional learning activities that help students practice survey design, participant communication, research ethics, data interpretation, and clear reporting.</p></div>
 <div class="grid-3" id="competitionGrid"></div>
+<div class="empty" hidden="" id="competitionEmpty"><h3>No Curoria challenges are open yet.</h3><p>Optional research challenges will appear here once one is ready to launch.</p><a class="btn btn-primary btn-sm" data-page-link="contact" href="#contact">Ask about hosting a challenge</a></div>
 <div class="card section-followup"><h3>What every Curoria challenge should make clear</h3><div class="grid-3" style="margin-top:16px"><p><b>Clear learning goal</b><br/><span class="muted small">Members know what research skill they are practicing and what they are expected to create or reflect on.</span></p><p><b>Clear participation guidance</b><br/><span class="muted small">Instructions, eligibility, timing, and any feedback process are explained before someone starts.</span></p><p><b>No misleading credentials</b><br/><span class="muted small">Completing a challenge does not imply institutional approval, academic credit, or a professional research credential.</span></p></div></div>
 </div>
 </div>
@@ -883,6 +884,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <div class="field full" data-field="description"><label for="description">Public survey / study description *</label><textarea id="description" name="description" placeholder="Explain the research question, what participants will do, and why the study is being conducted." required=""></textarea><div class="error"></div></div>
 <div class="field"><label for="category">Field *</label><select id="category" name="category" required=""><option value="">Choose a field</option><option>Computer Science &amp; AI</option><option>Health &amp; Life Sciences</option><option>Engineering</option><option>Social Sciences</option><option>Education</option><option>Environment</option><option>Business &amp; Economics</option></select></div>
 <div class="field"><label for="age">Minimum participant age *</label><input id="age" max="120" min="13" name="age" required="" type="number" value="18"/><div class="help">Curoria supports participant ages 13 and up. Participants younger than 18 must complete a guardian consent step before continuing to your study.</div></div>
+<div class="field"><label for="maxAge">Maximum participant age</label><input id="maxAge" max="120" min="13" name="max_age" placeholder="Leave blank for no maximum" type="number"/><div class="help">Optional. Shown to participants as part of your eligibility range; not automatically enforced.</div></div>
 <div class="field"><label for="slots">Participants needed *</label><input id="slots" min="1" name="slots" required="" type="number"/></div>
 <div class="field"><label for="time">Estimated time *</label><input id="time" name="time" placeholder="e.g. 10–15 minutes" required=""/></div>
 <div class="field full"><label for="link">Survey or study link *</label><input id="link" name="link" placeholder="https://" required="" type="url"/></div>
@@ -1101,7 +1103,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <footer class="footer">
 <div class="wrap">
 <div class="footer-grid">
-<div><div class="footer-brand"><img alt="" onerror="this.style.display='none'" src="CuroriaLOGO.png"/>Curoria</div><p class="small">Connecting researchers with volunteers so that ethical, accessible research can reach the people who want to help.</p><p class="small">curoriafoundation@gmail.com</p><a aria-label="Curoria on Instagram" class="footer-social-link" href="http://instagram.com/curoriafoundation/" rel="noopener noreferrer" target="_blank"><svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="18"><rect height="20" rx="5" width="20" x="2" y="2"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.2" cy="6.8" r="1.05"></circle></svg><span>Instagram</span></a></div>
+<div><div class="footer-brand"><img alt="" onerror="this.style.display='none'" src="images/CuroriaLOGO.png"/>Curoria</div><p class="small">Connecting researchers with volunteers so that ethical, accessible research can reach the people who want to help.</p><p class="small">curoriafoundation@gmail.com</p><a aria-label="Curoria on Instagram" class="footer-social-link" href="http://instagram.com/curoriafoundation/" rel="noopener noreferrer" target="_blank"><svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="18"><rect height="20" rx="5" width="20" x="2" y="2"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.2" cy="6.8" r="1.05"></circle></svg><span>Instagram</span></a></div>
 <div><h4>Explore</h4><a data-page-link="research" href="#research">Browse Surveys</a><a data-page-link="results" href="#results">Curoria Results</a><a data-page-link="challenges" href="#challenges">Challenges</a><a data-page-link="communities" href="#communities">Communities</a></div>
 <div><h4>For Researchers</h4><a data-page-link="submit" href="#submit">Submit Survey</a><a data-page-link="guidelines" href="#guidelines">Submission Guidelines</a><a data-page-link="review-process" href="#review-process">Study Listing Review</a><a data-page-link="standards" href="#standards">Research Standards</a><a data-page-link="transparency" href="#transparency">Transparency &amp; Trust</a><a data-page-link="contact" href="#contact">Contact</a></div></div>
 <div class="footer-bottom"><span>© 2026 Curoria. Connecting curiosity with discovery through responsible research participation.</span><span><a data-page-link="privacy" href="#privacy" style="display:inline;margin-right:14px">Privacy</a><a data-page-link="terms" href="#terms" style="display:inline;margin-right:14px">Terms</a><a data-page-link="accessibility" href="#accessibility" style="display:inline;margin-right:14px">Accessibility</a><a data-page-link="safeguarding" href="#safeguarding" style="display:inline">Safeguarding</a></span></div>
@@ -1506,34 +1508,15 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     $('#authTitle').textContent = 'Reset Your Password';
   }
 
-  const demoOpportunities = [
-    {
-      id:'demo-study-1', type:'study', sample:true, title:'Example: Student Technology Habits Study', field:'Education', status:'recruiting', level:'open', method:'Survey', researcher:'Demo Researcher', organization:'Illustrative listing', roles:120, members:0,
-      summary:'A demonstration participant listing showing the information Curoria expects before a study is made public.',
-      skills:['18+ participants','Online survey','10 minutes'], eligibility:'Adults age 18 or older.', commitment:'Approximately 10 minutes, one time.', privacy:'Example only. Replace with the real study data and privacy statement before launch.', ethics:'Demonstration listing — no real study is being recruited.', link:'#'
-    },
-    {
-      id:'demo-group-1', type:'group', sample:true, title:'Example: Responsible AI Literature Review Group', field:'Computer Science & AI', status:'recruiting', level:'beginner', method:'Literature Review', researcher:'Demo Lead', organization:'Illustrative listing', roles:6, members:0,
-      summary:'A demonstration research-group card showing how collaborative opportunities appear in the Curoria directory.',
-      skills:['Literature review','Scientific writing','Citation management'], eligibility:'Students interested in AI governance and research writing.', commitment:'2–3 hours per week for 8 weeks.', privacy:'No participant data collection in this example.', ethics:'Example only; not an active research project.', link:'#'
-    }
-  ];
-
-  const demoPublications = [
-    {id:'demo-record-1',sample:true,type:'outcome',title:'Example Research Record',authors:'Demo Authors',year:'2026',abstract:'This is an illustrative archive record included only to preview the publication interface. Replace it with an accepted public record before launch.',keywords:['Example','Archive'],status:'Illustrative preview'}
-  ];
-
-  const demoCompetitions = [
-    {id:'demo-comp-1',sample:true,title:'Example Research Challenge',status:'Preview only',deadline:'No active deadline',summary:'A demonstration challenge card showing the information that should be displayed when a real Curoria challenge opens.',eligibility:'Eligibility will be published with any real competition.',criteria:['Originality','Method clarity','Evidence','Communication']}
-  ];
-
   async function loadData() {
     const approvedStudies = (await storeList('submissions:')).filter(item => item && item.status === 'approved').map(item => {
       const minAge = Number(item.age);
-      const ageLabel = Number.isFinite(minAge) && minAge > 0 ? `Ages ${minAge}+` : 'See study details';
+      const maxAge = Number(item.max_age);
+      const hasMax = Number.isFinite(maxAge) && maxAge > 0;
+      const ageLabel = !Number.isFinite(minAge) || minAge <= 0 ? 'See study details' : hasMax && maxAge >= minAge ? `Ages ${minAge}–${maxAge}` : `Ages ${minAge}+`;
       return {
         id:item.id, type:'study', title:item.title, field:item.category, status:'recruiting', level:'open', method:'Participant study', researcher:item.researcher, organization:'Community submitted', roles:Number(item.slots)||0, members:0, summary:item.description,
-        skills:[ageLabel,item.time].filter(Boolean), eligibility:ageLabel, commitment:item.time || 'See study details', privacy:item.data_collected || 'See researcher-provided privacy information.', ethics:item.ethics_status || 'Not specified', link:item.link || '#', volunteerHours:Number(item.volunteerHours)||0, age:minAge
+        skills:[ageLabel,item.time].filter(Boolean), eligibility:ageLabel, commitment:item.time || 'See study details', privacy:item.data_collected || 'See researcher-provided privacy information.', ethics:item.ethics_status || 'Not specified', link:item.link || '#', volunteerHours:Number(item.volunteerHours)||0, age:minAge, maxAge:hasMax?maxAge:null
       };
     });
     const storedGroups = (await storeList('groups:')).filter(item => item && item.status === 'approved');
@@ -1542,11 +1525,6 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     publicationRecords = [...storedPublications];
     competitionRecords = [];
 
-    // Keep the preview useful before launch, while marking illustrative data clearly.
-    if (!researchOpportunities.length) researchOpportunities = demoOpportunities.slice();
-    if (!publicationRecords.length) publicationRecords = demoPublications.slice();
-    if (!competitionRecords.length) competitionRecords = demoCompetitions.slice();
-
     renderResearch();
     renderPublications();
     renderCompetitions();
@@ -1554,8 +1532,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
   }
 
   function updateMetrics() {
-    const realOpps = researchOpportunities.filter(item => !item.sample);
-    const realStudies = realOpps.filter(item => item.type === 'study');
+    const realStudies = researchOpportunities.filter(item => item.type === 'study');
     const researcherNames = new Set(realStudies.map(item => (item.researcher || '').trim().toLowerCase()).filter(Boolean));
     const participantPlaces = realStudies.reduce((sum, item) => sum + (Number(item.roles) || 0), 0);
     $('#metricStudies').textContent = realStudies.length.toLocaleString();
@@ -1584,9 +1561,9 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     $('#researchEmpty').hidden = list.length > 0;
     $('#researchGrid').innerHTML = list.map(item => `
       <article class="listing">
-        <div class="listing-head"><div class="chip-row"><span class="chip blue">${esc('Participant study')}</span>${item.sample ? '<span class="chip gold">Illustrative preview</span>' : ''}<span class="chip ${item.status === 'recruiting' ? 'green' : ''}">${esc(item.status.replace(/-/g,' '))}</span>${item.volunteerHours ? `<span class="chip green">${esc(item.volunteerHours)} vol. hrs</span>` : ''}</div><h3>${esc(item.title)}</h3><div class="meta-line"><span>${esc(item.field)}</span><span>${esc(item.level)}</span><span>${esc(item.method)}</span></div></div>
+        <div class="listing-head"><div class="chip-row"><span class="chip blue">${esc('Participant study')}</span><span class="chip ${item.status === 'recruiting' ? 'green' : ''}">${esc(item.status.replace(/-/g,' '))}</span>${item.volunteerHours ? `<span class="chip green">${esc(item.volunteerHours)} vol. hrs</span>` : ''}</div><h3>${esc(item.title)}</h3><div class="meta-line"><span>${esc(item.field)}</span><span>${esc(item.level)}</span><span>${esc(item.method)}</span></div></div>
         <div class="listing-body"><p>${esc(item.summary)}</p><div class="chip-row">${(item.skills||[]).slice(0,4).map(skill => `<span class="chip">${esc(skill)}</span>`).join('')}</div></div>
-        <div class="listing-foot"><div class="meta-line" style="margin-bottom:12px"><span>${esc(item.researcher || 'Researcher')}</span><span>${esc(item.organization || '')}</span>${item.type === 'group' ? `<span>${esc(item.members || 0)}/${esc(item.roles || 0)} members</span>` : `<span>${esc(item.roles || 0)} participants requested</span>`}</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-outline btn-sm" type="button" data-view-research="${esc(item.id)}">View details</button>${item.sample ? '' : `<button class="btn btn-primary btn-sm" type="button" data-apply-research="${esc(item.id)}">${item.type === 'study' ? 'Participate' : 'Apply to join'}</button>`}</div></div>
+        <div class="listing-foot"><div class="meta-line" style="margin-bottom:12px"><span>${esc(item.researcher || 'Researcher')}</span><span>${esc(item.organization || '')}</span>${item.type === 'group' ? `<span>${esc(item.members || 0)}/${esc(item.roles || 0)} members</span>` : `<span>${esc(item.roles || 0)} participants requested</span>`}</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-outline btn-sm" type="button" data-view-research="${esc(item.id)}">View details</button><button class="btn btn-primary btn-sm" type="button" data-apply-research="${esc(item.id)}">${item.type === 'study' ? 'Participate' : 'Apply to join'}</button></div></div>
       </article>`).join('');
     observeReveal($('#researchGrid'));
   }
@@ -1596,13 +1573,13 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     if (!item) return;
     $('#detailTitle').textContent = item.title;
     $('#detailBody').innerHTML = `
-      <div class="chip-row"><span class="chip blue">${esc('Participant study')}</span>${item.sample ? '<span class="chip gold">Illustrative preview</span>' : ''}<span class="chip">${esc(item.field)}</span>${item.volunteerHours ? `<span class="chip green">${esc(item.volunteerHours)} volunteer hours</span>` : ''}</div>
+      <div class="chip-row"><span class="chip blue">${esc('Participant study')}</span><span class="chip">${esc(item.field)}</span>${item.volunteerHours ? `<span class="chip green">${esc(item.volunteerHours)} volunteer hours</span>` : ''}</div>
       <h2 style="font-family:var(--serif);font-size:34px;margin:18px 0 12px;color:var(--navy)">${esc(item.title)}</h2>
       <p class="muted">${esc(item.summary)}</p>
       <div class="grid-2" style="margin:22px 0"><div class="note"><b>Eligibility</b><br>${esc(item.eligibility || 'See application details.')}</div><div class="note"><b>Time commitment</b><br>${esc(item.commitment || 'See application details.')}</div><div class="note"><b>Privacy / data</b><br>${esc(item.privacy || 'Not specified.')}</div><div class="note"><b>Ethics / oversight</b><br>${esc(item.ethics || 'Not specified.')}</div></div>
       ${item.volunteerHours ? `<div class="note success" style="margin-bottom:22px"><b>${esc(item.volunteerHours)} volunteer hours</b> — automatically credited to your account 48 hours after you continue to this study.</div>` : ''}
       <h3>Skills and tags</h3><div class="chip-row" style="margin:10px 0 22px">${(item.skills||[]).map(skill => `<span class="chip">${esc(skill)}</span>`).join('')}</div>
-      ${item.sample ? '<div class="note warning">This is clearly marked demonstration content. Replace it with a real, reviewed opportunity before launch.</div>' : `<button class="btn btn-primary" type="button" data-apply-research="${esc(item.id)}">${item.type === 'study' ? 'Continue to participation' : 'Apply to join this group'}</button>`}`;
+      <button class="btn btn-primary" type="button" data-apply-research="${esc(item.id)}">${item.type === 'study' ? 'Continue to participation' : 'Apply to join this group'}</button>`;
     openModal('detailModal');
   }
 
@@ -1636,7 +1613,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 
   async function openResearchApplication(id) {
     const item = researchOpportunities.find(record => record.id === id);
-    if (!item || item.sample) return;
+    if (!item) return;
     if (item.type === 'study' && item.link && item.link !== '#') {
       if (!currentUser) {
         pendingParticipationId = id;
@@ -1699,12 +1676,13 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
   function renderPublications() {
     const list = publicationFiltered();
     $('#publicationEmpty').hidden = list.length > 0;
-    $('#publicationGrid').innerHTML = list.map(item => `<article class="publication"><div class="chip-row"><span class="chip blue">${esc(({journal:'Study outcome',archive:'Research summary',review:'Research summary',news:'News & comment'})[item.type] || item.type)}</span>${item.sample ? '<span class="chip gold">Illustrative preview</span>' : ''}</div><h3>${esc(item.title)}</h3><div class="meta-line" style="margin-bottom:12px"><span>${esc(item.authors || '')}</span><span>${esc(item.year || '')}</span><span>${esc(item.status || '')}</span></div><p>${esc(item.abstract || '')}</p><div class="chip-row">${(item.keywords||[]).map(k => `<span class="chip">${esc(k)}</span>`).join('')}</div></article>`).join('');
+    $('#publicationGrid').innerHTML = list.map(item => `<article class="publication"><div class="chip-row"><span class="chip blue">${esc(({journal:'Study outcome',archive:'Research summary',review:'Research summary',news:'News & comment'})[item.type] || item.type)}</span></div><h3>${esc(item.title)}</h3><div class="meta-line" style="margin-bottom:12px"><span>${esc(item.authors || '')}</span><span>${esc(item.year || '')}</span><span>${esc(item.status || '')}</span></div><p>${esc(item.abstract || '')}</p><div class="chip-row">${(item.keywords||[]).map(k => `<span class="chip">${esc(k)}</span>`).join('')}</div></article>`).join('');
     observeReveal($('#publicationGrid'));
   }
 
   function renderCompetitions() {
-    $('#competitionGrid').innerHTML = competitionRecords.map(item => `<article class="card"><div class="chip-row"><span class="chip ${item.sample ? 'gold' : 'green'}">${esc(item.status)}</span></div><h3 style="margin-top:14px">${esc(item.title)}</h3><p>${esc(item.summary)}</p><p class="small"><b>Deadline:</b> ${esc(item.deadline)}</p><p class="small"><b>Eligibility:</b> ${esc(item.eligibility)}</p><div class="chip-row">${(item.criteria||[]).map(c => `<span class="chip">${esc(c)}</span>`).join('')}</div>${item.sample ? '' : `<button class="btn btn-primary btn-sm" style="margin-top:16px" data-competition-interest="${esc(item.id)}">Register interest</button>`}</article>`).join('');
+    $('#competitionEmpty').hidden = competitionRecords.length > 0;
+    $('#competitionGrid').innerHTML = competitionRecords.map(item => `<article class="card"><div class="chip-row"><span class="chip green">${esc(item.status)}</span></div><h3 style="margin-top:14px">${esc(item.title)}</h3><p>${esc(item.summary)}</p><p class="small"><b>Deadline:</b> ${esc(item.deadline)}</p><p class="small"><b>Eligibility:</b> ${esc(item.eligibility)}</p><div class="chip-row">${(item.criteria||[]).map(c => `<span class="chip">${esc(c)}</span>`).join('')}</div><button class="btn btn-primary btn-sm" style="margin-top:16px" data-competition-interest="${esc(item.id)}">Register interest</button></article>`).join('');
     observeReveal($('#competitionGrid'));
   }
 
@@ -1850,6 +1828,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
               <span>${esc(item.researcher || 'Unknown researcher')}</span>
               <span>${esc(item.email || 'No email')}</span>
               <span>${item.age ? `Min. age ${esc(item.age)}` : 'Age not specified'}</span>
+              ${item.max_age ? `<span>Max. age ${esc(item.max_age)}</span>` : ''}
               <span>${esc(item.time || 'Time not specified')}</span>
               <span>${esc(item.slots || '—')} participants</span>
               <span>Submitted ${esc(item.submittedAt || '—')}</span>
@@ -2392,7 +2371,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     const id = 'sub_' + Date.now() + '_' + Math.random().toString(36).slice(2,7);
     const fieldValue = name => String(form.elements.namedItem(name)?.value || '').trim();
     const submission = {
-      id, title:fieldValue('title'), description:fieldValue('description'), category:fieldValue('category'), age:fieldValue('age'), slots:fieldValue('slots'), time:fieldValue('time'), link:fieldValue('link'), researcher:fieldValue('researcher'), email:fieldValue('email'), ethics_status:fieldValue('ethics_status'), consent_plan:fieldValue('consent_plan'), data_collected:fieldValue('data_collected'), status:'pending', submittedAt:new Date().toLocaleDateString()
+      id, title:fieldValue('title'), description:fieldValue('description'), category:fieldValue('category'), age:fieldValue('age'), max_age:fieldValue('max_age'), slots:fieldValue('slots'), time:fieldValue('time'), link:fieldValue('link'), researcher:fieldValue('researcher'), email:fieldValue('email'), ethics_status:fieldValue('ethics_status'), consent_plan:fieldValue('consent_plan'), data_collected:fieldValue('data_collected'), status:'pending', submittedAt:new Date().toLocaleDateString()
     };
     try {
       await postNetlifyForm(form);
