@@ -209,6 +209,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 .brand-copy { display: flex; flex-direction: column; line-height: 1.25; }
 .brand-copy span:last-child { font-size: 11px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
 .header-utilities { display: flex; align-items: center; gap: 22px; margin-left: auto; }
+.header-auth { display: flex; align-items: center; gap: var(--space-4); }
 .header-utility-link { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 700; color: var(--navy); }
 .header-utility-link:hover { color: var(--blue); }
 .header-login-btn { border: 1.5px solid var(--navy); padding: var(--space-2) var(--space-4); }
@@ -363,7 +364,11 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 /* ---------- Dashboard ---------- */
 .dashboard-layout { display: grid; grid-template-columns: 260px minmax(0,1fr); gap: 28px; }
 .profile { padding: var(--space-7) var(--space-6); text-align: center; }
-.avatar { width: 68px; height: 68px; margin: 0 auto 14px; border: 1.5px solid var(--navy); display: grid; place-items: center; background: var(--navy); color: #fff; font-weight: 900; font-size: 20px; font-family: var(--serif); }
+.avatar { width: 46px; height: 46px; margin: 0 auto 10px; border: 1.5px solid var(--navy); display: grid; place-items: center; background: var(--navy); color: #fff; font-weight: 900; font-size: 14px; font-family: var(--serif); overflow: hidden; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.avatar-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.header-avatar { width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid var(--navy); background: var(--navy); color: #fff; font-size: 8.5px; font-weight: 800; font-family: var(--serif); flex-shrink: 0; }
+.header-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .dash-tabs { display: flex; flex-wrap: wrap; gap: 1px; margin-bottom: 20px; background: var(--line); border: 1px solid var(--line); }
 .dash-tab { flex: 1; border: 0; background: #fff; padding: var(--space-3) var(--space-4); font-weight: 700; color: var(--muted); font-size: 13px; }
 .dash-tab.active { background: var(--navy); color: #fff; }
@@ -473,8 +478,10 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
   .wrap { width: min(100% - 32px, 1240px); }
   .header-primary-inner { min-height: 66px; }
   .brand strong { font-size: 19px; }
+  .brand-copy span:last-child { display: none; }
   .header-utilities { gap: 12px; }
-  .header-utility-link span:not(.utility-icon) { display: none; }
+  .header-quicklink { display: none; }
+  .header-utility-link span:not(.utility-icon):not(.header-avatar) { display: none; }
   .hero { padding: var(--space-9) 0 var(--space-8); }
   .hero h1 { font-size: clamp(36px,12vw,52px); }
   .section { padding: var(--space-9) 0; }
@@ -504,8 +511,8 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <span class="brand-copy"><strong>Curoria</strong><span>Student Research Network</span></span>
 </a>
 <div aria-label="Quick links" class="header-utilities">
-<a class="header-utility-link" data-page-link="research" href="#research">Browse Surveys</a>
-<button aria-label="Search Curoria" class="header-utility-link search-btn" id="globalSearchBtn" type="button"><span aria-hidden="true" class="utility-icon search-icon"></span>Search</button>
+<a class="header-utility-link header-quicklink" data-page-link="research" href="#research">Browse Surveys</a>
+<button aria-label="Search Curoria" class="header-utility-link search-btn" id="globalSearchBtn" type="button"><span aria-hidden="true" class="utility-icon search-icon"></span><span>Search</span></button>
 <div class="nav-actions header-auth" id="authArea"></div>
 <button aria-expanded="false" aria-label="Open navigation" class="menu-btn" id="menuBtn" type="button">☰</button>
 </div>
@@ -928,7 +935,17 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <div class="section"><div class="wrap grid-2"><div><div class="section-head"><div class="eyebrow">Contact Curoria</div><h2>Questions about a study, submission, or your account?</h2><p>Use the form for participant concerns, researcher questions, corrections, partnerships, or general support. Curoria is here to help both sides of the research network.</p></div><div class="card"><h3>Email</h3><p><a href="mailto:curoriafoundation@gmail.com" style="color:var(--blue);font-weight:800">curoriafoundation@gmail.com</a></p><p class="small muted">For urgent study-related concerns, include the study title and researcher name.</p></div></div><div class="form-card"><form data-netlify="true" id="contactForm" name="contact" netlify-honeypot="bot-field"><input name="form-name" type="hidden" value="contact"/><p hidden=""><label>Do not fill this out <input name="bot-field"/></label></p><div class="form-grid"><div class="field"><label for="contactName">Name</label><input id="contactName" name="name" required=""/></div><div class="field"><label for="contactEmail">Email</label><input id="contactEmail" name="email" required="" type="email"/></div><div class="field full"><label for="contactTopic">Topic</label><select id="contactTopic" name="topic" required=""><option value="">Choose</option><option>Survey or study listing</option><option>Participant question or safety concern</option><option>Survey submission</option><option>Account or dashboard</option><option>Community or collaboration</option><option>Partnership</option><option>Correction or takedown request</option><option>General</option></select></div><div class="field full"><label for="contactMessage">Message</label><textarea id="contactMessage" name="message" required=""></textarea></div></div><div class="form-actions"><button class="btn btn-primary" type="submit">Send message</button><span class="small muted" id="contactStatus"></span></div></form></div></div></div>
 </section>
 <section class="page" data-page="dashboard">
-<div class="section"><div class="wrap"><div class="section-head"><div class="eyebrow">My Curoria</div><h2>Track the surveys and studies you contribute to</h2><p>Sign in to see participant opportunities you joined, surveys you submitted, and your activity across the Curoria network.</p></div><div class="card" id="dashboardLoggedOut" style="text-align:center"><h3>You're not logged in</h3><p>Create a free account or log in to track your research participation and submissions.</p><button class="btn btn-primary" data-open-auth="login" type="button">Log in</button></div><div class="dashboard-layout" hidden="" id="dashboardLoggedIn"><aside class="surface profile"><div class="avatar" id="dashAvatar">C</div><h3 id="dashName">Member</h3><p class="small muted" id="dashEmail"></p><div class="stack" style="margin-top:16px;text-align:left"><div class="note"><b id="dashJoinedCount">0</b> studies and opportunities joined</div><div class="note"><b id="dashSubmissionCount">0</b> research submissions</div></div></aside><div><div class="dash-tabs"><button class="dash-tab active" data-dash-tab="applications">My Participation</button><button class="dash-tab" data-dash-tab="submissions">My Survey Submissions</button><button class="dash-tab" data-dash-tab="profile">Profile</button></div><div class="dash-panel active surface" id="dash-applications"></div><div class="dash-panel surface" id="dash-submissions"></div><div class="dash-panel surface" id="dash-profile"><div style="padding:24px"><h3>Profile</h3><p class="muted">Your account supports your Curoria dashboard. Researcher verification, when offered, is separate from simply creating an account.</p></div></div></div></div></div></div>
+<div class="section"><div class="wrap"><div class="section-head"><div class="eyebrow">My Curoria</div><h2>Track the surveys and studies you contribute to</h2><p>Sign in to see participant opportunities you joined, surveys you submitted, and your activity across the Curoria network.</p></div><div class="card" id="dashboardLoggedOut" style="text-align:center"><h3>You're not logged in</h3><p>Create a free account or log in to track your research participation and submissions.</p><button class="btn btn-primary" data-open-auth="login" type="button">Log in</button></div><div class="dashboard-layout" hidden="" id="dashboardLoggedIn"><aside class="surface profile"><div class="avatar" id="dashAvatar">C</div><h3 id="dashName">Member</h3><p class="small muted" id="dashEmail"></p><div class="stack" style="margin-top:16px;text-align:left"><div class="note"><b id="dashJoinedCount">0</b> studies and opportunities joined</div><div class="note"><b id="dashSubmissionCount">0</b> research submissions</div></div></aside><div><div class="dash-tabs"><button class="dash-tab active" data-dash-tab="applications">My Participation</button><button class="dash-tab" data-dash-tab="submissions">My Survey Submissions</button><button class="dash-tab" data-dash-tab="profile">Profile</button></div><div class="dash-panel active surface" id="dash-applications"></div><div class="dash-panel surface" id="dash-submissions"></div><div class="dash-panel surface" id="dash-profile"><div style="padding:24px"><h3>Profile</h3><p class="muted">Your account supports your Curoria dashboard. Researcher verification, when offered, is separate from simply creating an account.</p>
+<div class="field" style="max-width:360px;margin-top:20px">
+<label for="avatarUpload">Profile picture</label>
+<div class="avatar-controls">
+<input accept="image/png,image/jpeg,image/webp" id="avatarUpload" type="file"/>
+<button class="btn btn-outline btn-sm" id="avatarRemoveBtn" type="button">Remove photo</button>
+</div>
+<div class="help">JPG, PNG, or WebP. Your photo is cropped to a square and stored on your Curoria account.</div>
+<div class="small" id="avatarStatus" style="margin-top:4px"></div>
+</div>
+</div></div></div></div></div></div>
 </section>
 <section class="page" data-page="admin-dashboard">
 <div class="section"><div class="wrap">
@@ -1057,8 +1074,9 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <div class="auth-portal active" data-auth-portal-panel="researcher" id="researcherAuthPortal">
 <p class="portal-intro">For researchers and Curoria members who submit surveys, participate in studies, and use the personal dashboard.</p>
 <div class="auth-tabs"><button class="auth-tab active" data-auth-tab="login" type="button">Log in</button><button class="auth-tab" data-auth-tab="signup" type="button">Sign up</button></div>
-<form class="auth-form active" id="loginForm"><div class="stack"><div class="field"><label for="loginEmail">Email</label><input id="loginEmail" required="" type="email"/></div><div class="field"><label for="loginPassword">Password</label><input id="loginPassword" required="" type="password"/></div><div class="small" id="loginError" style="color:var(--danger)"></div><button class="btn btn-primary btn-block" id="loginSubmit" type="submit">Log in</button></div></form>
+<form class="auth-form active" id="loginForm"><div class="stack"><div class="field"><label for="loginEmail">Email</label><input id="loginEmail" required="" type="email"/></div><div class="field"><label for="loginPassword">Password</label><input id="loginPassword" required="" type="password"/></div><button class="small" id="forgotPasswordLink" type="button" style="justify-self:start;background:none;border:0;padding:0;color:var(--blue);font-weight:700;text-decoration:underline;cursor:pointer">Forgot password?</button><div class="small" id="loginError" style="color:var(--danger)"></div><button class="btn btn-primary btn-block" id="loginSubmit" type="submit">Log in</button></div></form>
 <form class="auth-form" id="signupForm"><div class="stack"><div class="field"><label for="signupName">Full name</label><input id="signupName" required=""/></div><div class="field"><label for="signupEmail">Email</label><input id="signupEmail" required="" type="email"/></div><div class="field"><label for="signupDob">Date of birth</label><input autocomplete="bday" id="signupDob" required="" type="date"/><div class="help">Used to verify your age. Curoria stores the verification result and age band, not your birth date.</div></div><div class="field"><label for="signupPassword">Password</label><input id="signupPassword" minlength="6" required="" type="password"/></div><div class="small" id="signupError" style="color:var(--danger)"></div><button class="btn btn-primary btn-block" id="signupSubmit" type="submit">Create account</button></div></form>
+<form class="auth-form" id="forgotPasswordForm"><div class="stack"><p class="portal-intro" style="margin:0">Enter your account email and we'll send you a link to reset your password.</p><div class="field"><label for="forgotPasswordEmail">Email</label><input id="forgotPasswordEmail" required="" type="email"/></div><div class="small" id="forgotPasswordError" style="color:var(--danger)"></div><button class="btn btn-primary btn-block" id="forgotPasswordSubmit" type="submit">Send reset link</button><button class="small" id="backToLoginLink" type="button" style="justify-self:start;background:none;border:0;padding:0;color:var(--blue);font-weight:700;text-decoration:underline;cursor:pointer">Back to log in</button></div></form>
 <div class="note" id="authPreviewNote" style="margin-top:16px;display:none">Supabase is not available. Researcher account actions are disabled until the site is deployed with a working Supabase connection.</div>
 </div>
 <div class="auth-portal" data-auth-portal-panel="admin" id="adminAuthPortal">
@@ -1085,6 +1103,22 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <label class="check"><input id="ageVerificationConfirm" required type="checkbox"/> <span>I confirm that the date of birth I entered is accurate.</span></label>
 <div class="small" id="ageVerificationError" style="color:var(--danger)"></div>
 <button class="btn btn-primary btn-block" id="ageVerificationSubmit" type="submit">Verify age</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<div aria-labelledby="resetPasswordTitle" aria-modal="true" class="modal" id="resetPasswordModal" role="dialog">
+<div class="modal-box" style="max-width:440px">
+<div class="modal-head"><h3 id="resetPasswordTitle">Set a new password</h3><button aria-label="Close" class="modal-close" data-close-modal="resetPasswordModal" type="button">×</button></div>
+<div class="modal-body">
+<p class="portal-intro">Choose a new password for your Curoria account.</p>
+<form id="resetPasswordForm">
+<div class="stack">
+<div class="field"><label for="resetPasswordNew">New password</label><input id="resetPasswordNew" minlength="6" required type="password"/></div>
+<div class="field"><label for="resetPasswordConfirm">Confirm new password</label><input id="resetPasswordConfirm" minlength="6" required type="password"/></div>
+<div class="small" id="resetPasswordError" style="color:var(--danger)"></div>
+<button class="btn btn-primary btn-block" id="resetPasswordSubmit" type="submit">Update password</button>
 </div>
 </form>
 </div>
@@ -1230,7 +1264,8 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
       id: user.id || '',
       ageVerified: Boolean(metadata.age_verified_at),
       adultVerified: metadata.adult_verified === true,
-      ageBand: metadata.age_band || ''
+      ageBand: metadata.age_band || '',
+      avatarUrl: metadata.avatar_url || ''
     };
   }
   async function persistAgeVerification(age) {
@@ -1249,11 +1284,47 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     renderAuth();
     return true;
   }
+  async function persistAvatar(dataUrl) {
+    if (!currentUser || !supabaseClient) return false;
+    const { data, error } = await supabaseClient.auth.updateUser({ data: { avatar_url: dataUrl } });
+    if (error) throw error;
+    currentUser = deriveUser(data.user);
+    renderAuth();
+    return true;
+  }
+  function readFileAsDataURL(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => reject(new Error('Could not read the selected file.'));
+      reader.readAsDataURL(file);
+    });
+  }
+  function loadImageElement(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error('Could not read that image.'));
+      img.src = src;
+    });
+  }
+  async function cropImageToSquareDataURL(file, size = 160, quality = 0.85) {
+    const sourceUrl = await readFileAsDataURL(file);
+    const img = await loadImageElement(sourceUrl);
+    const side = Math.min(img.naturalWidth, img.naturalHeight);
+    const sx = (img.naturalWidth - side) / 2;
+    const sy = (img.naturalHeight - side) / 2;
+    const canvas = document.createElement('canvas');
+    canvas.width = size; canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, sx, sy, side, side, 0, 0, size, size);
+    return canvas.toDataURL('image/jpeg', quality);
+  }
   function initials(name) {
     return String(name || 'C').trim().split(/\s+/).slice(0,2).map(part => part[0]?.toUpperCase() || '').join('') || 'C';
   }
 
-  function showPage(name, push = false) {
+  function showPage(name, push = false, skipUrlUpdate = false) {
     if (!PAGE_NAMES.includes(name)) name = 'home';
     if (name === 'admin-dashboard' && !adminAuthenticated) {
       name = 'home';
@@ -1266,6 +1337,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     $$('.nav-dropdown.open').forEach(dropdown => dropdown.classList.remove('open'));
     $$('.nav-dropdown-toggle[aria-expanded="true"]').forEach(toggle => toggle.setAttribute('aria-expanded','false'));
     window.scrollTo({top:0,behavior:'auto'});
+    if (skipUrlUpdate) return;
     const url = '#' + name;
     if (push) history.pushState({page:name},'',url); else history.replaceState({page:name},'',url);
     if (name === 'dashboard') refreshDashboard();
@@ -1279,7 +1351,10 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
       area.innerHTML = `<a class="header-utility-link" href="#admin-dashboard" data-page-link="admin-dashboard"><span class="utility-icon account-icon" aria-hidden="true"></span>Admin Dashboard</a><button class="header-utility-link header-login-btn" id="adminLogoutBtn" type="button"><span class="utility-icon login-icon" aria-hidden="true"></span>Log out</button>`;
       $('#adminLogoutBtn').addEventListener('click', adminLogout);
     } else if (currentUser) {
-      area.innerHTML = `<a class="header-utility-link" href="#dashboard" data-page-link="dashboard"><span class="utility-icon account-icon" aria-hidden="true"></span>${esc(currentUser.name)}</a><button class="header-utility-link header-login-btn" id="logoutBtn" type="button"><span class="utility-icon login-icon" aria-hidden="true"></span>Log out</button>`;
+      const headerAvatar = currentUser.avatarUrl
+        ? `<span class="header-avatar" aria-hidden="true"><img alt="" src="${esc(currentUser.avatarUrl)}"/></span>`
+        : `<span class="header-avatar" aria-hidden="true">${esc(initials(currentUser.name))}</span>`;
+      area.innerHTML = `<a class="header-utility-link" href="#dashboard" data-page-link="dashboard">${headerAvatar}${esc(currentUser.name)}</a><button class="header-utility-link header-login-btn" id="logoutBtn" type="button"><span class="utility-icon login-icon" aria-hidden="true"></span>Log out</button>`;
       $('#logoutBtn').addEventListener('click', logout);
       ['email','applyEmail'].forEach(id => { const el = document.getElementById(id); if (el && !el.value) el.value = currentUser.email; });
       ['researcher','applyName','leadName'].forEach(id => { const el = document.getElementById(id); if (el && !el.value) el.value = currentUser.name; });
@@ -1326,7 +1401,15 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     $$('.auth-tab').forEach(btn => btn.classList.toggle('active', btn.dataset.authTab === tab));
     $('#loginForm').classList.toggle('active', tab === 'login');
     $('#signupForm').classList.toggle('active', tab === 'signup');
+    $('#forgotPasswordForm').classList.remove('active');
     if ($('#researcherAuthPortal').classList.contains('active')) $('#authTitle').textContent = tab === 'login' ? 'Researcher Login' : 'Create a Researcher Account';
+  }
+  function showForgotPasswordForm() {
+    $('#loginForm').classList.remove('active');
+    $('#signupForm').classList.remove('active');
+    $('#forgotPasswordForm').classList.add('active');
+    $('#forgotPasswordError').textContent = '';
+    $('#authTitle').textContent = 'Reset Your Password';
   }
 
   const demoOpportunities = [
@@ -1524,7 +1607,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     const loggedIn = $('#dashboardLoggedIn');
     if (!currentUser) { loggedOut.hidden = false; loggedIn.hidden = true; return; }
     loggedOut.hidden = true; loggedIn.hidden = false;
-    $('#dashAvatar').textContent = initials(currentUser.name);
+    $('#dashAvatar').innerHTML = currentUser.avatarUrl ? `<img alt="Profile picture" src="${esc(currentUser.avatarUrl)}"/>` : esc(initials(currentUser.name));
     $('#dashName').textContent = currentUser.name;
     $('#dashEmail').textContent = currentUser.email;
     const applications = (await storeGet('user-applications:' + currentUser.email)) || [];
@@ -1756,6 +1839,8 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
   $('#ageVerificationDob').max = todayForAgeInputs;
   $$('.portal-tab').forEach(button => button.addEventListener('click', () => switchAuthPortal(button.dataset.authPortal)));
   $$('.auth-tab').forEach(button => button.addEventListener('click', () => switchAuthTab(button.dataset.authTab)));
+  $('#forgotPasswordLink').addEventListener('click', showForgotPasswordForm);
+  $('#backToLoginLink').addEventListener('click', () => switchAuthTab('login'));
   $('#loginForm').addEventListener('submit', async event => {
     event.preventDefault();
     $('#loginError').textContent='';
@@ -1782,6 +1867,58 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
       }
     } catch (error) { $('#loginError').textContent=error.message || 'Login failed.'; }
     finally { button.disabled=false; button.textContent='Log in'; }
+  });
+
+  $('#forgotPasswordForm').addEventListener('submit', async event => {
+    event.preventDefault();
+    const errorEl = $('#forgotPasswordError');
+    errorEl.style.color = 'var(--danger)';
+    errorEl.textContent = '';
+    if (!supabaseClient) { errorEl.textContent = 'Supabase is not available on this deployment.'; return; }
+    const email = $('#forgotPasswordEmail').value.trim();
+    if (!email) { errorEl.textContent = 'Enter your account email.'; return; }
+    const button = $('#forgotPasswordSubmit');
+    button.disabled = true; button.textContent = 'Sending…';
+    try {
+      const redirectTo = window.location.origin + window.location.pathname;
+      const { error } = await supabaseClient.auth.resetPasswordForEmail(email, { redirectTo });
+      if (error) throw error;
+      errorEl.style.color = 'var(--success)';
+      errorEl.textContent = 'Check your email for a link to reset your password.';
+      toast('Password reset email sent.');
+    } catch (error) {
+      errorEl.style.color = 'var(--danger)';
+      errorEl.textContent = error.message || 'Could not send the reset email.';
+    } finally {
+      button.disabled = false; button.textContent = 'Send reset link';
+    }
+  });
+
+  $('#resetPasswordForm').addEventListener('submit', async event => {
+    event.preventDefault();
+    const errorEl = $('#resetPasswordError');
+    errorEl.style.color = 'var(--danger)';
+    errorEl.textContent = '';
+    if (!supabaseClient) { errorEl.textContent = 'Supabase is not available on this deployment.'; return; }
+    const newPassword = $('#resetPasswordNew').value;
+    const confirmPassword = $('#resetPasswordConfirm').value;
+    if (newPassword.length < 6) { errorEl.textContent = 'Password must be at least 6 characters.'; return; }
+    if (newPassword !== confirmPassword) { errorEl.textContent = 'Passwords do not match.'; return; }
+    const button = $('#resetPasswordSubmit');
+    button.disabled = true; button.textContent = 'Updating…';
+    try {
+      const { data, error } = await supabaseClient.auth.updateUser({ password: newPassword });
+      if (error) throw error;
+      currentUser = deriveUser(data.user);
+      renderAuth();
+      closeModal('resetPasswordModal');
+      $('#resetPasswordForm').reset();
+      toast('Password updated. You are logged in.');
+    } catch (error) {
+      errorEl.textContent = error.message || 'Could not update your password.';
+    } finally {
+      button.disabled = false; button.textContent = 'Update password';
+    }
   });
 
   $('#adminLoginForm').addEventListener('submit', async event => {
@@ -1929,6 +2066,47 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
   $('#guardianConsentForm').addEventListener('submit', event => { event.preventDefault(); handleGenericNetlifyForm(event.currentTarget,$('#guardianConsentStatus'),'Guardian consent submitted. Curoria will follow up by email.'); });
   $('#safeguardingReportForm').addEventListener('submit', event => { event.preventDefault(); handleGenericNetlifyForm(event.currentTarget,$('#safeguardingReportStatus'),'Report submitted. The Curoria team will review it.'); });
 
+  $('#avatarUpload').addEventListener('change', async event => {
+    const input = event.currentTarget;
+    const statusEl = $('#avatarStatus');
+    const file = input.files && input.files[0];
+    if (!file) return;
+    statusEl.style.color = 'var(--danger)';
+    if (!currentUser || !supabaseClient) { statusEl.textContent = 'Log in to set a profile picture.'; input.value = ''; return; }
+    if (!file.type.startsWith('image/')) { statusEl.textContent = 'Please choose an image file.'; input.value = ''; return; }
+    if (file.size > 8 * 1024 * 1024) { statusEl.textContent = 'Please choose an image under 8MB.'; input.value = ''; return; }
+    statusEl.style.color = 'var(--muted)';
+    statusEl.textContent = 'Picture chosen. Updating…';
+    try {
+      const dataUrl = await cropImageToSquareDataURL(file);
+      await persistAvatar(dataUrl);
+      statusEl.style.color = 'var(--success)';
+      statusEl.textContent = 'Profile picture updated.';
+      toast('Profile picture updated.');
+    } catch (error) {
+      console.error(error);
+      statusEl.style.color = 'var(--danger)';
+      statusEl.textContent = error.message || 'Could not update profile picture.';
+    } finally {
+      input.value = '';
+    }
+  });
+  $('#avatarRemoveBtn').addEventListener('click', async () => {
+    const statusEl = $('#avatarStatus');
+    if (!currentUser || !supabaseClient) { statusEl.style.color = 'var(--danger)'; statusEl.textContent = 'Log in to manage your profile picture.'; return; }
+    if (!currentUser.avatarUrl) { statusEl.style.color = 'var(--muted)'; statusEl.textContent = 'No profile picture set.'; return; }
+    try {
+      await persistAvatar('');
+      statusEl.style.color = 'var(--success)';
+      statusEl.textContent = 'Profile picture removed.';
+      toast('Profile picture removed.');
+    } catch (error) {
+      console.error(error);
+      statusEl.style.color = 'var(--danger)';
+      statusEl.textContent = error.message || 'Could not remove profile picture.';
+    }
+  });
+
   $('#adminStatusFilter').addEventListener('change', refreshAdminDashboard);
 
   // Dashboard tabs
@@ -1981,14 +2159,27 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
   async function init() {
     structureEditorialPages();
     observeReveal();
-    showPage(location.hash.slice(1) || 'home', false);
+    // A Supabase password-reset email link lands here with recovery tokens in the URL hash.
+    // Leave that hash intact so Supabase can read it, instead of the usual hash-based page routing.
+    const isAuthCallback = /access_token=|error_description=|type=recovery/i.test(location.hash);
+    showPage(isAuthCallback ? 'home' : (location.hash.slice(1) || 'home'), false, isAuthCallback);
     renderAuth();
     if (supabaseClient) {
       try {
         const {data:{session}} = await supabaseClient.auth.getSession();
         currentUser = session ? deriveUser(session.user) : null;
         renderAuth();
-        supabaseClient.auth.onAuthStateChange((_event,session) => { currentUser=session ? deriveUser(session.user) : null; renderAuth(); });
+        if (isAuthCallback) history.replaceState({page:'home'},'','#home');
+        supabaseClient.auth.onAuthStateChange((event,session) => {
+          currentUser = session ? deriveUser(session.user) : null;
+          renderAuth();
+          if (event === 'PASSWORD_RECOVERY') {
+            history.replaceState({page:'home'},'','#home');
+            $('#resetPasswordForm').reset();
+            $('#resetPasswordError').textContent = '';
+            openModal('resetPasswordModal');
+          }
+        });
       } catch (error) { console.warn('Supabase session check failed',error); }
     }
     await loadData();
