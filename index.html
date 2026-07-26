@@ -370,10 +370,10 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 .header-avatar { width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid var(--navy); background: var(--navy); color: #fff; font-size: 8.5px; font-weight: 800; font-family: var(--serif); flex-shrink: 0; }
 .header-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .dash-tabs { display: flex; flex-wrap: wrap; gap: 1px; margin-bottom: 20px; background: var(--line); border: 1px solid var(--line); }
-.dash-tab { flex: 1; border: 0; background: #fff; padding: var(--space-3) var(--space-4); font-weight: 700; color: var(--muted); font-size: 13px; }
-.dash-tab.active { background: var(--navy); color: #fff; }
-.dash-panel { display: none; }
-.dash-panel.active { display: block; }
+.dash-tab, .admin-tab { flex: 1; border: 0; background: #fff; padding: var(--space-3) var(--space-4); font-weight: 700; color: var(--muted); font-size: 13px; }
+.dash-tab.active, .admin-tab.active { background: var(--navy); color: #fff; }
+.dash-panel, .admin-panel-tab { display: none; }
+.dash-panel.active, .admin-panel-tab.active { display: block; }
 .activity-row { padding: var(--space-5) var(--space-6); display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line); }
 .activity-row:last-child { border-bottom: 0; }
 .activity-row strong { display: block; color: var(--navy); font-family: var(--serif); font-size: 15px; }
@@ -444,6 +444,21 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 .toast { position: fixed; right: 22px; bottom: 22px; z-index: 4000; max-width: 360px; display: none; padding: var(--space-4) var(--space-5); background: var(--navy); color: #fff; box-shadow: var(--shadow); font-size: 13px; border-left: 3px solid var(--cyan); }
 .toast.show { display: block; }
 .hidden-netlify { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* ---------- Volunteer hour certificate ---------- */
+.certificate-sheet { border: 2px solid var(--navy); padding: 40px 32px; text-align: center; background: #fff; }
+.certificate-brand { font-family: var(--serif); font-weight: 900; font-size: 20px; color: var(--navy); letter-spacing: .1em; }
+.certificate-kicker { text-transform: uppercase; letter-spacing: .12em; font-size: 11.5px; font-weight: 800; color: var(--blue); margin: 10px 0 24px; }
+.certificate-body-text { color: var(--muted); font-size: 14px; margin: 0 0 6px; }
+.certificate-name { font-family: var(--serif); font-size: 30px; color: var(--navy); margin: 6px 0 18px; }
+.certificate-meta { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.certificate-note { margin-top: 16px; font-size: 12.5px; color: var(--muted); font-style: italic; }
+@media print {
+  body * { visibility: hidden; }
+  .certificate-sheet, .certificate-sheet * { visibility: visible; }
+  .certificate-sheet { position: fixed; inset: 0; border: none; }
+  .modal-head, .form-actions { display: none !important; }
+}
 
 /* ---------- Scroll-reveal (tasteful, reduced-motion aware) ---------- */
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
@@ -935,7 +950,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <div class="section"><div class="wrap grid-2"><div><div class="section-head"><div class="eyebrow">Contact Curoria</div><h2>Questions about a study, submission, or your account?</h2><p>Use the form for participant concerns, researcher questions, corrections, partnerships, or general support. Curoria is here to help both sides of the research network.</p></div><div class="card"><h3>Email</h3><p><a href="mailto:curoriafoundation@gmail.com" style="color:var(--blue);font-weight:800">curoriafoundation@gmail.com</a></p><p class="small muted">For urgent study-related concerns, include the study title and researcher name.</p></div></div><div class="form-card"><form data-netlify="true" id="contactForm" name="contact" netlify-honeypot="bot-field"><input name="form-name" type="hidden" value="contact"/><p hidden=""><label>Do not fill this out <input name="bot-field"/></label></p><div class="form-grid"><div class="field"><label for="contactName">Name</label><input id="contactName" name="name" required=""/></div><div class="field"><label for="contactEmail">Email</label><input id="contactEmail" name="email" required="" type="email"/></div><div class="field full"><label for="contactTopic">Topic</label><select id="contactTopic" name="topic" required=""><option value="">Choose</option><option>Survey or study listing</option><option>Participant question or safety concern</option><option>Survey submission</option><option>Account or dashboard</option><option>Community or collaboration</option><option>Partnership</option><option>Correction or takedown request</option><option>General</option></select></div><div class="field full"><label for="contactMessage">Message</label><textarea id="contactMessage" name="message" required=""></textarea></div></div><div class="form-actions"><button class="btn btn-primary" type="submit">Send message</button><span class="small muted" id="contactStatus"></span></div></form></div></div></div>
 </section>
 <section class="page" data-page="dashboard">
-<div class="section"><div class="wrap"><div class="section-head"><div class="eyebrow">My Curoria</div><h2>Track the surveys and studies you contribute to</h2><p>Sign in to see participant opportunities you joined, surveys you submitted, and your activity across the Curoria network.</p></div><div class="card" id="dashboardLoggedOut" style="text-align:center"><h3>You're not logged in</h3><p>Create a free account or log in to track your research participation and submissions.</p><button class="btn btn-primary" data-open-auth="login" type="button">Log in</button></div><div class="dashboard-layout" hidden="" id="dashboardLoggedIn"><aside class="surface profile"><div class="avatar" id="dashAvatar">C</div><h3 id="dashName">Member</h3><p class="small muted" id="dashEmail"></p><div class="stack" style="margin-top:16px;text-align:left"><div class="note"><b id="dashJoinedCount">0</b> studies and opportunities joined</div><div class="note"><b id="dashSubmissionCount">0</b> research submissions</div></div></aside><div><div class="dash-tabs"><button class="dash-tab active" data-dash-tab="applications">My Participation</button><button class="dash-tab" data-dash-tab="submissions">My Survey Submissions</button><button class="dash-tab" data-dash-tab="profile">Profile</button></div><div class="dash-panel active surface" id="dash-applications"></div><div class="dash-panel surface" id="dash-submissions"></div><div class="dash-panel surface" id="dash-profile"><div style="padding:24px"><h3>Profile</h3><p class="muted">Your account supports your Curoria dashboard. Researcher verification, when offered, is separate from simply creating an account.</p>
+<div class="section"><div class="wrap"><div class="section-head"><div class="eyebrow">My Curoria</div><h2>Track the surveys and studies you contribute to</h2><p>Sign in to see participant opportunities you joined, surveys you submitted, and your activity across the Curoria network.</p></div><div class="card" id="dashboardLoggedOut" style="text-align:center"><h3>You're not logged in</h3><p>Create a free account or log in to track your research participation and submissions.</p><button class="btn btn-primary" data-open-auth="login" type="button">Log in</button></div><div class="dashboard-layout" hidden="" id="dashboardLoggedIn"><aside class="surface profile"><div class="avatar" id="dashAvatar">C</div><h3 id="dashName">Member</h3><p class="small muted" id="dashEmail"></p><div class="stack" style="margin-top:16px;text-align:left"><div class="note"><b id="dashJoinedCount">0</b> studies and opportunities joined</div><div class="note"><b id="dashSubmissionCount">0</b> research submissions</div><div class="note success"><b id="dashParticipantHours">0</b> volunteer hours earned (participation)</div><div class="note success"><b id="dashResearcherHours">0</b> volunteer hours earned (research submissions)</div><div class="note" id="dashPendingHoursNote" hidden><b id="dashPendingHours">0</b> volunteer hours pending — credited 48 hours after participation</div></div></aside><div><div class="dash-tabs"><button class="dash-tab active" data-dash-tab="applications">My Participation</button><button class="dash-tab" data-dash-tab="submissions">My Survey Submissions</button><button class="dash-tab" data-dash-tab="profile">Profile</button></div><div class="dash-panel active surface" id="dash-applications"></div><div class="dash-panel surface" id="dash-submissions"></div><div class="dash-panel surface" id="dash-profile"><div style="padding:24px"><h3>Profile</h3><p class="muted">Your account supports your Curoria dashboard. Researcher verification, when offered, is separate from simply creating an account.</p>
 <div class="field" style="max-width:360px;margin-top:20px">
 <label for="avatarUpload">Profile picture</label>
 <div class="avatar-controls">
@@ -944,6 +959,10 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 </div>
 <div class="help">JPG, PNG, or WebP. Your photo is cropped to a square and stored on your Curoria account.</div>
 <div class="small" id="avatarStatus" style="margin-top:4px"></div>
+</div>
+<div class="field" style="max-width:420px;margin-top:28px">
+<label>Volunteer hour certification</label>
+<div id="certificationArea" style="margin-top:8px"></div>
 </div>
 </div></div></div></div></div></div>
 </section>
@@ -961,6 +980,12 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <div class="admin-stat"><strong id="adminChangesCount">0</strong><span>Changes requested</span></div>
 <div class="admin-stat"><strong id="adminTotalCount">0</strong><span>Total submissions</span></div>
 </div>
+<div class="dash-tabs" style="margin-bottom:20px">
+<button class="admin-tab active" data-admin-tab="submissions" type="button">Submissions</button>
+<button class="admin-tab" data-admin-tab="hours" type="button">Volunteer Hours</button>
+<button class="admin-tab" data-admin-tab="certifications" type="button">Certifications</button>
+</div>
+<div class="admin-panel-tab active" id="admin-panel-submissions">
 <div class="admin-toolbar">
 <div><strong style="font-weight:600">Submission queue</strong><div class="small muted">Review the researcher-provided details before changing a listing status.</div></div>
 <label class="small" for="adminStatusFilter">Show
@@ -976,6 +1001,23 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 </label>
 </div>
 <div class="admin-review-list" id="adminSubmissionList"></div>
+</div>
+<div class="admin-panel-tab" id="admin-panel-hours">
+<div class="admin-toolbar">
+<div><strong style="font-weight:600">Volunteer hours per survey</strong><div class="small muted">Set how many volunteer hours a survey is worth. Participants are credited automatically 48 hours after they continue to the study; researchers are credited once their submission is approved.</div></div>
+</div>
+<div class="admin-review-list" id="adminHoursSubmissionList"></div>
+<div class="admin-toolbar section-followup">
+<div><strong style="font-weight:600">Participant hour credits</strong><div class="small muted">Automatic credits from participants continuing to a study. Pending credits become Credited 48 hours after participation unless revoked.</div></div>
+</div>
+<div class="admin-review-list" id="adminHoursLedgerList"></div>
+</div>
+<div class="admin-panel-tab" id="admin-panel-certifications">
+<div class="admin-toolbar">
+<div><strong style="font-weight:600">Certification requests</strong><div class="small muted">Participants can request an official certificate for their credited volunteer hours. Issue it once you've confirmed the hours are accurate.</div></div>
+</div>
+<div class="admin-review-list" id="adminCertificationList"></div>
+</div>
 </div>
 </div></div>
 </section>
@@ -1124,6 +1166,15 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 </div>
 </div>
 </div>
+<div aria-labelledby="certificateTitle" aria-modal="true" class="modal" id="certificateModal" role="dialog">
+<div class="modal-box" style="max-width:640px">
+<div class="modal-head"><h3 id="certificateTitle">Certificate of Volunteer Service</h3><button aria-label="Close" class="modal-close" data-close-modal="certificateModal" type="button">×</button></div>
+<div class="modal-body">
+<div class="certificate-sheet" id="certificateBody"></div>
+<div class="form-actions"><button class="btn btn-primary" id="printCertificateBtn" type="button">Print / Save as PDF</button></div>
+</div>
+</div>
+</div>
 <div aria-labelledby="searchTitle" aria-modal="true" class="modal" id="searchModal" role="dialog">
 <div class="modal-box"><div class="modal-head"><h3 id="searchTitle">Search Curoria</h3><button aria-label="Close" class="modal-close" data-close-modal="searchModal" type="button">×</button></div><div class="modal-body"><input autofocus="" class="control" id="globalSearchInput" placeholder="Search surveys, results, challenges, communities, and pages…" type="search"/><div class="search-results" id="globalSearchResults"></div></div></div>
 </div>
@@ -1238,6 +1289,25 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
       return out;
     } catch { return []; }
   }
+  async function storeListWithKeys(prefix) {
+    try {
+      if (window.storage && typeof window.storage.list === 'function') {
+        const result = await window.storage.list(prefix, true);
+        if (!result || !Array.isArray(result.keys)) return [];
+        const pairs = await Promise.all(result.keys.map(async key => ({key, value: await storeGet(key)})));
+        return pairs.filter(pair => pair.value);
+      }
+      const out = [];
+      for (let i = 0; i < localStorage.length; i += 1) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('curoria:' + prefix)) {
+          try { out.push({key: key.slice('curoria:'.length), value: JSON.parse(localStorage.getItem(key))}); } catch {}
+        }
+      }
+      return out;
+    } catch { return []; }
+  }
+  const VOLUNTEER_CREDIT_DELAY_MS = 48 * 60 * 60 * 1000;
 
   function calculateAge(dateString) {
     if (!dateString) return NaN;
@@ -1436,7 +1506,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
   async function loadData() {
     const approvedStudies = (await storeList('submissions:')).filter(item => item && item.status === 'approved').map(item => ({
       id:item.id, type:'study', title:item.title, field:item.category, status:'recruiting', level:'open', method:'Participant study', researcher:item.researcher, organization:'Community submitted', roles:Number(item.slots)||0, members:0, summary:item.description,
-      skills:[item.age,item.time].filter(Boolean), eligibility:item.age || 'See study details', commitment:item.time || 'See study details', privacy:item.data_collected || 'See researcher-provided privacy information.', ethics:item.ethics_status || 'Not specified', link:item.link || '#'
+      skills:[item.age,item.time].filter(Boolean), eligibility:item.age || 'See study details', commitment:item.time || 'See study details', privacy:item.data_collected || 'See researcher-provided privacy information.', ethics:item.ethics_status || 'Not specified', link:item.link || '#', volunteerHours:Number(item.volunteerHours)||0
     }));
     const storedGroups = (await storeList('groups:')).filter(item => item && item.status === 'approved');
     const storedPublications = (await storeList('publications:')).filter(item => item && item.status === 'published');
@@ -1486,7 +1556,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     $('#researchEmpty').hidden = list.length > 0;
     $('#researchGrid').innerHTML = list.map(item => `
       <article class="listing">
-        <div class="listing-head"><div class="chip-row"><span class="chip blue">${esc('Participant study')}</span>${item.sample ? '<span class="chip gold">Illustrative preview</span>' : ''}<span class="chip ${item.status === 'recruiting' ? 'green' : ''}">${esc(item.status.replace(/-/g,' '))}</span></div><h3>${esc(item.title)}</h3><div class="meta-line"><span>${esc(item.field)}</span><span>${esc(item.level)}</span><span>${esc(item.method)}</span></div></div>
+        <div class="listing-head"><div class="chip-row"><span class="chip blue">${esc('Participant study')}</span>${item.sample ? '<span class="chip gold">Illustrative preview</span>' : ''}<span class="chip ${item.status === 'recruiting' ? 'green' : ''}">${esc(item.status.replace(/-/g,' '))}</span>${item.volunteerHours ? `<span class="chip green">${esc(item.volunteerHours)} vol. hrs</span>` : ''}</div><h3>${esc(item.title)}</h3><div class="meta-line"><span>${esc(item.field)}</span><span>${esc(item.level)}</span><span>${esc(item.method)}</span></div></div>
         <div class="listing-body"><p>${esc(item.summary)}</p><div class="chip-row">${(item.skills||[]).slice(0,4).map(skill => `<span class="chip">${esc(skill)}</span>`).join('')}</div></div>
         <div class="listing-foot"><div class="meta-line" style="margin-bottom:12px"><span>${esc(item.researcher || 'Researcher')}</span><span>${esc(item.organization || '')}</span>${item.type === 'group' ? `<span>${esc(item.members || 0)}/${esc(item.roles || 0)} members</span>` : `<span>${esc(item.roles || 0)} participants requested</span>`}</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-outline btn-sm" type="button" data-view-research="${esc(item.id)}">View details</button>${item.sample ? '' : `<button class="btn btn-primary btn-sm" type="button" data-apply-research="${esc(item.id)}">${item.type === 'study' ? 'Participate' : 'Apply to join'}</button>`}</div></div>
       </article>`).join('');
@@ -1498,10 +1568,11 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     if (!item) return;
     $('#detailTitle').textContent = item.title;
     $('#detailBody').innerHTML = `
-      <div class="chip-row"><span class="chip blue">${esc('Participant study')}</span>${item.sample ? '<span class="chip gold">Illustrative preview</span>' : ''}<span class="chip">${esc(item.field)}</span></div>
+      <div class="chip-row"><span class="chip blue">${esc('Participant study')}</span>${item.sample ? '<span class="chip gold">Illustrative preview</span>' : ''}<span class="chip">${esc(item.field)}</span>${item.volunteerHours ? `<span class="chip green">${esc(item.volunteerHours)} volunteer hours</span>` : ''}</div>
       <h2 style="font-family:var(--serif);font-size:34px;margin:18px 0 12px;color:var(--navy)">${esc(item.title)}</h2>
       <p class="muted">${esc(item.summary)}</p>
       <div class="grid-2" style="margin:22px 0"><div class="note"><b>Eligibility</b><br>${esc(item.eligibility || 'See application details.')}</div><div class="note"><b>Time commitment</b><br>${esc(item.commitment || 'See application details.')}</div><div class="note"><b>Privacy / data</b><br>${esc(item.privacy || 'Not specified.')}</div><div class="note"><b>Ethics / oversight</b><br>${esc(item.ethics || 'Not specified.')}</div></div>
+      ${item.volunteerHours ? `<div class="note success" style="margin-bottom:22px"><b>${esc(item.volunteerHours)} volunteer hours</b> — automatically credited to your account 48 hours after you continue to this study.</div>` : ''}
       <h3>Skills and tags</h3><div class="chip-row" style="margin:10px 0 22px">${(item.skills||[]).map(skill => `<span class="chip">${esc(skill)}</span>`).join('')}</div>
       ${item.sample ? '<div class="note warning">This is clearly marked demonstration content. Replace it with a real, reviewed opportunity before launch.</div>' : `<button class="btn btn-primary" type="button" data-apply-research="${esc(item.id)}">${item.type === 'study' ? 'Continue to participation' : 'Apply to join this group'}</button>`}`;
     openModal('detailModal');
@@ -1509,7 +1580,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 
   function continueToExternalStudy(item) {
     window.open(item.link, '_blank', 'noopener,noreferrer');
-    const activity = {title:item.title,type:'Participant study',date:new Date().toISOString()};
+    const activity = {title:item.title,type:'Participant study',date:new Date().toISOString(),submissionId:item.id,volunteerHours:Number(item.volunteerHours)||0};
     saveUserApplication(activity);
   }
 
@@ -1614,8 +1685,75 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     const submissions = (await storeList('submissions:')).filter(item => item?.email === currentUser.email);
     $('#dashJoinedCount').textContent = applications.length;
     $('#dashSubmissionCount').textContent = submissions.length;
-    $('#dash-applications').innerHTML = applications.length ? applications.map(item => `<div class="activity-row"><div><strong>${esc(item.title)}</strong><span>${esc(item.type)} · ${new Date(item.date).toLocaleDateString()}</span></div><span class="chip green">Recorded</span></div>`).join('') : '<div style="padding:24px" class="muted">No applications or participation activity yet.</div>';
-    $('#dash-submissions').innerHTML = submissions.length ? submissions.map(item => `<div class="activity-row"><div><strong>${esc(item.title)}</strong><span>${esc(item.category)} · submitted ${esc(item.submittedAt || '')}</span></div><span class="chip">${esc(item.status || 'pending')}</span></div>`).join('') : '<div style="padding:24px" class="muted">No survey submissions yet.</div>';
+    const now = Date.now();
+    let creditedHours = 0, pendingHours = 0;
+    applications.forEach(item => {
+      const hours = Number(item.volunteerHours) || 0;
+      if (!hours) return;
+      const elapsed = now - new Date(item.date).getTime();
+      if (elapsed >= VOLUNTEER_CREDIT_DELAY_MS) creditedHours += hours; else pendingHours += hours;
+    });
+    const researcherHours = submissions.filter(item => item.status === 'approved').reduce((sum,item) => sum + (Number(item.volunteerHours) || 0), 0);
+    $('#dashParticipantHours').textContent = creditedHours.toLocaleString();
+    $('#dashResearcherHours').textContent = researcherHours.toLocaleString();
+    $('#dashPendingHoursNote').hidden = pendingHours <= 0;
+    $('#dashPendingHours').textContent = pendingHours.toLocaleString();
+    $('#dash-applications').innerHTML = applications.length ? applications.map(item => {
+      const hours = Number(item.volunteerHours) || 0;
+      const elapsed = now - new Date(item.date).getTime();
+      const hoursChip = hours ? (elapsed >= VOLUNTEER_CREDIT_DELAY_MS ? `<span class="chip green">${esc(hours)}h credited</span>` : `<span class="chip gold">${esc(hours)}h pending</span>`) : '';
+      return `<div class="activity-row"><div><strong>${esc(item.title)}</strong><span>${esc(item.type)} · ${new Date(item.date).toLocaleDateString()}</span></div><div class="chip-row">${hoursChip}<span class="chip green">Recorded</span></div></div>`;
+    }).join('') : '<div style="padding:24px" class="muted">No applications or participation activity yet.</div>';
+    $('#dash-submissions').innerHTML = submissions.length ? submissions.map(item => `<div class="activity-row"><div><strong>${esc(item.title)}</strong><span>${esc(item.category)} · submitted ${esc(item.submittedAt || '')}</span></div><div class="chip-row">${item.status === 'approved' && item.volunteerHours ? `<span class="chip green">${esc(item.volunteerHours)}h earned</span>` : ''}<span class="chip">${esc(item.status || 'pending')}</span></div></div>`).join('') : '<div style="padding:24px" class="muted">No survey submissions yet.</div>';
+    await refreshCertificationArea(creditedHours + researcherHours);
+  }
+
+  async function refreshCertificationArea(totalHours) {
+    const area = $('#certificationArea');
+    if (!area || !currentUser) return;
+    const requests = (await storeList('certification-requests:')).filter(item => item?.email === currentUser.email);
+    const latest = requests.sort((a,b) => new Date(b.requestedAt) - new Date(a.requestedAt))[0];
+    if (!latest || latest.status === 'declined') {
+      area.innerHTML = `
+        <div class="note">${esc(totalHours.toLocaleString())} total credited volunteer hours</div>
+        ${latest && latest.status === 'declined' ? `<div class="note warning" style="margin-top:8px"><b>Your previous request was declined.</b>${latest.adminNote ? ' ' + esc(latest.adminNote) : ''}</div>` : ''}
+        <div class="field full" style="margin:12px 0 8px"><label for="certificationName">Full legal name for certificate</label><input id="certificationName" placeholder="As it should appear on the certificate"/></div>
+        <button class="btn btn-outline btn-sm" id="certificationRequestBtn" type="button"${totalHours <= 0 ? ' disabled' : ''}>Request certification</button>
+        <div class="small" id="certificationStatus" style="margin-top:8px">${totalHours <= 0 ? 'You need credited volunteer hours before requesting a certificate.' : ''}</div>`;
+      const btn = $('#certificationRequestBtn');
+      if (btn) btn.addEventListener('click', () => requestCertification(totalHours));
+    } else if (latest.status === 'pending') {
+      area.innerHTML = `<div class="note"><b>${esc(latest.hours)}</b> volunteer hours requested for certification on ${new Date(latest.requestedAt).toLocaleDateString()}.</div><div class="small muted" style="margin-top:8px">Pending review by the Curoria team.</div>`;
+    } else if (latest.status === 'issued') {
+      area.innerHTML = `<div class="note success"><b>Certificate issued</b> for ${esc(latest.hours)} volunteer hours on ${new Date(latest.issuedAt).toLocaleDateString()}.</div><button class="btn btn-primary btn-sm" style="margin-top:10px" type="button" data-view-certificate="${esc(latest.id)}">View certificate</button>`;
+    }
+  }
+
+  async function requestCertification(totalHours) {
+    if (!currentUser) return;
+    const nameInput = $('#certificationName');
+    const statusEl = $('#certificationStatus');
+    const name = nameInput ? nameInput.value.trim() : '';
+    if (!name) { if (statusEl) statusEl.textContent = 'Enter the full legal name for the certificate.'; return; }
+    const id = 'cert_' + Date.now() + '_' + Math.random().toString(36).slice(2,7);
+    const record = {id, email:currentUser.email, name, hours:totalHours, requestedAt:new Date().toISOString(), status:'pending'};
+    await storeSet('certification-requests:' + id, record);
+    toast('Certification requested.');
+    refreshDashboard();
+  }
+
+  async function showCertificate(id) {
+    const record = await storeGet('certification-requests:' + id);
+    if (!record || record.status !== 'issued') { toast('That certificate is not available.'); return; }
+    $('#certificateBody').innerHTML = `
+      <div class="certificate-brand">CURORIA</div>
+      <p class="certificate-kicker">Certificate of Volunteer Service</p>
+      <p class="certificate-body-text">This certifies that</p>
+      <h2 class="certificate-name">${esc(record.name)}</h2>
+      <p class="certificate-body-text">has completed <b>${esc(record.hours)} volunteer hours</b> through the Curoria student research network.</p>
+      <div class="certificate-meta"><span>Issued ${new Date(record.issuedAt).toLocaleDateString()}</span><span>Certificate ID: ${esc(record.certificateId || record.id)}</span></div>
+      ${record.adminNote ? `<p class="certificate-note">${esc(record.adminNote)}</p>` : ''}`;
+    openModal('certificateModal');
   }
 
   function adminStatusChip(status) {
@@ -1631,6 +1769,8 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     $('#adminApprovedCount').textContent = submissions.filter(item => item.status === 'approved').length;
     $('#adminChangesCount').textContent = submissions.filter(item => item.status === 'changes-requested').length;
     $('#adminTotalCount').textContent = submissions.length;
+    await refreshAdminHours(submissions);
+    await refreshAdminCertifications();
     const filter = $('#adminStatusFilter')?.value || 'all';
     const visible = filter === 'all' ? submissions : submissions.filter(item => item.status === filter);
     const list = $('#adminSubmissionList');
@@ -1695,6 +1835,127 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     toast(`Submission marked ${nextStatus.replace(/-/g,' ')}.`);
   }
 
+  async function setSubmissionHours(id) {
+    if (!adminAuthenticated) return;
+    const submission = await storeGet('submissions:' + id);
+    if (!submission) { toast('Submission could not be found.'); return; }
+    const input = window.prompt('Volunteer hours for this survey (used for both participant and researcher credit):', String(submission.volunteerHours || 0));
+    if (input === null) return;
+    const hours = Number(input);
+    if (!Number.isFinite(hours) || hours < 0) { toast('Enter a valid, non-negative number.'); return; }
+    await storeSet('submissions:' + id, {...submission, volunteerHours:hours});
+    await loadData();
+    await refreshAdminDashboard();
+    refreshDashboard();
+    toast(`Volunteer hours set to ${hours}.`);
+  }
+
+  async function refreshAdminHours(submissionsInput) {
+    const hoursList = $('#adminHoursSubmissionList');
+    const ledgerList = $('#adminHoursLedgerList');
+    if (!hoursList || !ledgerList) return;
+    const submissions = (submissionsInput || (await storeList('submissions:')).filter(Boolean)).filter(item => item.status === 'approved');
+    hoursList.innerHTML = submissions.length ? submissions.map(item => `
+      <article class="admin-review-card">
+        <div class="admin-review-top">
+          <div>
+            <div class="chip-row"><span class="chip green">${esc(item.volunteerHours || 0)} vol. hrs</span><span class="chip blue">${esc(item.category || 'Uncategorized')}</span></div>
+            <h3>${esc(item.title || 'Untitled submission')}</h3>
+            <div class="admin-review-meta"><span>${esc(item.researcher || 'Unknown researcher')}</span><span>${esc(item.email || 'No email')}</span></div>
+          </div>
+        </div>
+        <div class="admin-review-actions">
+          <button class="admin-action-btn" type="button" data-admin-set-hours="${esc(item.id)}">Set hours</button>
+        </div>
+      </article>`).join('') : '<div class="admin-empty">No approved surveys yet. Approve a submission first, then set its volunteer hours here.</div>';
+    observeReveal(hoursList);
+
+    const pairs = await storeListWithKeys('user-applications:');
+    const ledger = [];
+    pairs.forEach(({key, value}) => {
+      const email = key.slice('user-applications:'.length);
+      (value || []).forEach((activity, index) => {
+        if (Number(activity.volunteerHours) > 0) ledger.push({...activity, email, index});
+      });
+    });
+    ledger.sort((a,b) => new Date(b.date) - new Date(a.date));
+    const now = Date.now();
+    ledgerList.innerHTML = ledger.length ? ledger.map(entry => {
+      const elapsed = now - new Date(entry.date).getTime();
+      const credited = elapsed >= VOLUNTEER_CREDIT_DELAY_MS;
+      return `<article class="admin-review-card">
+        <div class="admin-review-top">
+          <div>
+            <div class="chip-row">${credited ? '<span class="chip green">Credited</span>' : '<span class="chip gold">Pending</span>'}<span class="chip">${esc(entry.volunteerHours)}h</span></div>
+            <h3>${esc(entry.title)}</h3>
+            <div class="admin-review-meta"><span>${esc(entry.email)}</span><span>${new Date(entry.date).toLocaleString()}</span></div>
+          </div>
+        </div>
+        <div class="admin-review-actions">
+          <button class="admin-action-btn reject" type="button" data-revoke-hours-email="${esc(entry.email)}" data-revoke-hours-index="${esc(entry.index)}">Revoke</button>
+        </div>
+      </article>`;
+    }).join('') : '<div class="admin-empty">No participant volunteer-hour activity yet.</div>';
+    observeReveal(ledgerList);
+  }
+
+  async function revokeVolunteerHours(email, index) {
+    if (!adminAuthenticated) return;
+    const key = 'user-applications:' + email;
+    const list = (await storeGet(key)) || [];
+    if (!list[index]) { toast('That activity could not be found.'); return; }
+    list[index] = {...list[index], volunteerHours:0, hoursRevoked:true};
+    await storeSet(key, list);
+    await refreshAdminDashboard();
+    toast('Volunteer hours revoked.');
+  }
+
+  async function refreshAdminCertifications() {
+    const list = $('#adminCertificationList');
+    if (!list) return;
+    const requests = (await storeList('certification-requests:')).filter(Boolean).sort((a,b) => new Date(b.requestedAt) - new Date(a.requestedAt));
+    list.innerHTML = requests.length ? requests.map(item => `
+      <article class="admin-review-card">
+        <div class="admin-review-top">
+          <div>
+            <div class="chip-row">${item.status === 'issued' ? '<span class="chip green">Issued</span>' : item.status === 'declined' ? '<span class="chip">Declined</span>' : '<span class="chip gold">Pending</span>'}<span class="chip blue">${esc(item.hours)}h</span></div>
+            <h3>${esc(item.name)}</h3>
+            <div class="admin-review-meta"><span>${esc(item.email)}</span><span>Requested ${new Date(item.requestedAt).toLocaleDateString()}</span>${item.issuedAt ? `<span>Issued ${new Date(item.issuedAt).toLocaleDateString()}</span>` : ''}</div>
+          </div>
+        </div>
+        ${item.adminNote ? `<div class="admin-review-note"><b>Note:</b> ${esc(item.adminNote)}</div>` : ''}
+        <div class="admin-review-actions">
+          ${item.status === 'pending' ? `<button class="admin-action-btn approve" type="button" data-issue-certification="${esc(item.id)}">Issue certification</button><button class="admin-action-btn reject" type="button" data-decline-certification="${esc(item.id)}">Decline</button>` : ''}
+          ${item.status === 'issued' ? `<button class="admin-action-btn" type="button" data-view-certificate="${esc(item.id)}">View certificate</button>` : ''}
+        </div>
+      </article>`).join('') : '<div class="admin-empty">No certification requests yet.</div>';
+    observeReveal(list);
+  }
+
+  async function issueCertification(id) {
+    if (!adminAuthenticated) return;
+    const record = await storeGet('certification-requests:' + id);
+    if (!record) { toast('Request could not be found.'); return; }
+    const note = window.prompt('Optional note to include on the certificate:', record.adminNote || '');
+    if (note === null) return;
+    const certificateId = 'CUR-' + new Date().getFullYear() + '-' + Math.random().toString(36).slice(2,8).toUpperCase();
+    const updated = {...record, status:'issued', issuedAt:new Date().toISOString(), adminNote:note.trim(), certificateId};
+    await storeSet('certification-requests:' + id, updated);
+    await refreshAdminCertifications();
+    toast('Certificate issued.');
+  }
+
+  async function declineCertification(id) {
+    if (!adminAuthenticated) return;
+    const record = await storeGet('certification-requests:' + id);
+    if (!record) { toast('Request could not be found.'); return; }
+    const note = window.prompt('Reason for declining (the requester will see this):', record.adminNote || '');
+    if (note === null) return;
+    const updated = {...record, status:'declined', adminNote:note.trim()};
+    await storeSet('certification-requests:' + id, updated);
+    await refreshAdminCertifications();
+    toast('Request declined.');
+  }
 
   const searchIndex = [
     {title:'About Curoria',page:'about',text:'mission student research access transparency'},
@@ -1741,6 +2002,16 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     if (authTrigger) { openAuth(authTrigger.dataset.openAuth || 'login'); return; }
     const adminAction = event.target.closest('[data-admin-action]');
     if (adminAction) { updateSubmissionStatus(adminAction.dataset.submissionId, adminAction.dataset.adminAction); return; }
+    const setHours = event.target.closest('[data-admin-set-hours]');
+    if (setHours) { setSubmissionHours(setHours.dataset.adminSetHours); return; }
+    const revokeHours = event.target.closest('[data-revoke-hours-email]');
+    if (revokeHours) { revokeVolunteerHours(revokeHours.dataset.revokeHoursEmail, Number(revokeHours.dataset.revokeHoursIndex)); return; }
+    const issueCert = event.target.closest('[data-issue-certification]');
+    if (issueCert) { issueCertification(issueCert.dataset.issueCertification); return; }
+    const declineCert = event.target.closest('[data-decline-certification]');
+    if (declineCert) { declineCertification(declineCert.dataset.declineCertification); return; }
+    const viewCert = event.target.closest('[data-view-certificate]');
+    if (viewCert) { showCertificate(viewCert.dataset.viewCertificate); return; }
     const close = event.target.closest('[data-close-modal]');
     if (close) { closeModal(close.dataset.closeModal); return; }
     const view = event.target.closest('[data-view-research]');
@@ -2114,6 +2385,13 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     $$('.dash-tab').forEach(btn => btn.classList.toggle('active',btn===button));
     $$('.dash-panel').forEach(panel => panel.classList.toggle('active',panel.id==='dash-'+button.dataset.dashTab));
   }));
+
+  // Admin dashboard tabs
+  $$('.admin-tab').forEach(button => button.addEventListener('click', () => {
+    $$('.admin-tab').forEach(btn => btn.classList.toggle('active',btn===button));
+    $$('.admin-panel-tab').forEach(panel => panel.classList.toggle('active',panel.id==='admin-panel-'+button.dataset.adminTab));
+  }));
+  $('#printCertificateBtn').addEventListener('click', () => window.print());
 
 
 
