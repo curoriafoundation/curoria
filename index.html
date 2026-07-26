@@ -10,6 +10,8 @@
 <meta content="Find reviewed participant studies, contribute to research, or submit a study to recruit volunteers through Curoria." property="og:description"/>
 <meta content="website" property="og:type"/>
 <title>Curoria — Connecting Researchers With Participants</title>
+<link href="CuroriaLOGO.png" rel="icon" type="image/png"/>
+<link href="CuroriaLOGO.png" rel="apple-touch-icon"/>
 <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -804,13 +806,13 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <div class="eyebrow">Minors</div>
 <h1>Age and participant protection</h1>
 <p>Research involving minors can require additional consent, permission, safeguarding, and institutional processes. Researchers must accurately state participant ages and follow every requirement that applies to their specific study.</p>
-<div class="note warning">Curoria's external participant-recruitment pathway remains limited to age-verified adults 18 and older. Members age 13–17 can hold a Curoria account under Curoria's <a data-page-link="safeguarding" href="#safeguarding" style="color:var(--blue);font-weight:800">guardian consent and safeguarding process</a>, but cannot currently be recruited into external studies through the marketplace.</div>
-<h2>Before any future minor recruitment is enabled</h2>
+<div class="note warning">Researchers can set a study's minimum participant age as low as 13. Curoria only opens a study's external link to a participant once their age is verified — adults 18+ can continue immediately, and participants age 13–17 must complete a guardian consent step for that specific study first.</div>
+<h2>What researchers recruiting minors are responsible for</h2>
 <div class="standards-point-grid">
-<div class="standards-point"><b>Age must be accurate</b><span>A listing cannot describe an adult-only study as open to younger participants or encourage anyone to misstate their age.</span></div>
-<div class="standards-point"><b>Required permissions must exist</b><span>Researchers are responsible for applicable parental or guardian permission, participant assent, institutional review, and safeguarding procedures.</span></div>
+<div class="standards-point"><b>Age must be accurate</b><span>A listing's minimum age must reflect the study's actual eligibility. Do not encourage anyone to misstate their age.</span></div>
+<div class="standards-point"><b>Required permissions must exist</b><span>Curoria collects guardian consent for a participant's account, but researchers remain responsible for participant assent, institutional review, and safeguarding procedures specific to their own study.</span></div>
 <div class="standards-point"><b>Data collection must be appropriate</b><span>Studies should minimize unnecessary personal information and clearly explain how information about younger participants is protected.</span></div>
-<div class="standards-point"><b>Curoria access is not approval</b><span>Being able to create an account or submit a listing does not establish that a study involving minors is ethically or legally cleared.</span></div>
+<div class="standards-point"><b>Curoria consent is not institutional approval</b><span>Curoria's guardian consent step confirms a guardian was notified and consented on the platform. It does not establish that a study is ethically or legally cleared.</span></div>
 </div>
 </article>
 <article aria-labelledby="standards-tab-privacy" class="prose standard-panel" data-standards-panel="privacy" hidden="" id="standards-panel-privacy" role="tabpanel">
@@ -873,14 +875,14 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <div class="eyebrow">Participant recruitment submission</div>
 <h3 class="card-heading-lg">Submit a survey for review</h3>
 <p class="muted">Tell potential participants what your survey or study is about, who can join, what they will do, how long it takes, and how their information will be handled.</p>
-<div class="note warning" style="margin:16px 0">The public participant pathway remains limited to age-verified adults 18 and older. Curoria does not yet support recruiting minor participants through the marketplace — see the <a data-page-link="safeguarding" href="#safeguarding" style="color:var(--blue);font-weight:800">guardian consent and safeguarding process</a> for how Curoria supports members age 13–17.</div>
+<div class="note warning" style="margin:16px 0">Set the lowest age a participant may be for your study — 13 or older. If you set it below 18, Curoria will require each participant to complete a guardian consent step for this specific study before they can continue to your survey link. See the <a data-page-link="safeguarding" href="#safeguarding" style="color:var(--blue);font-weight:800">guardian consent and safeguarding process</a> for details.</div>
 <form data-netlify="true" id="researchForm" name="research-submission" netlify-honeypot="bot-field" novalidate="">
 <input name="form-name" type="hidden" value="research-submission"/><p hidden=""><label>Do not fill this out <input name="bot-field"/></label></p>
 <div class="form-grid">
 <div class="field full" data-field="title"><label for="title">Survey or study title *</label><input id="title" name="title" required=""/><div class="error"></div></div>
 <div class="field full" data-field="description"><label for="description">Public survey / study description *</label><textarea id="description" name="description" placeholder="Explain the research question, what participants will do, and why the study is being conducted." required=""></textarea><div class="error"></div></div>
 <div class="field"><label for="category">Field *</label><select id="category" name="category" required=""><option value="">Choose a field</option><option>Computer Science &amp; AI</option><option>Health &amp; Life Sciences</option><option>Engineering</option><option>Social Sciences</option><option>Education</option><option>Environment</option><option>Business &amp; Economics</option></select></div>
-<div class="field"><label for="age">Eligible age group *</label><select id="age" name="age" required=""><option value="">Choose</option><option>18–24</option><option>25–40</option><option>41+</option><option>18+</option></select></div>
+<div class="field"><label for="age">Minimum participant age *</label><input id="age" max="120" min="13" name="age" required="" type="number" value="18"/><div class="help">Curoria supports participant ages 13 and up. Participants younger than 18 must complete a guardian consent step before continuing to your study.</div></div>
 <div class="field"><label for="slots">Participants needed *</label><input id="slots" min="1" name="slots" required="" type="number"/></div>
 <div class="field"><label for="time">Estimated time *</label><input id="time" name="time" placeholder="e.g. 10–15 minutes" required=""/></div>
 <div class="field full"><label for="link">Survey or study link *</label><input id="link" name="link" placeholder="https://" required="" type="url"/></div>
@@ -1028,7 +1030,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <h2>How Curoria uses information</h2><p>Information may be used to operate accounts, review and display research listings, help users track their Curoria activity, communicate with researchers and participants, prevent abuse, and improve the platform.</p>
 <h2>Research conducted outside Curoria</h2><p>When a participant follows a study link to an external survey or research system, that external service and the researcher may collect information under their own privacy practices. Curoria does not automatically control data collected inside those external systems.</p>
 <h2>Service providers</h2><p>This site may use services such as Supabase for authentication and Netlify for hosting or form processing. Their privacy practices also apply to information they process.</p>
-<h2>Participant age and safeguarding</h2><p>Curoria accounts are available to members age 13 and older; external study participation is limited to age-verified adults 18 and older. Members age 13–17 are supported through Curoria's <a data-page-link="safeguarding" href="#safeguarding" style="color:var(--blue);font-weight:800">guardian consent and safeguarding process</a>, which covers parental/guardian consent and safeguarding concern reports. Researchers remain responsible for consent and safeguarding requirements that apply to their own studies.</p>
+<h2>Participant age and safeguarding</h2><p>Curoria accounts are available to members age 13 and older. External study participation is open to age-verified adults immediately, and to members age 13–17 for studies whose researcher sets a minimum age of 17 or younger, after a parent or guardian completes consent for that specific study. See Curoria's <a data-page-link="safeguarding" href="#safeguarding" style="color:var(--blue);font-weight:800">guardian consent and safeguarding process</a> for details on account-level consent and safeguarding concern reports. Researchers remain responsible for consent and safeguarding requirements that apply to their own studies.</p>
 <h2>Corrections and deletion</h2><p>Users may contact Curoria about corrections or deletion requests, subject to applicable legal, safety, and recordkeeping obligations.</p>
 <h2>Contact</h2><p>Privacy questions may be sent to curoriafoundation@gmail.com.</p>
 </article></div></div></section>
@@ -1049,8 +1051,8 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <div class="section-head"><div class="eyebrow">Trust &amp; Safety</div><h2>Minor consent and safeguarding process</h2><p>Curoria accounts are open to members age 13 and older. This page explains how guardian consent, participation limits, and safeguarding reports work for younger members, researchers, and the wider Curoria community.</p></div>
 <div class="standards-point-grid" style="margin-bottom:40px">
 <div class="standards-point"><b>Accounts: age 13+</b><span>Anyone 13 or older may create a Curoria account after completing age verification. Curoria stores an age band and verification status only, not the birth date itself.</span></div>
-<div class="standards-point"><b>External participation: adults 18+</b><span>Curoria only opens external survey and study links to age-verified adults. This limit stays in place for members age 13–17 while Curoria continues building study-level safeguards.</span></div>
-<div class="standards-point"><b>Guardian consent pathway</b><span>A parent or guardian of a member age 13–17 can submit consent for that account using the form below. Curoria reviews every submission before noting consent on the account.</span></div>
+<div class="standards-point"><b>External participation: 13+ with consent</b><span>Curoria opens a study's external link to age-verified adults immediately. Members age 13–17 can also continue, but only to studies where the researcher has set a minimum age of 17 or younger, and only after a parent or guardian completes consent for that specific study.</span></div>
+<div class="standards-point"><b>Two separate consent steps</b><span>Guardian consent for a Curoria account (below) is separate from the guardian consent collected automatically before a participant age 13–17 continues to a specific study.</span></div>
 <div class="standards-point"><b>Safeguarding reports</b><span>Anyone — a participant, guardian, researcher, or bystander — can report a safeguarding concern about a listing, researcher, or interaction using the report form below.</span></div>
 </div>
 <div class="grid-2" style="align-items:start">
@@ -1138,13 +1140,35 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <div class="modal-head"><h3 id="ageVerificationTitle">Verify your age</h3><button aria-label="Close" class="modal-close" data-close-modal="ageVerificationModal" type="button">×</button></div>
 <div class="modal-body">
 <div class="age-verification-badge">Age verification required before participation</div>
-<p class="age-verification-copy">Curoria currently opens external participation links only for age-verified adults who are 18 or older. Your date of birth is used for this check and is not stored by Curoria in this browser flow.</p>
+<p class="age-verification-copy">Curoria verifies your age before opening a study's external link. Adults 18+ can continue immediately; participants age 13–17 may need a guardian's consent depending on the study. Your date of birth is used for this check and is not stored by Curoria in this browser flow.</p>
 <form id="ageVerificationForm">
 <div class="stack">
 <div class="field"><label for="ageVerificationDob">Date of birth</label><input autocomplete="bday" id="ageVerificationDob" required type="date"/><div class="help">Your account will store only an age band and verification status.</div></div>
 <label class="check"><input id="ageVerificationConfirm" required type="checkbox"/> <span>I confirm that the date of birth I entered is accurate.</span></label>
 <div class="small" id="ageVerificationError" style="color:var(--danger)"></div>
 <button class="btn btn-primary btn-block" id="ageVerificationSubmit" type="submit">Verify age</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<div aria-labelledby="studyConsentTitle" aria-modal="true" class="modal" id="studyConsentModal" role="dialog">
+<div class="modal-box" style="max-width:520px">
+<div class="modal-head"><h3 id="studyConsentTitle">Guardian consent required</h3><button aria-label="Close" class="modal-close" data-close-modal="studyConsentModal" type="button">×</button></div>
+<div class="modal-body">
+<p class="portal-intro">This study accepts participants younger than 18. A parent or legal guardian must consent before continuing to <b id="studyConsentStudyTitle"></b>.</p>
+<form data-netlify="true" id="studyConsentForm" name="study-guardian-consent" netlify-honeypot="bot-field">
+<input name="form-name" type="hidden" value="study-guardian-consent"/><p hidden=""><label>Do not fill this out <input name="bot-field"/></label></p>
+<input id="studyConsentStudyId" name="study_id" type="hidden"/>
+<input id="studyConsentStudyTitleField" name="study_title" type="hidden"/>
+<input id="studyConsentParticipantEmail" name="participant_email" type="hidden"/>
+<div class="stack">
+<div class="field"><label for="studyConsentGuardianName">Parent or guardian full name</label><input id="studyConsentGuardianName" name="guardian_name" required=""/></div>
+<div class="field"><label for="studyConsentGuardianEmail">Parent or guardian email</label><input id="studyConsentGuardianEmail" name="guardian_email" required="" type="email"/></div>
+<div class="field"><label for="studyConsentRelationship">Relationship to participant</label><input id="studyConsentRelationship" name="relationship" placeholder="e.g. Parent, legal guardian" required=""/></div>
+<label class="check field full"><input id="studyConsentConfirm" required="" type="checkbox"/><span>I am this participant's parent or legal guardian and I consent to their participation in this study.</span></label>
+<div class="small" id="studyConsentError" style="color:var(--danger)"></div>
+<button class="btn btn-primary btn-block" id="studyConsentSubmit" type="submit">Submit consent and continue</button>
 </div>
 </form>
 </div>
@@ -1504,10 +1528,14 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
   ];
 
   async function loadData() {
-    const approvedStudies = (await storeList('submissions:')).filter(item => item && item.status === 'approved').map(item => ({
-      id:item.id, type:'study', title:item.title, field:item.category, status:'recruiting', level:'open', method:'Participant study', researcher:item.researcher, organization:'Community submitted', roles:Number(item.slots)||0, members:0, summary:item.description,
-      skills:[item.age,item.time].filter(Boolean), eligibility:item.age || 'See study details', commitment:item.time || 'See study details', privacy:item.data_collected || 'See researcher-provided privacy information.', ethics:item.ethics_status || 'Not specified', link:item.link || '#', volunteerHours:Number(item.volunteerHours)||0
-    }));
+    const approvedStudies = (await storeList('submissions:')).filter(item => item && item.status === 'approved').map(item => {
+      const minAge = Number(item.age);
+      const ageLabel = Number.isFinite(minAge) && minAge > 0 ? `Ages ${minAge}+` : 'See study details';
+      return {
+        id:item.id, type:'study', title:item.title, field:item.category, status:'recruiting', level:'open', method:'Participant study', researcher:item.researcher, organization:'Community submitted', roles:Number(item.slots)||0, members:0, summary:item.description,
+        skills:[ageLabel,item.time].filter(Boolean), eligibility:ageLabel, commitment:item.time || 'See study details', privacy:item.data_collected || 'See researcher-provided privacy information.', ethics:item.ethics_status || 'Not specified', link:item.link || '#', volunteerHours:Number(item.volunteerHours)||0, age:minAge
+      };
+    });
     const storedGroups = (await storeList('groups:')).filter(item => item && item.status === 'approved');
     const storedPublications = (await storeList('publications:')).filter(item => item && item.status === 'published');
     researchOpportunities = [...approvedStudies, ...storedGroups];
@@ -1584,7 +1612,29 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     saveUserApplication(activity);
   }
 
-  function openResearchApplication(id) {
+  function studyMinAge(item) {
+    const value = Number(item.age);
+    return Number.isFinite(value) && value >= 13 ? value : 18;
+  }
+  function studyAllowsMinors(item) {
+    return studyMinAge(item) < 18;
+  }
+  async function hasStudyGuardianConsent(studyId) {
+    if (!currentUser) return false;
+    const record = await storeGet('study-guardian-consent:' + currentUser.email + ':' + studyId);
+    return Boolean(record);
+  }
+  function openStudyConsentForm(item) {
+    $('#studyConsentForm').reset();
+    $('#studyConsentError').textContent = '';
+    $('#studyConsentStudyTitle').textContent = item.title;
+    $('#studyConsentStudyId').value = item.id;
+    $('#studyConsentStudyTitleField').value = item.title;
+    $('#studyConsentParticipantEmail').value = currentUser ? currentUser.email : '';
+    openModal('studyConsentModal');
+  }
+
+  async function openResearchApplication(id) {
     const item = researchOpportunities.find(record => record.id === id);
     if (!item || item.sample) return;
     if (item.type === 'study' && item.link && item.link !== '#') {
@@ -1601,13 +1651,24 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
         openModal('ageVerificationModal');
         return;
       }
-      if (!currentUser.adultVerified) {
+      if (currentUser.adultVerified) {
         pendingParticipationId = null;
-        toast('Participation links are currently available only to age-verified adults 18 or older.');
+        continueToExternalStudy(item);
         return;
       }
-      pendingParticipationId = null;
-      continueToExternalStudy(item);
+      if (!studyAllowsMinors(item)) {
+        pendingParticipationId = null;
+        toast('This study is limited to age-verified adults 18 or older.');
+        return;
+      }
+      const consented = await hasStudyGuardianConsent(item.id);
+      if (consented) {
+        pendingParticipationId = null;
+        continueToExternalStudy(item);
+      } else {
+        pendingParticipationId = id;
+        openStudyConsentForm(item);
+      }
       return;
     }
     $('#applyTitle').textContent = `Apply: ${item.title}`;
@@ -1788,7 +1849,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
             <div class="admin-review-meta">
               <span>${esc(item.researcher || 'Unknown researcher')}</span>
               <span>${esc(item.email || 'No email')}</span>
-              <span>${esc(item.age || 'Age not specified')}</span>
+              <span>${item.age ? `Min. age ${esc(item.age)}` : 'Age not specified'}</span>
               <span>${esc(item.time || 'Time not specified')}</span>
               <span>${esc(item.slots || '—')} participants</span>
               <span>Submitted ${esc(item.submittedAt || '—')}</span>
@@ -2124,17 +2185,8 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
       closeModal('authModal'); renderAuth(); toast('Welcome back.');
       if (pendingParticipationId) {
         const participationId = pendingParticipationId;
-        if (!currentUser.ageVerified) {
-          $('#ageVerificationForm').reset();
-          $('#ageVerificationError').textContent = '';
-          setTimeout(() => openModal('ageVerificationModal'), 50);
-        } else if (!currentUser.adultVerified) {
-          pendingParticipationId = null;
-          toast('Participation links are currently available only to age-verified adults 18 or older.');
-        } else {
-          pendingParticipationId = null;
-          setTimeout(() => openResearchApplication(participationId), 50);
-        }
+        pendingParticipationId = null;
+        setTimeout(() => openResearchApplication(participationId), 50);
       }
     } catch (error) { $('#loginError').textContent=error.message || 'Login failed.'; }
     finally { button.disabled=false; button.textContent='Log in'; }
@@ -2239,22 +2291,24 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
         }}
       });
       if (error) throw error;
+      if (data?.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
+        $('#signupError').textContent = 'An account with this email already exists. Try logging in instead.';
+        return;
+      }
       if (data.session) {
         currentUser=deriveUser(data.user);
         closeModal('authModal'); renderAuth(); toast('Account created and age verified.');
         if (pendingParticipationId) {
           const participationId = pendingParticipationId;
-          if (currentUser.adultVerified) {
-            pendingParticipationId = null;
-            setTimeout(() => openResearchApplication(participationId), 50);
-          } else {
-            pendingParticipationId = null;
-            toast('Your account is active, but participation links are currently limited to adults 18 or older.');
-          }
+          pendingParticipationId = null;
+          setTimeout(() => openResearchApplication(participationId), 50);
         }
       }
       else { $('#signupError').style.color='var(--success)'; $('#signupError').textContent='Account created and age verified. Check your email if confirmation is enabled.'; }
-    } catch (error) { $('#signupError').textContent=error.message || 'Sign-up failed.'; }
+    } catch (error) {
+      const message = error.message || 'Sign-up failed.';
+      $('#signupError').textContent = /already registered|already exists/i.test(message) ? 'An account with this email already exists. Try logging in instead.' : message;
+    }
     finally { button.disabled=false; button.textContent='Create account'; }
   });
 
@@ -2281,21 +2335,49 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     button.textContent = 'Verifying…';
     try {
       await persistAgeVerification(age);
-      if (age < MIN_PARTICIPATION_AGE) {
-        pendingParticipationId = null;
-        errorEl.textContent = 'Your age is verified. Participation links are currently available only to adults 18 or older, but you may continue using researcher and account features.';
-        return;
-      }
       const participationId = pendingParticipationId;
       pendingParticipationId = null;
       closeModal('ageVerificationModal');
-      toast('Age verified. You can now continue to the study.');
+      toast('Age verified.');
       if (participationId) setTimeout(() => openResearchApplication(participationId), 50);
     } catch (error) {
       errorEl.textContent = error.message || 'Age verification could not be saved.';
     } finally {
       button.disabled = false;
       button.textContent = 'Verify age';
+    }
+  });
+
+  $('#studyConsentForm').addEventListener('submit', async event => {
+    event.preventDefault();
+    const errorEl = $('#studyConsentError');
+    errorEl.textContent = '';
+    if (!currentUser) { errorEl.textContent = 'Please log in first.'; return; }
+    const form = event.currentTarget;
+    const studyId = $('#studyConsentStudyId').value;
+    const button = $('#studyConsentSubmit');
+    button.disabled = true; button.textContent = 'Submitting…';
+    try {
+      await postNetlifyForm(form);
+      await storeSet('study-guardian-consent:' + currentUser.email + ':' + studyId, {
+        email: currentUser.email,
+        studyId,
+        studyTitle: $('#studyConsentStudyTitleField').value,
+        guardianName: $('#studyConsentGuardianName').value.trim(),
+        guardianEmail: $('#studyConsentGuardianEmail').value.trim(),
+        relationship: $('#studyConsentRelationship').value.trim(),
+        submittedAt: new Date().toISOString()
+      });
+      closeModal('studyConsentModal');
+      toast('Guardian consent recorded. Continuing to the study.');
+      const item = researchOpportunities.find(record => record.id === studyId);
+      pendingParticipationId = null;
+      if (item) continueToExternalStudy(item);
+    } catch (error) {
+      console.error(error);
+      errorEl.textContent = 'Could not submit consent. Please try again.';
+    } finally {
+      button.disabled = false; button.textContent = 'Submit consent and continue';
     }
   });
 
