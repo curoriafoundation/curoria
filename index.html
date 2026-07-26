@@ -10,8 +10,8 @@
 <meta content="Find reviewed participant studies, contribute to research, or submit a study to recruit volunteers through Curoria." property="og:description"/>
 <meta content="website" property="og:type"/>
 <title>Curoria — Connecting Researchers With Participants</title>
-<link href="images/CuroriaLOGO.png" rel="icon" type="image/png"/>
-<link href="images/CuroriaLOGO.png" rel="apple-touch-icon"/>
+<link href="CuroriaLOGO.png" rel="icon" type="image/png"/>
+<link href="CuroriaLOGO.png" rel="apple-touch-icon"/>
 <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -524,7 +524,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <div class="header-primary">
 <div class="wrap header-primary-inner">
 <a aria-label="Curoria home" class="brand institutional-brand" data-page-link="home" href="#home">
-<img alt="Curoria logo" onerror="this.style.display='none'" src="images/CuroriaLOGO.png"/>
+<img alt="Curoria logo" onerror="this.style.display='none'" src="CuroriaLOGO.png"/>
 <span class="brand-copy"><strong>Curoria</strong><span>Student Research Network</span></span>
 </a>
 <div aria-label="Quick links" class="header-utilities">
@@ -585,7 +585,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <span>Reviewed study listings</span><span>Clear participation details</span><span>Contribution tracking</span>
 </div>
 </div>
-<div aria-hidden="true" class="hero-art"><img alt="Curoria Logo" class="hero-logo" src="images/CuroriaLOGO.png"/></div>
+<div aria-hidden="true" class="hero-art"><img alt="Curoria Logo" class="hero-logo" src="CuroriaLOGO.png"/></div>
 </div>
 </div>
 <div class="section-sm">
@@ -1103,7 +1103,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <footer class="footer">
 <div class="wrap">
 <div class="footer-grid">
-<div><div class="footer-brand"><img alt="" onerror="this.style.display='none'" src="images/CuroriaLOGO.png"/>Curoria</div><p class="small">Connecting researchers with volunteers so that ethical, accessible research can reach the people who want to help.</p><p class="small">curoriafoundation@gmail.com</p><a aria-label="Curoria on Instagram" class="footer-social-link" href="http://instagram.com/curoriafoundation/" rel="noopener noreferrer" target="_blank"><svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="18"><rect height="20" rx="5" width="20" x="2" y="2"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.2" cy="6.8" r="1.05"></circle></svg><span>Instagram</span></a></div>
+<div><div class="footer-brand"><img alt="" onerror="this.style.display='none'" src="CuroriaLOGO.png"/>Curoria</div><p class="small">Connecting researchers with volunteers so that ethical, accessible research can reach the people who want to help.</p><p class="small">curoriafoundation@gmail.com</p><a aria-label="Curoria on Instagram" class="footer-social-link" href="http://instagram.com/curoriafoundation/" rel="noopener noreferrer" target="_blank"><svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="18"><rect height="20" rx="5" width="20" x="2" y="2"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.2" cy="6.8" r="1.05"></circle></svg><span>Instagram</span></a></div>
 <div><h4>Explore</h4><a data-page-link="research" href="#research">Browse Surveys</a><a data-page-link="results" href="#results">Curoria Results</a><a data-page-link="challenges" href="#challenges">Challenges</a><a data-page-link="communities" href="#communities">Communities</a></div>
 <div><h4>For Researchers</h4><a data-page-link="submit" href="#submit">Submit Survey</a><a data-page-link="guidelines" href="#guidelines">Submission Guidelines</a><a data-page-link="review-process" href="#review-process">Study Listing Review</a><a data-page-link="standards" href="#standards">Research Standards</a><a data-page-link="transparency" href="#transparency">Transparency &amp; Trust</a><a data-page-link="contact" href="#contact">Contact</a></div></div>
 <div class="footer-bottom"><span>© 2026 Curoria. Connecting curiosity with discovery through responsible research participation.</span><span><a data-page-link="privacy" href="#privacy" style="display:inline;margin-right:14px">Privacy</a><a data-page-link="terms" href="#terms" style="display:inline;margin-right:14px">Terms</a><a data-page-link="accessibility" href="#accessibility" style="display:inline;margin-right:14px">Accessibility</a><a data-page-link="safeguarding" href="#safeguarding" style="display:inline">Safeguarding</a></span></div>
@@ -1275,17 +1275,33 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     if (!document.querySelector('.modal.open')) document.body.classList.remove('modal-open');
   }
 
+  // Shared, cross-browser storage: reads/writes a single Supabase table (public.app_data)
+  // keyed exactly like the old localStorage scheme (e.g. "submissions:sub_123").
+  // Falls back to window.storage (if a host environment provides it) or localStorage
+  // only when Supabase isn't configured, so nothing is shared in that case.
+  const likeEscape = prefix => prefix.replace(/[%_\\]/g, ch => '\\' + ch);
+
   async function storeGet(key) {
     try {
+      if (supabaseClient) {
+        const { data, error } = await supabaseClient.from('app_data').select('value').eq('key', key).maybeSingle();
+        if (error) throw error;
+        return data ? data.value : null;
+      }
       if (window.storage && typeof window.storage.get === 'function') {
         const result = await window.storage.get(key, true);
         return result ? JSON.parse(result.value) : null;
       }
       return JSON.parse(localStorage.getItem('curoria:' + key) || 'null');
-    } catch { return null; }
+    } catch (error) { console.error('Storage get error', error); return null; }
   }
   async function storeSet(key, value) {
     try {
+      if (supabaseClient) {
+        const { error } = await supabaseClient.from('app_data').upsert({key, value, updated_at:new Date().toISOString()});
+        if (error) throw error;
+        return true;
+      }
       if (window.storage && typeof window.storage.set === 'function') {
         await window.storage.set(key, JSON.stringify(value), true);
       } else {
@@ -1299,6 +1315,11 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
   }
   async function storeList(prefix) {
     try {
+      if (supabaseClient) {
+        const { data, error } = await supabaseClient.from('app_data').select('value').like('key', likeEscape(prefix) + '%');
+        if (error) throw error;
+        return (data || []).map(row => row.value).filter(Boolean);
+      }
       if (window.storage && typeof window.storage.list === 'function') {
         const result = await window.storage.list(prefix, true);
         if (!result || !Array.isArray(result.keys)) return [];
@@ -1313,10 +1334,15 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
         }
       }
       return out;
-    } catch { return []; }
+    } catch (error) { console.error('Storage list error', error); return []; }
   }
   async function storeListWithKeys(prefix) {
     try {
+      if (supabaseClient) {
+        const { data, error } = await supabaseClient.from('app_data').select('key,value').like('key', likeEscape(prefix) + '%');
+        if (error) throw error;
+        return (data || []).filter(row => row.value).map(row => ({key:row.key, value:row.value}));
+      }
       if (window.storage && typeof window.storage.list === 'function') {
         const result = await window.storage.list(prefix, true);
         if (!result || !Array.isArray(result.keys)) return [];
@@ -1331,7 +1357,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
         }
       }
       return out;
-    } catch { return []; }
+    } catch (error) { console.error('Storage listWithKeys error', error); return []; }
   }
   const VOLUNTEER_CREDIT_DELAY_MS = 48 * 60 * 60 * 1000;
 
