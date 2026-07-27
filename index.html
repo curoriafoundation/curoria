@@ -2531,10 +2531,10 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     renderAuth();
     if (supabaseClient) {
       try {
-        const {data:{session}} = await supabaseClient.auth.getSession();
-        currentUser = session ? deriveUser(session.user) : null;
-        renderAuth();
-        if (isAuthCallback) history.replaceState({page:'home'},'','#home');
+        // Register the listener before the first getSession() call: Supabase parses
+        // recovery tokens out of the URL hash during client init, which getSession()
+        // awaits internally, so a listener attached afterward can miss that first
+        // PASSWORD_RECOVERY event.
         supabaseClient.auth.onAuthStateChange((event,session) => {
           currentUser = session ? deriveUser(session.user) : null;
           renderAuth();
@@ -2545,6 +2545,10 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
             openModal('resetPasswordModal');
           }
         });
+        const {data:{session}} = await supabaseClient.auth.getSession();
+        currentUser = session ? deriveUser(session.user) : null;
+        renderAuth();
+        if (isAuthCallback) history.replaceState({page:'home'},'','#home');
       } catch (error) { console.warn('Supabase session check failed',error); }
     }
     await loadData();
@@ -2555,4 +2559,4 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 })();
 </script>
 </body>
-</html>
+</html> 
