@@ -123,7 +123,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 
 .grid-2 { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: var(--gap); }
 .grid-3 { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: var(--gap); }
-.grid-4 { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 20px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: var(--gap); }
 .stack { display: grid; gap: 20px; }
 
 /* ---------- Cards ---------- */
@@ -132,6 +132,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 .card h3 { color: var(--navy); font-size: 20px; margin-bottom: 10px; }
 .card p:last-of-type { margin-bottom: 0; }
 .card p { color: var(--muted); }
+.card > .btn { margin-top: var(--space-6); }
 .card-heading-lg { font-size: clamp(22px,2.6vw,28px); }
 .section-followup { margin-top: var(--space-6); }
 
@@ -287,19 +288,21 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 .directory-status { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 20px; font-size: 13px; color: var(--muted); padding-bottom: var(--space-4); border-bottom: 1px solid var(--line); }
 .directory-status span:first-child { font-weight: 800; color: var(--navy); text-transform: uppercase; letter-spacing: .04em; font-size: 12px; }
 
-.listing-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; }
+.listing-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: var(--gap); }
 .listing { display: flex; flex-direction: column; min-height: 100%; background: #fff; border: 1px solid var(--line); transition: border-color var(--dur) ease, transform var(--dur) ease; }
 .listing:hover { border-color: var(--navy); transform: translateY(-2px); }
 .listing-head { padding: var(--space-6) var(--space-6) 0; }
 .listing-body { padding: var(--space-4) var(--space-6); flex: 1; }
-.listing-foot { padding: var(--space-5) var(--space-6) var(--space-6); border-top: 1px solid var(--line); margin-top: 4px; }
+.listing-foot { padding: var(--space-5) var(--space-6) var(--space-6); border-top: 1px solid var(--line); }
 .listing h3 { font-size: 18px; color: var(--navy); margin: 10px 0 10px; }
 .listing p { color: var(--muted); font-size: 13.5px; }
 .meta-line { display: flex; flex-wrap: wrap; gap: 8px 16px; color: var(--muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
 .empty { text-align: center; padding: var(--space-9) var(--space-6); background: #fff; border: 1px dashed var(--line-strong); color: var(--muted); }
+.empty h3 { margin-bottom: var(--space-4); }
+.empty p:last-of-type { margin-bottom: var(--space-6); }
 .admin-empty { text-align: center; padding: var(--space-8) var(--space-6); color: var(--muted); border: 1px dashed var(--line); }
 
-.publication-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+.publication-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: var(--gap); }
 .publication { padding: var(--space-7); background: #fff; border: 1px solid var(--line); }
 .publication h3 { font-size: 21px; color: var(--navy); margin: 10px 0 12px; }
 .publication p { color: var(--muted); font-size: 14px; }
@@ -349,6 +352,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 
 /* ---------- Forms ---------- */
 .form-card { background: #fff; border: 1px solid var(--line-strong); padding: var(--space-7); }
+.form-card h3 { margin-bottom: var(--space-4); }
 .form-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
 .field { display: grid; gap: 8px; }
 .field.full { grid-column: 1/-1; }
@@ -359,7 +363,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 .field .help { font-size: 11px; color: var(--muted); }
 .field .error { min-height: 15px; color: var(--danger); font-size: 11px; }
 .field.invalid input, .field.invalid select, .field.invalid textarea { border-color: var(--danger); }
-.check { display: flex; align-items: flex-start; gap: 10px; color: var(--muted); font-size: 13px; }
+.check { display: flex; align-items: flex-start; gap: var(--space-2); color: var(--muted); font-size: 13px; }
 .check input { margin-top: 4px; }
 .form-actions { margin-top: 24px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 
@@ -888,6 +892,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <div class="field"><label for="slots">Participants needed *</label><input id="slots" min="1" name="slots" required="" type="number"/></div>
 <div class="field"><label for="time">Estimated time *</label><input id="time" name="time" placeholder="e.g. 10–15 minutes" required=""/></div>
 <div class="field full"><label for="link">Survey or study link *</label><input id="link" name="link" placeholder="https://" required="" type="url"/></div>
+<div class="field full"><label for="completionCode">Completion code (optional)</label><input id="completionCode" name="completion_code" placeholder="e.g. CURO482"/><div class="help">If set, Curoria only credits a participant's volunteer hours once they enter this code back on the site — so add a line to the end of your survey showing it (e.g. "Your completion code is: CURO482"). Leave blank to credit hours as soon as someone clicks through, with no proof of completion.</div></div>
 <div class="field"><label for="researcher">Researcher name *</label><input id="researcher" name="researcher" required=""/></div>
 <div class="field"><label for="email">Researcher email *</label><input id="email" name="email" required="" type="email"/></div>
 <div class="field full"><label for="ethicsStatus">Ethics / oversight status *</label><select id="ethicsStatus" name="ethics_status" required=""><option value="">Choose the most accurate description</option><option>Institutional ethics / IRB approval obtained</option><option>Institution determined the project exempt</option><option>Institutional review not required</option><option>Faculty- or supervisor-guided student project</option><option>Independent project; no formal institutional review</option><option>Not sure</option></select><div class="help">Do not describe platform review as IRB or institutional approval.</div></div>
@@ -1008,6 +1013,19 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 </div>
 <div class="admin-panel-tab" id="admin-panel-hours">
 <div class="admin-toolbar">
+<div><strong style="font-weight:600">Assign a volunteer to a project</strong><div class="small muted">Appoint any volunteer (by email) to an existing or submitted project so they earn volunteer hours from it. Use "credit immediately" for volunteers who already completed a study, so their hours are available as soon as they're asked for.</div></div>
+</div>
+<form class="stack" id="adminAssignHoursForm" style="margin-bottom:var(--space-7)">
+<div class="grid-3" style="gap:16px">
+<div class="field"><label for="adminAssignEmail">Volunteer email</label><input id="adminAssignEmail" placeholder="volunteer@example.com" required type="email"/></div>
+<div class="field"><label for="adminAssignProject">Project</label><select class="control" id="adminAssignProject" required><option value="">Select a project…</option></select></div>
+<div class="field"><label for="adminAssignHours">Hours (optional override)</label><input id="adminAssignHours" min="0" placeholder="Uses project's set hours" step="0.5" type="number"/></div>
+</div>
+<label class="small" style="align-items:center;display:flex;gap:8px"><input checked id="adminAssignImmediate" style="min-height:auto;width:auto" type="checkbox"/> Already completed — credit hours immediately</label>
+<div class="small" id="adminAssignError" style="color:var(--danger)"></div>
+<button class="btn btn-primary btn-sm" style="justify-self:start" type="submit">Assign volunteer</button>
+</form>
+<div class="admin-toolbar section-followup">
 <div><strong style="font-weight:600">Volunteer hours per survey</strong><div class="small muted">Set how many volunteer hours a survey is worth. Participants are credited automatically 48 hours after they continue to the study; researchers are credited once their submission is approved.</div></div>
 </div>
 <div class="admin-review-list" id="adminHoursSubmissionList"></div>
@@ -1173,6 +1191,23 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <button class="btn btn-primary btn-block" id="studyConsentSubmit" type="submit">Submit consent and continue</button>
 </div>
 </form>
+</div>
+</div>
+</div>
+<div aria-labelledby="completionCodeTitle" aria-modal="true" class="modal" id="completionCodeModal" role="dialog">
+<div class="modal-box" style="max-width:480px">
+<div class="modal-head"><h3 id="completionCodeTitle">Enter your completion code</h3><button aria-label="Close" class="modal-close" data-close-modal="completionCodeModal" type="button">×</button></div>
+<div class="modal-body">
+<p class="portal-intro">To receive volunteer hours for <b id="completionCodeStudyTitle"></b>, enter the completion code shown at the end of the survey.</p>
+<form id="completionCodeForm">
+<input id="completionCodeStudyId" type="hidden"/>
+<div class="stack">
+<div class="field"><label for="completionCodeInput">Completion code</label><input autocomplete="off" id="completionCodeInput" required=""/></div>
+<div class="small" id="completionCodeError" style="color:var(--danger)"></div>
+<button class="btn btn-primary btn-block" id="completionCodeSubmit" type="submit">Confirm and claim hours</button>
+</div>
+</form>
+<p class="small muted" style="margin-top:var(--space-4)">Don't have it yet? Close this and click "Participate" on the study again once you've finished — it'll ask for the code again.</p>
 </div>
 </div>
 </div>
@@ -1542,7 +1577,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
       const ageLabel = !Number.isFinite(minAge) || minAge <= 0 ? 'See study details' : hasMax && maxAge >= minAge ? `Ages ${minAge}–${maxAge}` : `Ages ${minAge}+`;
       return {
         id:item.id, type:'study', title:item.title, field:item.category, status:'recruiting', level:'open', method:'Participant study', researcher:item.researcher, organization:'Community submitted', roles:Number(item.slots)||0, members:0, summary:item.description,
-        skills:[ageLabel,item.time].filter(Boolean), eligibility:ageLabel, commitment:item.time || 'See study details', privacy:item.data_collected || 'See researcher-provided privacy information.', ethics:item.ethics_status || 'Not specified', link:item.link || '#', volunteerHours:Number(item.volunteerHours)||0, age:minAge, maxAge:hasMax?maxAge:null
+        skills:[ageLabel,item.time].filter(Boolean), eligibility:ageLabel, commitment:item.time || 'See study details', privacy:item.data_collected || 'See researcher-provided privacy information.', ethics:item.ethics_status || 'Not specified', link:item.link || '#', volunteerHours:Number(item.volunteerHours)||0, completionCode:item.completion_code || '', age:minAge, maxAge:hasMax?maxAge:null
       };
     });
     const storedGroups = (await storeList('groups:')).filter(item => item && item.status === 'approved');
@@ -1611,8 +1646,20 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 
   function continueToExternalStudy(item) {
     window.open(item.link, '_blank', 'noopener,noreferrer');
+    if (item.completionCode) {
+      openCompletionCodeForm(item);
+      return;
+    }
     const activity = {title:item.title,type:'Participant study',date:new Date().toISOString(),submissionId:item.id,volunteerHours:Number(item.volunteerHours)||0};
     saveUserApplication(activity);
+  }
+
+  function openCompletionCodeForm(item) {
+    $('#completionCodeForm').reset();
+    $('#completionCodeError').textContent = '';
+    $('#completionCodeStudyTitle').textContent = item.title;
+    $('#completionCodeStudyId').value = item.id;
+    openModal('completionCodeModal');
   }
 
   function studyMinAge(item) {
@@ -1910,28 +1957,70 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     const hours = Number(input);
     if (!Number.isFinite(hours) || hours < 0) { toast('Enter a valid, non-negative number.'); return; }
     await storeSet('submissions:' + id, {...submission, volunteerHours:hours});
+    const updatedCount = await syncVolunteerHoursForSubmission(id, hours);
     await loadData();
     await refreshAdminDashboard();
     refreshDashboard();
-    toast(`Volunteer hours set to ${hours}.`);
+    toast(`Volunteer hours set to ${hours}.` + (updatedCount ? ` Updated ${updatedCount} existing participant record${updatedCount === 1 ? '' : 's'}.` : ''));
+  }
+
+  async function setSubmissionCompletionCode(id) {
+    if (!adminAuthenticated) return;
+    const submission = await storeGet('submissions:' + id);
+    if (!submission) { toast('Submission could not be found.'); return; }
+    const input = window.prompt('Completion code participants must enter to claim volunteer hours for this survey (leave blank to remove the requirement and credit hours instantly on click):', submission.completion_code || '');
+    if (input === null) return;
+    await storeSet('submissions:' + id, {...submission, completion_code:input.trim()});
+    await loadData();
+    await refreshAdminDashboard();
+    toast(input.trim() ? 'Completion code saved.' : 'Completion code removed — hours now credit instantly on click.');
+  }
+
+  async function syncVolunteerHoursForSubmission(submissionId, hours) {
+    const pairs = await storeListWithKeys('user-applications:');
+    let updatedCount = 0;
+    for (const {key, value} of pairs) {
+      if (!Array.isArray(value)) continue;
+      let changed = false;
+      const updatedList = value.map(activity => {
+        if (activity.submissionId === submissionId && !activity.hoursRevoked && Number(activity.volunteerHours) !== hours) {
+          changed = true;
+          updatedCount++;
+          return {...activity, volunteerHours:hours};
+        }
+        return activity;
+      });
+      if (changed) await storeSet(key, updatedList);
+    }
+    return updatedCount;
   }
 
   async function refreshAdminHours(submissionsInput) {
     const hoursList = $('#adminHoursSubmissionList');
     const ledgerList = $('#adminHoursLedgerList');
     if (!hoursList || !ledgerList) return;
-    const submissions = (submissionsInput || (await storeList('submissions:')).filter(Boolean)).filter(item => item.status === 'approved');
+    const allSubmissions = submissionsInput || (await storeList('submissions:')).filter(Boolean);
+    const assignSelect = $('#adminAssignProject');
+    if (assignSelect) {
+      const previousValue = assignSelect.value;
+      assignSelect.innerHTML = '<option value="">Select a project…</option>' + allSubmissions.map(item =>
+        `<option value="${esc(item.id)}">${esc(item.title || 'Untitled submission')} — ${esc((item.status || 'pending').replace(/-/g,' '))} (${esc(item.volunteerHours || 0)}h)</option>`
+      ).join('');
+      if (allSubmissions.some(item => item.id === previousValue)) assignSelect.value = previousValue;
+    }
+    const submissions = allSubmissions.filter(item => item.status === 'approved');
     hoursList.innerHTML = submissions.length ? submissions.map(item => `
       <article class="admin-review-card">
         <div class="admin-review-top">
           <div>
-            <div class="chip-row"><span class="chip green">${esc(item.volunteerHours || 0)} vol. hrs</span><span class="chip blue">${esc(item.category || 'Uncategorized')}</span></div>
+            <div class="chip-row"><span class="chip green">${esc(item.volunteerHours || 0)} vol. hrs</span><span class="chip blue">${esc(item.category || 'Uncategorized')}</span>${item.completion_code ? '<span class="chip">Completion code set</span>' : '<span class="chip gold">No completion code</span>'}</div>
             <h3>${esc(item.title || 'Untitled submission')}</h3>
             <div class="admin-review-meta"><span>${esc(item.researcher || 'Unknown researcher')}</span><span>${esc(item.email || 'No email')}</span></div>
           </div>
         </div>
         <div class="admin-review-actions">
           <button class="admin-action-btn" type="button" data-admin-set-hours="${esc(item.id)}">Set hours</button>
+          <button class="admin-action-btn" type="button" data-admin-set-code="${esc(item.id)}">${item.completion_code ? 'Edit completion code' : 'Set completion code'}</button>
         </div>
       </article>`).join('') : '<div class="admin-empty">No approved surveys yet. Approve a submission first, then set its volunteer hours here.</div>';
     observeReveal(hoursList);
@@ -1974,6 +2063,37 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     await storeSet(key, list);
     await refreshAdminDashboard();
     toast('Volunteer hours revoked.');
+  }
+
+  async function handleAdminAssignHours(event) {
+    event.preventDefault();
+    if (!adminAuthenticated) return;
+    const errorEl = $('#adminAssignError');
+    errorEl.textContent = '';
+    const email = $('#adminAssignEmail').value.trim().toLowerCase();
+    const submissionId = $('#adminAssignProject').value;
+    const hoursOverride = $('#adminAssignHours').value.trim();
+    const immediate = $('#adminAssignImmediate').checked;
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) { errorEl.textContent = 'Enter a valid volunteer email.'; return; }
+    if (!submissionId) { errorEl.textContent = 'Select a project.'; return; }
+    const submission = await storeGet('submissions:' + submissionId);
+    if (!submission) { errorEl.textContent = 'That project could not be found.'; return; }
+    let hours = Number(submission.volunteerHours) || 0;
+    if (hoursOverride !== '') {
+      const parsed = Number(hoursOverride);
+      if (!Number.isFinite(parsed) || parsed < 0) { errorEl.textContent = 'Enter a valid, non-negative number of hours.'; return; }
+      hours = parsed;
+    }
+    const key = 'user-applications:' + email;
+    const list = (await storeGet(key)) || [];
+    if (list.some(item => item.submissionId === submission.id)) { errorEl.textContent = 'This volunteer is already assigned to this project.'; return; }
+    const date = immediate ? new Date(Date.now() - VOLUNTEER_CREDIT_DELAY_MS - 1000).toISOString() : new Date().toISOString();
+    list.push({title:submission.title, type:'Admin-assigned participation', date, submissionId:submission.id, volunteerHours:hours, assignedByAdmin:true});
+    await storeSet(key, list);
+    $('#adminAssignHoursForm').reset();
+    $('#adminAssignImmediate').checked = true;
+    await refreshAdminDashboard();
+    toast(`Assigned ${hours} volunteer hour${hours === 1 ? '' : 's'} to ${email}.`);
   }
 
   async function refreshAdminCertifications() {
@@ -2275,6 +2395,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     button.disabled = false;
     button.textContent = 'Open Admin Dashboard';
   });
+  $('#adminAssignHoursForm').addEventListener('submit', handleAdminAssignHours);
   $('#signupForm').addEventListener('submit', async event => {
     event.preventDefault();
     $('#signupError').style.color='var(--danger)';
@@ -2288,12 +2409,15 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
       const {data,error} = await supabaseClient.auth.signUp({
         email:$('#signupEmail').value.trim(),
         password:$('#signupPassword').value,
-        options:{data:{
-          name:$('#signupName').value.trim(),
-          age_band:ageBandFor(age),
-          age_verified_at:new Date().toISOString(),
-          adult_verified:age >= MIN_PARTICIPATION_AGE
-        }}
+        options:{
+          emailRedirectTo: window.location.origin + window.location.pathname,
+          data:{
+            name:$('#signupName').value.trim(),
+            age_band:ageBandFor(age),
+            age_verified_at:new Date().toISOString(),
+            adult_verified:age >= MIN_PARTICIPATION_AGE
+          }
+        }
       });
       if (error) throw error;
       if (data?.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
@@ -2386,6 +2510,25 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     }
   });
 
+  $('#completionCodeForm').addEventListener('submit', async event => {
+    event.preventDefault();
+    const errorEl = $('#completionCodeError');
+    errorEl.textContent = '';
+    const studyId = $('#completionCodeStudyId').value;
+    const item = researchOpportunities.find(record => record.id === studyId);
+    if (!item) { errorEl.textContent = 'This study could not be found.'; return; }
+    const entered = $('#completionCodeInput').value.trim();
+    if (!entered) { errorEl.textContent = 'Enter the completion code shown at the end of the survey.'; return; }
+    if (entered.toLowerCase() !== String(item.completionCode || '').trim().toLowerCase()) {
+      errorEl.textContent = "That code doesn't match. Double-check the end of the survey and try again.";
+      return;
+    }
+    const activity = {title:item.title,type:'Participant study',date:new Date().toISOString(),submissionId:item.id,volunteerHours:Number(item.volunteerHours)||0};
+    await saveUserApplication(activity);
+    closeModal('completionCodeModal');
+    toast('Completion code verified — volunteer hours recorded.');
+  });
+
   // Submission forms
   $('#researchForm').addEventListener('submit', async event => {
     event.preventDefault();
@@ -2397,7 +2540,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     const id = 'sub_' + Date.now() + '_' + Math.random().toString(36).slice(2,7);
     const fieldValue = name => String(form.elements.namedItem(name)?.value || '').trim();
     const submission = {
-      id, title:fieldValue('title'), description:fieldValue('description'), category:fieldValue('category'), age:fieldValue('age'), max_age:fieldValue('max_age'), slots:fieldValue('slots'), time:fieldValue('time'), link:fieldValue('link'), researcher:fieldValue('researcher'), email:fieldValue('email'), ethics_status:fieldValue('ethics_status'), consent_plan:fieldValue('consent_plan'), data_collected:fieldValue('data_collected'), status:'pending', submittedAt:new Date().toLocaleDateString()
+      id, title:fieldValue('title'), description:fieldValue('description'), category:fieldValue('category'), age:fieldValue('age'), max_age:fieldValue('max_age'), slots:fieldValue('slots'), time:fieldValue('time'), link:fieldValue('link'), completion_code:fieldValue('completion_code'), researcher:fieldValue('researcher'), email:fieldValue('email'), ethics_status:fieldValue('ethics_status'), consent_plan:fieldValue('consent_plan'), data_collected:fieldValue('data_collected'), status:'pending', submittedAt:new Date().toLocaleDateString()
     };
     try {
       await postNetlifyForm(form);
@@ -2527,8 +2670,10 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
     // A Supabase password-reset email link lands here with recovery tokens in the URL hash.
     // Leave that hash intact so Supabase can read it, instead of the usual hash-based page routing.
     const isAuthCallback = /access_token=|error_description=|type=recovery/i.test(location.hash);
+    const authError = new URLSearchParams(location.hash.replace(/^#/, '')).get('error_description');
     showPage(isAuthCallback ? 'home' : (location.hash.slice(1) || 'home'), false, isAuthCallback);
     renderAuth();
+    if (authError) toast(authError);
     if (supabaseClient) {
       try {
         // Register the listener before the first getSession() call: Supabase parses
@@ -2559,4 +2704,4 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 })();
 </script>
 </body>
-</html> 
+</html>
