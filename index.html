@@ -281,6 +281,17 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 .about-art { border: 1px solid var(--line-strong); padding: var(--space-7); }
 .about-art svg { filter: none; }
 
+/* ---------- Team directory placeholders ---------- */
+.team-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: var(--gap); margin-top: var(--space-6); }
+.team-placeholder-card { background: #fff; border: 1px solid var(--line); padding: var(--space-6); text-align: center; }
+.team-placeholder-photo { width: 84px; height: 84px; margin: 0 auto var(--space-4); border-radius: 50%; background: var(--soft); border: 1.5px dashed var(--line-strong); display: grid; place-items: center; color: var(--muted); }
+.team-placeholder-photo svg { width: 36px; height: 36px; }
+.team-placeholder-card h4 { font-family: var(--serif); font-size: 16px; color: var(--navy); margin-bottom: 4px; }
+.team-placeholder-card .team-role { display: block; font-size: 11px; color: var(--muted); font-weight: 800; text-transform: uppercase; letter-spacing: .05em; margin-bottom: var(--space-3); }
+.team-placeholder-card .chip { margin: 0 auto; }
+@media (max-width: 860px) { .team-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 560px) { .team-grid { grid-template-columns: 1fr; } }
+
 /* ---------- Directory / listings ---------- */
 .directory-toolbar { display: grid; grid-template-columns: 1.6fr repeat(4,1fr) auto; gap: 10px; margin-bottom: 22px; padding: var(--space-6); border: 1px solid var(--line-strong); background: var(--soft); }
 .control { width: 100%; border: 1px solid var(--line); background: #fff; color: var(--ink); min-height: 44px; padding: var(--space-3) var(--space-4); }
@@ -681,7 +692,14 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
 <article class="card"><div class="icon-tile">R</div><h3>Research Standards &amp; Review</h3><p>Maintains listing standards and helps ensure public survey and study pages clearly explain participation, privacy, eligibility, and review status.</p></article>
 <article class="card"><div class="icon-tile">C</div><h3>Community &amp; Partnerships</h3><p>Supports researchers, volunteers, schools, and organizations interested in responsible research participation and collaboration.</p></article>
 </div>
-<div class="card section-followup"><h3>Team directory</h3><p>Named leadership profiles should be added here only when Curoria is ready to publish each person's role and information accurately. Curoria does not display fictional team members or unverifiable credentials.</p><a class="btn btn-outline btn-sm" data-page-link="contact" href="#contact">Contact Curoria</a></div>
+<div class="card section-followup"><h3>Team directory</h3><p>The placeholders below reserve space for named leadership profiles. Curoria will replace each one with a real name, role, and photo only once that person's information is ready to publish — Curoria does not display fictional team members or unverifiable credentials.</p><a class="btn btn-outline btn-sm" data-page-link="contact" href="#contact">Contact Curoria</a>
+<div class="team-grid">
+<article class="team-placeholder-card"><div class="team-placeholder-photo" aria-hidden="true"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"></path></svg></div><span class="team-role">Role pending</span><h4>Name pending</h4><span class="chip">Profile coming soon</span></article>
+<article class="team-placeholder-card"><div class="team-placeholder-photo" aria-hidden="true"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"></path></svg></div><span class="team-role">Role pending</span><h4>Name pending</h4><span class="chip">Profile coming soon</span></article>
+<article class="team-placeholder-card"><div class="team-placeholder-photo" aria-hidden="true"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"></path></svg></div><span class="team-role">Role pending</span><h4>Name pending</h4><span class="chip">Profile coming soon</span></article>
+<article class="team-placeholder-card"><div class="team-placeholder-photo" aria-hidden="true"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"></path></svg></div><span class="team-role">Role pending</span><h4>Name pending</h4><span class="chip">Profile coming soon</span></article>
+</div>
+</div>
 </div>
 </div>
 </section>
@@ -2701,7 +2719,7 @@ main > .page:not([data-page="home"]) { border-top: 1px solid var(--line-strong);
   }
 
   init();
-})();
+})(); 
 </script>
 </body>
 </html>
